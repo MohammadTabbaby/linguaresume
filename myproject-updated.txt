@@ -1,0 +1,3889 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+.github/workflows/ci.yml
+config.yaml
+cvs/devops_de.md
+cvs/devops_en.md
+cvs/devops_fr.md
+cvs/master_de.md
+cvs/master_en.md
+cvs/master_fr.md
+cvs/nontech_master_de.md
+cvs/nontech_master_en.md
+cvs/nontech_master_fr.md
+cvs/web_de.md
+cvs/web_en.md
+cvs/web_fr.md
+job_description.txt
+linguaresume/__init__.py
+linguaresume/cli.py
+linguaresume/config.py
+linguaresume/llm/__init__.py
+linguaresume/llm/cache.py
+linguaresume/llm/client.py
+linguaresume/llm/prompts.py
+linguaresume/models.py
+linguaresume/parsing/__init__.py
+linguaresume/parsing/extractor.py
+linguaresume/parsing/splitter.py
+linguaresume/pdf/__init__.py
+linguaresume/pdf/renderer.py
+linguaresume/tailoring/__init__.py
+linguaresume/tailoring/engine.py
+linguaresume/validation/__init__.py
+linguaresume/validation/base.py
+linguaresume/validation/bullets.py
+linguaresume/validation/companies.py
+linguaresume/validation/dates.py
+linguaresume/validation/experience.py
+linguaresume/validation/static.py
+linguaresume/validation/tech.py
+outputs/fach/Mohamed_Tababi_Anschreiben.md
+outputs/fach/Mohamed_Tababi_Anschreiben.pdf
+outputs/fach/Mohamed_Tababi_CV.md
+outputs/fach/Mohamed_Tababi_CV.pdf
+outputs/ingenieur_java_spring_backend_fullstack/ingenieur_java_spring_backend_fullstack.md
+outputs/ingenieur_java_spring_backend_fullstack/ingenieur_java_spring_backend_fullstack.pdf
+outputs/junior_fullstack_developer_mfd/junior_fullstack_developer_mfd.md
+outputs/junior_fullstack_developer_mfd/letter.md
+outputs/junior_fullstack_developer_mfd/letter.pdf
+outputs/junior_fullstack_developer_mfd/Mohamed ALi Tababi.pdf
+pytest.ini
+regenerate_pdf.py
+requirements.txt
+run.py
+tests/test_cv_selection.py
+tests/test_engine_mockllm.py
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path=".github/workflows/ci.yml">
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [ '3.11' ]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Install Playwright browsers
+        run: |
+          python -m playwright install --with-deps
+
+      - name: Run tests
+        env:
+          CI: true
+        run: |
+          pytest -q
+</file>
+
+<file path="cvs/devops_de.md">
+# Mohamed Tababi
+**DevOps & Cloud Engineer**
+
+**E-Mail:** mohammadtabbaby@gmail.com | **Telefon:** (+216) 99 145 392  
+**Standort:** Tunesien  
+**Links:** [LinkedIn](https://linkedin.com/in/mohammadtabbaby) | [GitHub](https://github.com/MohammadTabbaby)
+
+---
+
+## Profil
+DevOps & Cloud Engineer mit Schwerpunkt auf Automatisierung, Deployment-Industrialisierung und Zuverlässigkeit. Praktische Erfahrung mit CI/CD-Pipelines, Kubernetes-Orchestrierung, Observability und API-Sicherheit in akademischen und Krankenhausumgebungen. Fähig, über den gesamten Bereitstellungszyklus (vom Build über das Deployment bis zum Monitoring) hinweg zu arbeiten, mit einem starken Verständnis für Anwendungscode dank eines Full-Stack-Hintergrunds.
+
+---
+
+## Technische Fähigkeiten
+
+| Kategorie | Werkzeuge & Technologien |
+|----------|----------------------|
+| **Cloud & Infrastruktur** | AWS, Docker, Kubernetes, Terraform |
+| **CI/CD & Automatisierung** | Jenkins, GitHub Actions, Ansible, SonarQube |
+| **Monitoring & Logging** | Prometheus, Grafana, Winston |
+| **Sicherheit** | Spring Security, JWT, Ratenbegrenzung, API-Härtung |
+| **Backend-Entwicklung** | Spring Boot (JPA/Hibernate), Django, Laravel, Node.js, Express.js |
+| **Frontend-Entwicklung** | Angular, TypeScript, JavaScript (ES6+), HTML5, CSS3, Tailwind, Bootstrap |
+| **Datenbanken** | MongoDB, MySQL, PostgreSQL |
+| **Scripting & OS** | Python, Bash, Linux (Ubuntu, Debian), Windows Server |
+| **Konzepte** | Agile Methoden (Scrum), REST-APIs, RBAC, MVC-Architektur |
+
+---
+
+## Berufserfahrung
+
+### Höheres Institut für technologische Studien (ISET) Tozeur
+**Praktikant als DevOps & Full-Stack Engineer** (02/2024 – 06/2024)
+- Bereitstellung und Betrieb eines Kubernetes-Clusters mit 8 Microservices für Spring Boot-Dienste in einer realen akademischen Umgebung.
+- Entwurf und Implementierung von CI/CD-Pipelines mit Jenkins und SonarQube, einschließlich automatisierter Builds, Tests und Code-Qualitätsprüfungen.
+- Einrichtung eines Überwachungs- und Alarmierungs-Stacks mit Prometheus, Grafana und Winston, um den Service-Zustand zu verfolgen und Vorfälle zu erkennen.
+- Implementierung von API-Sicherheitsmechanismen mit Spring Security, JWT und Ratenbegrenzung zur Zugriffskontrolle und Sicherung von Endpunkten.
+- Entwicklung von Angular-Dashboards mit rollenbasierter Zugriffskontrolle (RBAC) für den akademischen Betrieb.
+- Entwurf und Entwicklung von Backend-Microservices und REST-APIs in einer verteilten Architektur.
+
+### Tahar Sfar Universitätskrankenhaus
+**Praktikant als Full-Stack Webentwickler** (02/2022 – 06/2022)
+- Entwicklung und Bereitstellung einer internen Beschwerdemanagement-Plattform mit Rückverfolgbarkeit in einer Krankenhausumgebung.
+- Aufbau eines Echtzeit-Systems zur Verfolgung medizinischer Bestände, um die Ressourcensichtbarkeit zu verbessern und den manuellen Verwaltungsaufwand zu reduzieren.
+
+### LeaderPos
+**Praktikant als Full-Stack Webentwickler** (08/2021 – 09/2021)
+- Entwicklung eines Backend-Systems (Django, MongoDB) für eine E-Commerce-Plattform zur Verwaltung von Produkten, Sitzungen und Bestellungen.
+- Implementierung einer dynamischen Warenkorbfunktion und von Mechanismen zur Bestandsverfolgung für Echtzeit-Updates.
+- Erstellung einer Admin-Oberfläche (Bootstrap) zur Verwaltung von Abläufen und simulierten Zahlungs-Workflows.
+
+---
+
+## Ausbildung
+
+**Nationaler Professioneller Master-Abschluss** | ISET Tozeur (2022 – 2024)
+- Fachbereich: Technologische Wissenschaften | Hauptfach: Informatik
+- Spezialisierung: DevOps und Cloud Computing
+
+**Nationaler Bachelor-Abschluss** | ISET Mahdia (2019 – 2022)
+- Fachbereich: Exakte Wissenschaften und Technologie | Hauptfach: Informationstechnologie
+- Spezialisierung: Webentwicklung und Multimedia
+
+---
+
+## Sprachen
+
+| Sprache | Sprachniveau |
+|----------|-------------|
+| **Arabisch** | Muttersprache |
+| **Französisch** | B2 |
+| **Englisch** | B2 |
+| **Deutsch** | B1 |
+</file>
+
+<file path="cvs/devops_en.md">
+# Mohamed Tababi  
+**DevOps & Cloud Engineer**
+
+**Email:** mohammadtabbaby@gmail.com | **Phone:** (+216) 99 145 392  
+**Location:** Tunisia  
+**Links:** [LinkedIn](https://linkedin.com/in/mohammadtabbaby) | [GitHub](https://github.com/MohammadTabbaby)
+
+---
+
+## Profile
+
+DevOps & Cloud Engineer focused on automation, deployment industrialization, and reliability. Hands-on experience with CI/CD pipelines, Kubernetes orchestration, observability, and API security in academic and hospital environments. Able to work across the delivery lifecycle, from build to deployment and monitoring, with a strong understanding of application code thanks to a full-stack background.
+
+---
+
+## Technical Skills
+
+| Category | Tools & Technologies |
+|----------|----------------------|
+| **Cloud & Infrastructure** | AWS, Docker, Kubernetes, Terraform |
+| **CI/CD & Automation** | Jenkins, GitHub Actions, Ansible, SonarQube |
+| **Monitoring & Logging** | Prometheus, Grafana, Winston |
+| **Security** | Spring Security, JWT, Rate Limiting, API Hardening |
+| **Backend Development** | Spring Boot (JPA/Hibernate), Django, Laravel, Node.js, Express.js |
+| **Frontend Development** | Angular, TypeScript, JavaScript (ES6+), HTML5, CSS3, Tailwind, Bootstrap |
+| **Databases** | MongoDB, MySQL, PostgreSQL |
+| **Scripting & OS** | Python, Bash, Linux (Ubuntu, Debian), Windows Server |
+| **Concepts** | Agile Methods (Scrum), REST APIs, RBAC, MVC Architecture |
+
+---
+
+## Professional Experience
+
+### Higher Institute of Technological Studies (ISET) Tozeur  
+**DevOps & Full-Stack Engineering Intern** (02/2024 – 06/2024)
+
+- Deployed and operated an 8-microservice Kubernetes cluster for Spring Boot services in a real academic environment.
+- Designed and implemented CI/CD pipelines with Jenkins and SonarQube, including automated builds, tests, and code quality checks.
+- Set up a monitoring and alerting stack with Prometheus, Grafana, and Winston to track service health and detect incidents.
+- Implemented API security mechanisms with Spring Security, JWT, and rate limiting to control access and secure endpoints.
+- Developed Angular dashboards with Role-Based Access Control (RBAC) for academic operations.
+- Designed and developed backend microservices and REST APIs in a distributed architecture.
+
+### Tahar Sfar University Hospital  
+**Full-Stack Web Developer Intern** (02/2022 – 06/2022)
+
+- Developed and deployed an internal complaints management platform with traceability in a hospital environment.
+- Built a real-time medical inventory tracking system to improve resource visibility and reduce manual administrative work.
+
+### LeaderPos  
+**Full-Stack Web Developer Intern** (08/2021 – 09/2021)
+
+- Developed a backend system (Django, MongoDB) for an e-commerce platform managing products, sessions, and orders.
+- Implemented dynamic cart functionality and stock tracking mechanisms for real-time updates.
+- Built an admin interface (Bootstrap) to manage operations and simulated payment workflows.
+
+---
+
+## Education
+
+**National Professional Master's Degree** | ISET Tozeur (2022 – 2024)  
+- Field: Technological Sciences | Major: Computer Science  
+- Specialization: DevOps and Cloud Computing
+
+**National Bachelor's Degree** | ISET Mahdia (2019 – 2022)  
+- Field: Exact Sciences and Technology | Major: Information Technology  
+- Specialization: Web Development and Multimedia
+
+---
+
+## Languages
+
+| Language | Proficiency |
+|----------|-------------|
+| Arabic   | Native      |
+| French   | B2          |
+| English  | B2          |
+| German   | B1          |
+
+---
+</file>
+
+<file path="cvs/devops_fr.md">
+# Mohamed Tababi  
+**Ingénieur DevOps & Cloud**
+
+**Email :** mohammadtabbaby@gmail.com | **Téléphone :** (+216) 99 145 392  
+**Localisation :** Tunisie  
+**Liens :** [LinkedIn](https://linkedin.com/in/mohammadtabbaby) | [GitHub](https://github.com/MohammadTabbaby)
+
+---
+
+## Profil
+
+Ingénieur DevOps & Cloud orienté automatisation, industrialisation et fiabilité des déploiements. Expérience pratique dans la mise en place de pipelines CI/CD, l’orchestration Kubernetes, l’observabilité et la sécurisation d’API dans des environnements académiques et hospitaliers. Capacité à intervenir sur l’ensemble du cycle de livraison, du build au déploiement et à la supervision, avec une bonne compréhension du code applicatif grâce à un parcours full-stack.
+
+---
+
+## Compétences techniques
+
+| Catégorie | Outils & Technologies |
+|----------|----------------------|
+| **Cloud & Infrastructure** | AWS, Docker, Kubernetes, Terraform |
+| **CI/CD & Automatisation** | Jenkins, GitHub Actions, Ansible, SonarQube |
+| **Monitoring & Logs** | Prometheus, Grafana, Winston |
+| **Sécurité** | Spring Security, JWT, Rate Limiting, Sécurisation d’API |
+| **Backend** | Spring Boot (JPA/Hibernate), Django, Laravel, Node.js, Express.js |
+| **Frontend** | Angular, TypeScript, JavaScript (ES6+), HTML5, CSS3, Tailwind, Bootstrap |
+| **Bases de données** | MongoDB, MySQL, PostgreSQL |
+| **Scripting & OS** | Python, Bash, Linux (Ubuntu, Debian), Windows Server |
+| **Concepts** | Méthodes Agiles (Scrum), API REST, RBAC, Architecture MVC |  
+
+---
+
+## Expérience professionnelle
+
+### Institut Supérieur des Études Technologiques (ISET) Tozeur  
+**Stagiaire Ingénieur DevOps & Full-Stack** (02/2024 – 06/2024)
+
+- Déploiement et exploitation d’un cluster Kubernetes composé de 8 microservices Spring Boot dans un environnement académique en conditions réelles.
+- Conception et implémentation de pipelines CI/CD avec Jenkins et SonarQube, incluant build automatisé, exécution de tests et contrôle qualité du code.
+- Mise en place d’une stack de monitoring et d’alerting (Prometheus, Grafana, Winston) pour suivre l’état des services et détecter les incidents.
+- Implémentation de mécanismes de sécurité API (Spring Security, JWT, rate limiting) pour contrôler les accès et sécuriser les endpoints.
+- Développement de tableaux de bord Angular avec gestion des rôles (RBAC) pour les opérations académiques.
+- Conception et développement de microservices backend (Spring Boot, REST APIs) dans une architecture distribuée.
+
+### Hôpital Universitaire Tahar Sfar  
+**Stagiaire Développeur Full-Stack** (02/2022 – 06/2022)
+
+- Développement et déploiement d’une plateforme interne de gestion des réclamations avec traçabilité dans un environnement hospitalier.
+- Mise en place d’un système de suivi des stocks médicaux en temps réel pour améliorer la visibilité des ressources et réduire les tâches administratives.
+
+### LeaderPos  
+**Stagiaire Développeur Full-Stack** (08/2021 – 09/2021)
+
+- Développement d’un backend (Django, MongoDB) pour une plateforme e-commerce gérant produits, sessions et commandes.
+- Implémentation d’un panier dynamique et d’un système de gestion des stocks en temps réel.
+- Création d’une interface d’administration (Bootstrap) pour la gestion des opérations et des flux de paiement simulés.
+
+---
+
+## Formation
+
+**Master Professionnel National** | ISET Tozeur (2022 – 2024)  
+- Domaine : Sciences Technologiques | Spécialité : Informatique  
+- Spécialisation : DevOps et Cloud Computing
+
+**Licence Nationale** | ISET Mahdia (2019 – 2022)  
+- Domaine : Sciences Exactes et Technologie | Spécialité : Technologies de l’Information  
+- Spécialisation : Développement Web et Multimédia
+
+---
+
+## Langues
+
+| Langue | Niveau |
+|--------|--------|
+| Arabe  | Natif  |
+| Français | B2 |
+| Anglais | B2 |
+| Allemand | B1 |
+
+---
+</file>
+
+<file path="cvs/master_de.md">
+# Mohamed Tababi
+**Full-Stack, DevOps & Cloud Engineer**
+
+**E-Mail:** mohammadtabbaby@gmail.com | **Telefon:** (+216) 99 145 392  
+**Standort:** Tunesien  
+**Links:** [LinkedIn](https://linkedin.com/in/mohammadtabbaby) | [GitHub](https://github.com/MohammadTabbaby)
+
+---
+
+## Berufliches Profil
+Sicherheitsorientierter und auf Zuverlässigkeit ausgerichteter Software & DevOps Engineer mit Master-Spezialisierung in DevOps und Cloud Computing. Erfahren im Architekturentwurf von Full-Stack-Anwendungen und der Industrialisierung automatisierter Deployments in akademischen und medizinischen Umgebungen mit hohen Compliance-Anforderungen. Experte für den Aufbau skalierbarer Backend-REST-APIs, leistungsstarker Angular-Schnittstellen, die Verwaltung der Kubernetes-Orchestrierung und die Einrichtung umfassender Observability-Stacks. Kombiniert einen soliden Full-Stack-Engineering-Hintergrund mit einer sicherheitsorientierten Infrastruktur-Denkweise, um die Lücke zwischen sicherer Code-Entwicklung und stabilen Produktionsumgebungen zu schließen.
+
+---
+
+## Technische Fähigkeiten
+
+| Kategorie | Werkzeuge & Technologien |
+|----------|----------------------|
+| **Cloud & Infrastruktur** | AWS, Docker, Kubernetes, Terraform |
+| **CI/CD & Automatisierung** | Jenkins, GitHub Actions, Ansible, SonarQube |
+| **Monitoring & Logging** | Prometheus, Grafana, Winston |
+| **Sicherheit (DevSecOps)** | JWT, Helm, bcrypt, Ratenbegrenzung, API-Sicherheit |
+| **Backend-Entwicklung** | Spring Boot (JPA/Hibernate), Django, Laravel, Node.js, Express.js, RESTful APIs |
+| **Frontend-Entwicklung** | Angular, JavaScript (ES6+), TypeScript, HTML5, CSS3, Tailwind |
+| **Datenbanken** | MongoDB, MySQL, PostgreSQL |
+| **Scripting & OS** | Python, Bash, Linux (Ubuntu, Debian), Windows Server |
+| **Konzepte** | Agile Methoden (Scrum), REST-APIs, RBAC, MVC-Architektur |
+
+---
+
+## Berufserfahrung
+
+### ISET Tozeur — Software & DevOps Engineer (Full-Stack)
+*Praktikum | 02/2024 – 06/2024*
+- **Betrieb eines Kubernetes-Clusters mit 8 Microservices** für Spring Boot-Anwendungen, um hohe Verfügbarkeit und Stabilität der Orchestrierung zu gewährleisten.
+- **Architekturentwurf und Bereitstellung** eines sicheren Angular-Administrationsportals unter Verwendung einer rollenbasierten Zugriffskontrolle (RBAC), um komplexe akademische Abläufe zu rationalisieren und zu optimieren.
+- **Entwicklung verteilter Microservices** und REST-APIs, was modulare Skalierbarkeit und eine leistungsstarke Backend-Kommunikation sicherstellte.
+- **Standardisierung von Bereitstellungspipelines** mit Jenkins und SonarQube, Automatisierung von Code-Qualitätskontrollen und Beschleunigung des Release-Zyklus.
+- **Härtung der API-Sicherheit und Infrastruktur** durch Implementierung von Spring Security, JWT-Authentifizierung und Ratenbegrenzung, um unbefugten Zugriff zu verhindern und die Datenintegrität sicherzustellen.
+- **Aufbau eines umfassenden Observability-Stacks** mit Prometheus, Grafana und Winston, um eine Echtzeit-Vorfalls-Erkennung und die Überwachung des Service-Zustands zu ermöglichen.
+
+### Tahar Sfar University Hospital — Software Engineer (Healthcare Systems)
+*Praktikum | 02/2022 – 06/2022*
+- **Entwicklung, Einführung und Bereitstellung** einer zentralisierten Beschwerdemanagement-Plattform mit hoher Rückverfolgbarkeit, Digitalisierung kritischer Workflows und Gewährleistung der Systembetriebszeit in einer Krankenhausumgebung mit hohen Compliance-Anforderungen.
+- **Automatisierung der Verfolgung medizinischer Ressourcen** durch Entwicklung eines Echtzeit-Inventarsystems, was manuelle administrative Fehler signifikant reduzierte und die Ressourcensichtbarkeit erhöhte.
+
+### LeaderPos — Full-Stack Developer
+*Praktikum | 08/2021 – 09/2021*
+- **Entwicklung eines skalierbaren, leistungsstarken Backends** mit Django und MongoDB zur Handhabung komplexer Bestell-, Produkt- und hochfrequenter Sitzungslebenszyklen.
+- **Optimierung der Benutzererfahrung und Systemzuverlässigkeit** durch Implementierung einer dynamischen Warenkorb-Engine und von Workflows zur Echtzeit-Bestandsverfolgung.
+- **Aufbau einer spezialisierten Admin-Oberfläche** mit Bootstrap zur Verwaltung sicherer Zahlungssimulationen und Backend-Abläufe.
+
+---
+
+## Ausbildung
+
+**Nationaler Professioneller Master-Abschluss** | ISET Tozeur (2022 – 2024)
+- Fachbereich: Technologische Wissenschaften | Hauptfach: Informatik
+- Spezialisierung: DevOps (Entwicklung, Betrieb) und Cloud Computing
+
+**Nationaler Bachelor-Abschluss** | ISET Mahdia (2019 – 2022)
+- Fachbereich: Exakte Wissenschaften und Technologie | Hauptfach: Informationstechnologie
+- Spezialisierung: Webentwicklung und Multimedia
+
+---
+
+## Sprachen
+
+| Sprache | Sprachniveau |
+|----------|-------------|
+| **Arabisch** | Muttersprache |
+| **Französisch** | B2 |
+| **Englisch** | B2 |
+| **Deutsch** | B1 |
+</file>
+
+<file path="cvs/master_en.md">
+# Mohamed Tababi
+**Full-Stack, DevOps & Cloud Engineer**
+
+**Email:** mohammadtabbaby@gmail.com | **Phone:** (+216) 99 145 392  
+**Location:** Tunisia  
+**Links:** [LinkedIn](https://linkedin.com/in/mohammadtabbaby) | [GitHub](https://github.com/MohammadTabbaby)
+
+---
+
+## Professional Profile
+
+Security-focused and reliability-driven Software & DevOps Engineer with a Master’s specialization in DevOps and Cloud Computing. Experienced in architecting full-stack applications and industrializing automated deployments within high-compliance academic and healthcare environments. Expert in building scalable backend REST APIs, high-performance Angular interfaces, managing Kubernetes orchestration, and setting up comprehensive observability stacks. Combines a robust full-stack engineering background with a security-first infrastructure mindset to bridge the gap between secure code development and stable production environments.
+
+---
+
+## Technical Skills Stack
+
+| Category | Tools & Technologies |
+|----------|----------------------|
+| **Cloud & Infrastructure** | AWS, Docker, Kubernetes, Terraform |
+| **CI/CD & Automation** | Jenkins, GitHub Actions, Ansible, SonarQube |
+| **Monitoring & Logging** | Prometheus, Grafana, Winston |
+| **Security (DevSecOps)** | JWT, Helm, bcrypt, Rate Limiting, API Security |
+| **Backend Development** | Spring Boot (JPA/Hibernate), Django, Laravel, Node.js, Express.js, RESTful APIs |
+| **Frontend Development** | Angular, JavaScript (ES6+), TypeScript, HTML5, CSS3, Tailwind |
+| **Databases** | MongoDB, MySQL, PostgreSQL |
+| **Scripting & OS** | Python, Bash, Linux (Ubuntu, Debian), Windows Server |
+| **Concepts** | Agile Methods (Scrum), REST APIs, RBAC, MVC Architecture |
+
+---
+
+## Professional Experience
+
+### ISET Tozeur — Software & DevOps Engineer (Full-Stack)
+*Internship | 02/2024 – 06/2024*
+- **Operated an 8-microservice Kubernetes cluster** for Spring Boot applications, ensuring high availability and orchestration stability.
+- **Architected and deployed** a secure Angular administration portal using Role-Based Access Control (RBAC) to streamline and optimize complex academic operations.
+- **Engineered distributed microservices** and REST APIs, ensuring modular scalability and high-performance backend communication.
+- **Standardized delivery pipelines** using Jenkins and SonarQube, automating code quality gates and accelerating the release cycle.
+- **Hardened API security and infrastructure** by implementing Spring Security, JWT authentication, and rate limiting to prevent unauthorized access and ensure data integrity.
+- **Established a comprehensive observability stack** using Prometheus, Grafana, and Winston to enable real-time incident detection and service health tracking.
+
+### Tahar Sfar University Hospital — Software Engineer (Healthcare Systems)
+*Internship | 02/2022 – 06/2022*
+- **Developed, launched, and deployed** a centralized, high-traceability complaints management platform, digitizing critical workflows and ensuring system uptime in a high-compliance hospital environment.
+- **Automated medical resource tracking** by engineering a real-time inventory system, significantly reducing manual administrative errors and increasing resource visibility.
+
+### LeaderPos — Full-Stack Developer
+*Internship | 08/2021 – 09/2021*
+- **Engineered a scalable, high-performance backend** using Django and MongoDB to handle complex order, product, and high-frequency session lifecycles.
+- **Optimized user experience and system reliability** by implementing a dynamic cart engine and real-time stock tracking workflows.
+- **Built a specialized admin interface** using Bootstrap to manage secure payment simulations and backend operations.
+
+---
+
+## Education
+
+**National Professional Master’s Degree** | ISET Tozeur (2022 – 2024)  
+- Field: Technological Sciences | Major: Computer Science  
+- Specialization: DevOps (Development, Operations) and Cloud Computing
+
+**National Bachelor's Degree** | ISET Mahdia (2019 – 2022)  
+- Field: Exact Sciences and Technology | Major: Information Technology  
+- Specialization: Web Development and Multimedia
+
+---
+
+## Languages
+
+| Language | Proficiency |
+|----------|-------------|
+| Arabic   | Native      |
+| French   | B2          |
+| English  | B2          |
+| German   | B1          |
+</file>
+
+<file path="cvs/master_fr.md">
+# Mohamed Tababi
+**Ingénieur Full-Stack, DevOps & Cloud**
+
+**E-mail :** mohammadtabbaby@gmail.com | **Téléphone :** (+216) 99 145 392  
+**Localisation :** Tunisie  
+**Liens :** [LinkedIn](https://linkedin.com/in/mohammadtabbaby) | [GitHub](https://github.com/MohammadTabbaby)
+
+---
+
+## Profil Professionnel
+
+Ingénieur logiciel et DevOps axé sur la sécurité et la fiabilité, titulaire d'un Master spécialisé en DevOps et Cloud Computing. Expérimenté dans l'architecture d'applications full-stack et l'industrialisation des déploiements automatisés au sein d'environnements académiques et hospitaliers exigeants. Expert dans la création d'API REST backend évolutives, d'interfaces Angular haute performance, la gestion de l'orchestration Kubernetes et la mise en place de piles d'observabilité complètes. Je combine une solide expérience en ingénierie full-stack avec une mentalité d'infrastructure axée sur la sécurité pour combler le fossé entre le développement de code sécurisé et les environnements de production stables.
+
+---
+
+## Compétences Techniques
+
+| Catégorie | Outils & Technologies |
+|----------|----------------------|
+| **Cloud & Infrastructure** | AWS, Docker, Kubernetes, Terraform |
+| **CI/CD & Automatisation** | Jenkins, GitHub Actions, Ansible, SonarQube |
+| **Monitoring & Logging** | Prometheus, Grafana, Winston |
+| **Sécurité (DevSecOps)** | JWT, Helm, bcrypt, Limitation de débit (Rate Limiting), Sécurité des API |
+| **Développement Backend** | Spring Boot (JPA/Hibernate), Django, Laravel, Node.js, Express.js, API RESTful |
+| **Développement Frontend** | Angular, JavaScript (ES6+), TypeScript, HTML5, CSS3, Tailwind |
+| **Bases de données** | MongoDB, MySQL, PostgreSQL |
+| **Scripting & OS** | Python, Bash, Linux (Ubuntu, Debian), Windows Server |
+| **Concepts** | Méthodes Agile (Scrum), API REST, RBAC, Architecture MVC |
+
+---
+
+## Expérience Professionnelle
+
+### ISET Tozeur — Ingénieur Logiciel & DevOps (Full-Stack)
+*Stage | 02/2024 – 06/2024*
+- **Exploitation d'un cluster Kubernetes de 8 microservices** pour des applications Spring Boot, assurant une haute disponibilité et une stabilité d'orchestration.
+- **Conception et déploiement** d'un portail d'administration Angular sécurisé utilisant le contrôle d'accès basé sur les rôles (RBAC) pour rationaliser et optimiser les opérations académiques complexes.
+- **Ingénierie de microservices distribués** et d'API REST, garantissant une évolutivité modulaire et une communication backend haute performance.
+- **Standardisation des pipelines de livraison** avec Jenkins et SonarQube, automatisant les contrôles de qualité du code et accélérant le cycle de publication.
+- **Renforcement de la sécurité des API et de l'infrastructure** par l'implémentation de Spring Security, l'authentification JWT et la limitation de débit pour prévenir les accès non autorisés et assurer l'intégrité des données.
+- **Mise en place d'une pile d'observabilité complète** utilisant Prometheus, Grafana et Winston pour permettre la détection d'incidents en temps réel et le suivi de la santé des services.
+
+### Hôpital Universitaire Tahar Sfar — Ingénieur Logiciel (Systèmes de Santé)
+*Stage | 02/2022 – 06/2022*
+- **Développement, lancement et déploiement** d'une plateforme centralisée de gestion des plaintes à haute traçabilité, numérisant les flux de travail critiques et assurant la disponibilité du système dans un environnement hospitalier hautement réglementé.
+- **Automatisation du suivi des ressources médicales** par la conception d'un système d'inventaire en temps réel, réduisant considérablement les erreurs administratives manuelles et augmentant la visibilité des ressources.
+
+### LeaderPos — Développeur Full-Stack
+*Stage | 08/2021 – 09/2021*
+- **Ingénierie d'un backend performant et évolutif** utilisant Django et MongoDB pour gérer des cycles de vie complexes de commandes, de produits et de sessions à haute fréquence.
+- **Optimisation de l'expérience utilisateur et de la fiabilité du système** par l'implémentation d'un moteur de panier dynamique et de flux de travail de suivi des stocks en temps réel.
+- **Création d'une interface d'administration spécialisée** utilisant Bootstrap pour gérer des simulations de paiement sécurisées et des opérations backend.
+
+---
+
+## Formation
+
+**Master Professionnel National** | ISET Tozeur (2022 – 2024)  
+- Domaine : Sciences Technologiques | Spécialité : Informatique  
+- Option : DevOps (Développement, Opérations) et Cloud Computing
+
+**Licence Appliquée Nationale** | ISET Mahdia (2019 – 2022)  
+- Domaine : Sciences Exactes et Technologie | Spécialité : Informatique  
+- Option : Développement Web et Multimédia
+
+---
+
+## Langues
+
+| Langue | Niveau |
+|----------|-------------|
+| Arabe    | Maternel    |
+| Français | B2          |
+| Anglais  | B2          |
+| Allemand | B1          |
+</file>
+
+<file path="cvs/nontech_master_de.md">
+# Mohamed Tababi
+**Vielseitiger Fachmann – IT-Support & Helpdesk-Techniker**
+
+**E-Mail:** mohammadtabbaby@gmail.com | **Telefon:** (+216) 99 145 392  
+**Standort:** Tunesien  
+**Links:** [LinkedIn](https://linkedin.com/in/mohammadtabbaby) | [GitHub](https://github.com/MohammadTabbaby)
+
+---
+
+## Profil
+Rigoroser und autonomer Fachmann mit starken analytischen Fähigkeiten und ausgezeichneten zwischenmenschlichen Fähigkeiten. Besitzt umfangreiche Erfahrung im Verständnis von Geschäftsanforderungen, in der Implementierung strukturierter Lösungen und in der Leitung funktionsübergreifender Projekte. Anerkannt für den Aufbau von Vertrauensbeziehungen zu Stakeholdern (Kunden, Teams und Partnern) und die Umsetzung komplexer Anfragen in konkrete Maßnahmen. Legt großen Wert auf Teamarbeit und proaktiven Wissensaustausch.
+
+---
+
+## Kompetenzen
+
+| Kategorie | Fähigkeiten & Fertigkeiten |
+| :--- | :--- |
+| **Kundenbeziehungen** | Aktives Zuhören, Bedarfsermittlung, Personalisierte Nachverfolgung |
+| **Analyse & Problemlösung** | Diagnose, Lösungsvorschläge, Kontinuierliche Verbesserung |
+| **Organisation & Disziplin** | Prioritätenmanagement, Einhaltung von Verfahren, Rückverfolgbarkeit |
+| **Kommunikation & Zusammenarbeit** | Teamarbeit, Workshop-Moderation, Klares Reporting |
+| **Betriebssysteme** | Windows 10/11, macOS, Grundkenntnisse in Linux |
+| **Digitale Werkzeuge** | Office-Suite, TeamViewer, AnyDesk, Grundlegende Versionskontrolle |
+
+---
+
+## Berufserfahrung
+
+### Ehrenamtlicher IT-Support
+**Lokales Gemeindezentrum** | *2023 – Heute*
+
+* Unterstützung von über 50 Benutzern bei Hardware- und Softwareproblemen, sowohl telefonisch als auch persönlich.
+* Installation und Wartung von 20 Arbeitsplätzen, wodurch die Ausfallzeiten erfolgreich um 40 % reduziert wurden.
+* Erstellung einer umfassenden Wissensdatenbank für häufige technische Probleme, wodurch wiederholte Anfragen um 25 % gesenkt wurden.
+
+### Assistent für digitale Projekte
+**Höheres Institut für technologische Studien (ISET) Tozeur** | *02/2024 – 06/2024*
+
+* Erfassung und Analyse der Bedürfnisse akademischer Teams zur Entwicklung maßgeschneiderter Tracking-Schnittstellen, wodurch die betriebliche Transparenz verbessert wurde.
+* Teilnahme am Aufbau einer internen Tool-Architektur, um die Datenzuverlässigkeit und Servicekontinuität sicherzustellen.
+* Beitrag zur Sicherung von Zugängen und zum Schutz sensibler Informationen in Zusammenarbeit mit Geschäftsführern.
+
+### Assistent der Projektleitung
+**Tahar Sfar Universitätskrankenhaus** | *02/2022 – 06/2022*
+
+* Entwurf und Bereitstellung einer internen Plattform zur Beschwerdeverfolgung, um Anfragen zu zentralisieren und eine vollständige Datenrückverfolgbarkeit zu gewährleisten.
+* Implementierung eines Dashboards zur Verfolgung medizinischer Ressourcen, was die Entscheidungsfindung rationalisierte und sich wiederholende administrative Aufgaben reduzierte.
+
+### Assistent für Support- & Service-Management
+**LeaderPos** | *08/2021 – 09/2021*
+
+* Beitrag zur Verbesserung eines Online-Bestellservices durch Ermittlung der Benutzerbedürfnisse und Vorschlag funktionaler Anpassungen.
+* Zusammenarbeit mit dem Business-Team bei der Erstellung eines einfachen administrativen Verwaltungstools, das Fehler reduzierte und den täglichen Betrieb flüssiger machte.
+* Überwachung simulierter Transaktionsströme, um die betriebliche Konsistenz und Kundenzufriedenheit sicherzustellen.
+
+---
+
+## Ausbildung
+
+**Professioneller Master-Abschluss in Informatik** *ISET Tozeur* | 2022 – 2024
+* Fortgeschrittene Kurse in Projektmanagement-Methoden und Bedarfsanalyse.
+
+**Bachelor-Abschluss in Informationstechnologie** *ISET Mahdia* | 2019 – 2022
+* Spezialisierung auf digitale Lösungen und kollaboratives Arbeiten.
+
+---
+
+## Sprachen
+
+| Sprache | Sprachniveau |
+| :--- | :--- |
+| **Arabisch** | Muttersprache |
+| **Französisch** | B2 |
+| **Englisch** | B2 |
+| **Deutsch** | B1 |
+</file>
+
+<file path="cvs/nontech_master_en.md">
+# Mohamed Tababi
+
+**Versatile Professional – IT Support & Helpdesk Technician**
+
+**Email:** mohammadtabbaby@gmail.com | **Phone:** (+216) 99 145 392  
+**Location:** Tunisia  
+**Links:** [LinkedIn](https://linkedin.com/in/mohammadtabbaby) | [GitHub](https://github.com/MohammadTabbaby)
+
+---
+
+## Profile
+
+Rigorous and autonomous professional with strong analytical skills and excellent interpersonal abilities. Possesses significant experience in understanding business needs, implementing structured solutions, and managing cross-functional projects. Recognized for building relationships of trust with stakeholders (clients, teams, and partners) and translating complex requests into concrete actions. Highly values teamwork and proactive knowledge sharing.
+
+---
+
+## Skills
+
+| Category | Skills & Abilities |
+| :--- | :--- |
+| **Customer Relations** | Active listening, Needs identification, Personalized follow-up |
+| **Analysis & Problem Solving** | Diagnostics, Solution proposal, Continuous improvement |
+| **Organization & Discipline** | Priority management, Adherence to procedures, Traceability |
+| **Communication & Collaboration** | Teamwork, Workshop facilitation, Clear reporting |
+| **Operating Systems** | Windows 10/11, macOS, basic knowledge of Linux |
+| **Digital Tools** | Office Suite, TeamViewer, AnyDesk, Basic version control |
+
+---
+
+## Professional Experience
+
+### Volunteer IT Support
+**Local Community Center** | *2023 – Present*
+
+* Assisted over 50 users with hardware and software issues, both over the phone and in person.
+* Installed and maintained 20 workstations, successfully reducing downtime by 40%.
+* Created a comprehensive knowledge base for common technical issues, decreasing repeat calls by 25%.
+
+### Digital Project Assistant
+**Higher Institute of Technological Studies (ISET) Tozeur** | *02/2024 – 06/2024*
+
+* Gathered and analyzed needs from academic teams to design tailored tracking interfaces, improving operational transparency.
+* Participated in setting up an internal tool architecture to ensure data reliability and service continuity.
+* Contributed to securing access and protecting sensitive information in collaboration with business managers.
+
+### Project Management Assistant
+**Tahar Sfar University Hospital** | *02/2022 – 06/2022*
+
+* Designed and deployed an internal complaint tracking platform to centralize requests and ensure complete data traceability.
+* Implemented a medical resource tracking dashboard, streamlining decision-making and reducing repetitive administrative tasks.
+
+### Support & Service Management Assistant
+**LeaderPos** | *08/2021 – 09/2021*
+
+* Contributed to improving an online ordering service by identifying user needs and proposing functional adjustments.
+* Collaborated with the business team to create a simple administrative management tool, reducing errors and fluidifying daily operations.
+* Monitored simulated transaction flows to ensure operational consistency and customer satisfaction.
+
+---
+
+## Education
+
+**Professional Master’s Degree in Computer Science** *ISET Tozeur* | 2022 – 2024
+* Advanced coursework in project management methodologies and needs analysis.
+
+**Bachelor’s Degree in Information Technology** *ISET Mahdia* | 2019 – 2022
+* Specialization in digital solutions and collaborative work.
+
+---
+
+## Languages
+
+| Language | Proficiency |
+| :--- | :--- |
+| **Arabic** | Native |
+| **French** | B2 |
+| **English** | B2 |
+| **German** | B1 |
+</file>
+
+<file path="cvs/nontech_master_fr.md">
+# Mohamed Tababi
+
+**Versatile Professional – IT Support & Helpdesk Technician**
+
+**Email:** mohammadtabbaby@gmail.com | **Phone:** (+216) 99 145 392
+
+**Location:** Tunisia
+
+**Links:** [LinkedIn](https://linkedin.com/in/mohammadtabbaby) | [GitHub](https://github.com/MohammadTabbaby)
+
+---
+
+## Profile
+
+Rigorous and autonomous professional with strong analytical skills and excellent interpersonal abilities. Significant experience in understanding business needs, implementing structured solutions, and managing cross-functional projects. Recognized for building relationships of trust with stakeholders (clients, teams, partners) and translating complex requests into concrete actions. Highly values teamwork and knowledge sharing.
+
+---
+
+## Skills
+
+| Category | Skills & Abilities |
+| --- | --- |
+| **Customer Relations** | Active listening, Needs identification, Personalized follow-up |
+| **Analysis & Problem Solving** | Diagnostics, Solution proposal, Continuous improvement |
+| **Organization & Discipline** | Priority management, Adherence to procedures, Traceability |
+| **Communication & Collaboration** | Teamwork, Workshop facilitation, Clear reporting |
+| **Operating Systems** | Windows 10/11, macOS, basic knowledge of Linux |
+| **Digital Tools** | Office Suite, TeamViewer, AnyDesk, Basic version control |
+
+---
+
+## Professional Experience
+
+### Volunteer IT Support, Local Community Center (2023 – Present)
+
+* Assisted over 50 users with hardware and software issues, both over the phone and in person.
+* Installed and maintained 20 workstations, successfully reducing downtime by 40%.
+* Created a comprehensive knowledge base for common technical issues, decreasing repeat calls by 25%.
+
+### Higher Institute of Technological Studies (ISET) Tozeur
+
+**Digital Project Assistant** (02/2024 – 06/2024)
+
+* Gathered and analyzed needs from academic teams to design tailored tracking interfaces, improving operational transparency.
+* Participated in setting up an internal tool architecture to ensure data reliability and service continuity.
+* Contributed to securing access and protecting sensitive information in collaboration with business managers.
+
+### Tahar Sfar University Hospital
+
+**Project Management Assistant** (02/2022 – 06/2022)
+
+* Designed and deployed an internal complaint tracking platform to centralize requests and ensure complete data traceability.
+* Implemented a medical resource tracking dashboard, streamlining decision-making and reducing repetitive administrative tasks.
+
+### LeaderPos
+
+**Support & Service Management Assistant** (08/2021 – 09/2021)
+
+* Contributed to improving an online ordering service by identifying user needs and proposing functional adjustments.
+* Collaborated with the business team to create a simple administrative management tool, reducing errors and fluidifying daily operations.
+* Monitored simulated transaction flows to ensure operational consistency and customer satisfaction.
+
+---
+
+## Education
+
+**Professional Master’s Degree in Computer Science** | ISET Tozeur (2022 – 2024)
+
+* Advanced coursework in project management methodologies and needs analysis.
+
+**Bachelor’s Degree in Information Technology** | ISET Mahdia (2019 – 2022)
+
+* Specialization in digital solutions and collaborative work.
+
+---
+
+## Languages
+
+| Language | Proficiency |
+| --- | --- |
+| Arabic | Native |
+| French | B2 |
+| English | B2 |
+| German | B1 |
+
+---
+</file>
+
+<file path="cvs/web_de.md">
+# Mohamed Tababi
+**Full-Stack Webentwickler**
+
+**E-Mail:** mohammadtabbaby@gmail.com | **Telefon:** (+216) 99 145 392  
+**Standort:** Tunesien  
+**Links:** [LinkedIn](https://linkedin.com/in/mohammadtabbaby) | [GitHub](https://github.com/MohammadTabbaby)
+
+---
+
+## Profil
+Full-Stack Webentwickler mit Erfahrung in der Entwicklung von Webanwendungen in akademischen und medizinischen Umgebungen. Starker Fokus auf Backend-Architektur, REST-APIs und Frontend-Schnittstellen mit Angular. Fähig, komplette Weblösungen mit Augenmerk auf Leistung, Benutzerfreundlichkeit und Wartbarkeit zu entwerfen, zu entwickeln und bereitzustellen.
+
+---
+
+## Technische Fähigkeiten
+
+| Kategorie | Werkzeuge & Technologien |
+|-----------|---------------------|
+| **Frontend-Entwicklung** | Angular, TypeScript, JavaScript (ES6+), HTML5, CSS3, Tailwind, Bootstrap |
+| **Backend-Entwicklung** | Spring Boot (JPA/Hibernate), Django, Laravel, Node.js, Express.js |
+| **Datenbanken** | MongoDB, MySQL, PostgreSQL |
+| **Werkzeuge** | Git, Docker, Linux |
+| **Konzepte** | Agile Methoden (Scrum), REST-APIs, RBAC, MVC-Architektur |
+
+---
+
+## Berufserfahrung
+
+### ISET Tozeur — Praktikant als Full-Stack Entwickler (02/2024 – 06/2024)
+- Entwicklung von Angular-Dashboards mit rollenbasierter Zugriffskontrolle (RBAC) für den akademischen Betrieb.
+- Entwurf und Entwicklung von Backend-Microservices und REST-APIs in einer verteilten Architektur.
+- Implementierung von API-Sicherheitsmechanismen mit Spring Security, JWT und Ratenbegrenzung zur Zugriffskontrolle und Sicherung von Endpunkten.
+
+### Tahar Sfar Universitätskrankenhaus
+**Praktikant als Full-Stack Webentwickler** (02/2022 – 06/2022)
+- Entwicklung und Bereitstellung einer internen Beschwerdemanagement-Plattform mit Rückverfolgbarkeit in einer Krankenhausumgebung.
+- Aufbau eines Echtzeit-Systems zur Verfolgung medizinischer Bestände, um die Ressourcensichtbarkeit zu verbessern und den manuellen Verwaltungsaufwand zu reduzieren.
+
+### LeaderPos
+**Praktikant als Full-Stack Webentwickler** (08/2021 – 09/2021)
+- Entwicklung eines Backend-Systems (Django, MongoDB) für eine E-Commerce-Plattform zur Verwaltung von Produkten, Sitzungen und Bestellungen.
+- Implementierung einer dynamischen Warenkorbfunktion und von Mechanismen zur Bestandsverfolgung für Echtzeit-Updates.
+- Erstellung einer Admin-Oberfläche (Bootstrap) zur Verwaltung von Abläufen und simulierten Zahlungs-Workflows.
+
+---
+
+## Ausbildung
+
+**Nationaler Professioneller Master-Abschluss** | ISET Tozeur (2022 – 2024)
+- Fachbereich: Technologische Wissenschaften | Hauptfach: Informatik
+- Spezialisierung: DevOps und Cloud Computing
+
+**Nationaler Bachelor-Abschluss** | ISET Mahdia (2019 – 2022)
+- Fachbereich: Exakte Wissenschaften und Technologie | Hauptfach: Informationstechnologie
+- Spezialisierung: Webentwicklung und Multimedia
+
+---
+
+## Sprachen
+
+| Sprache | Sprachniveau |
+|----------|-------------|
+| **Arabisch** | Muttersprache |
+| **Französisch** | B2 |
+| **Englisch** | B2 |
+| **Deutsch** | B1 |
+</file>
+
+<file path="cvs/web_en.md">
+# Mohamed Tababi  
+**Full-Stack Web Developer**
+
+**Email:** mohammadtabbaby@gmail.com | **Phone:** (+216) 99 145 392  
+**Location:** Tunisia  
+**Links:** [LinkedIn](https://linkedin.com/in/mohammadtabbaby) | [GitHub](https://github.com/MohammadTabbaby)
+
+---
+
+## Profile
+
+Full-Stack Web Developer with experience building web applications in academic and healthcare environments. Strong focus on backend architecture, REST APIs, and frontend interfaces using Angular. Able to design, develop, and deploy complete web solutions with attention to performance, usability, and maintainability.
+
+---
+
+## Technical Skills
+
+| Category | Tools & Technologies |
+|-----------|---------------------|
+| **Frontend Development** | Angular, TypeScript, JavaScript (ES6+), HTML5, CSS3, Tailwind, Bootstrap |
+| **Backend Development** | Spring Boot (JPA/Hibernate), Django, Laravel, Node.js, Express.js |
+| **Databases** | MongoDB, MySQL, PostgreSQL |
+| **Tools** | Git, Docker, Linux |
+| **Concepts** | Agile Methods (Scrum), REST APIs, RBAC, MVC Architecture |
+
+---
+
+## Experience
+
+### ISET Tozeur — Full-Stack Developer Intern (02/2024 – 06/2024)
+- Developed Angular dashboards with Role-Based Access Control (RBAC) for academic operations.
+- Designed and developed backend microservices and REST APIs in a distributed architecture.
+- Implemented API security mechanisms with Spring Security, JWT, and rate limiting to control access and secure endpoints.
+
+### Tahar Sfar University Hospital  
+**Full-Stack Web Developer Intern** (02/2022 – 06/2022)
+
+- Developed and deployed an internal complaints management platform with traceability in a hospital environment.
+- Built a real-time medical inventory tracking system to improve resource visibility and reduce manual administrative work.
+
+### LeaderPos  
+**Full-Stack Web Developer Intern** (08/2021 – 09/2021)
+
+- Developed a backend system (Django, MongoDB) for an e-commerce platform managing products, sessions, and orders.
+- Implemented dynamic cart functionality and stock tracking mechanisms for real-time updates.
+- Built an admin interface (Bootstrap) to manage operations and simulated payment workflows.
+
+---
+
+## Education
+
+**National Professional Master's Degree** | ISET Tozeur (2022 – 2024)  
+- Field: Technological Sciences | Major: Computer Science  
+- Specialization: DevOps and Cloud Computing
+
+**National Bachelor's Degree** | ISET Mahdia (2019 – 2022)  
+- Field: Exact Sciences and Technology | Major: Information Technology  
+- Specialization: Web Development and Multimedia
+
+---
+
+## Languages
+
+| Language | Proficiency |
+|----------|-------------|
+| Arabic   | Native      |
+| French   | B2          |
+| English  | B2          |
+| German   | B1          |
+
+---
+</file>
+
+<file path="cvs/web_fr.md">
+# Mohamed Tababi  
+**Développeur Web Full-Stack**
+
+**Email :** mohammadtabbaby@gmail.com | **Téléphone :** (+216) 99 145 392  
+**Localisation :** Tunisie  
+**Liens :** [LinkedIn](https://linkedin.com/in/mohammadtabbaby) | [GitHub](https://github.com/MohammadTabbaby)
+
+---
+
+## Profil
+
+Développeur Web Full-Stack avec une expérience dans la conception d’applications web en environnements académique et hospitalier. Solide maîtrise du développement backend, des API REST et des interfaces frontend avec Angular. Capable de concevoir et déployer des applications complètes.
+
+---
+
+## Compétences techniques
+
+| Catégorie | Outils & Technologies |
+|-----------|----------------------|
+| **Frontend** | Angular, TypeScript, JavaScript (ES6+), HTML5, CSS3, Tailwind |
+| **Backend** | Spring Boot (JPA/Hibernate), Django, Laravel, Node.js, Express.js |
+| **Bases de données** | MongoDB, MySQL, PostgreSQL |
+| **Sécurité** | Spring Security, JWT, Rate Limiting, Sécurisation d’API |
+| **Outils** | Git, Docker, Linux |
+| **Concepts** | Méthodes Agiles (Scrum), API REST, RBAC, Architecture MVC |  
+
+---
+
+## Expérience professionnelle
+
+### Institut Supérieur des Études Technologiques (ISET) Tozeur  
+**Stagiaire Ingénieur DevOps & Full-Stack** (02/2024 – 06/2024)
+
+- Développement de tableaux de bord Angular avec gestion des rôles (RBAC) pour les opérations académiques.
+- Conception et développement de microservices backend (Spring Boot, REST APIs) dans une architecture distribuée.
+- Implémentation de mécanismes de sécurité API (Spring Security, JWT, rate limiting) pour contrôler les accès et sécuriser les endpoints.
+
+### Hôpital Universitaire Tahar Sfar  
+**Stagiaire Développeur Full-Stack** (02/2022 – 06/2022)
+
+- Développement et déploiement d’une plateforme interne de gestion des réclamations avec traçabilité dans un environnement hospitalier.
+- Mise en place d’un système de suivi des stocks médicaux en temps réel pour améliorer la visibilité des ressources et réduire les tâches administratives.
+
+### LeaderPos  
+**Stagiaire Développeur Full-Stack** (08/2021 – 09/2021)
+
+- Développement d’un backend (Django, MongoDB) pour une plateforme e-commerce gérant produits, sessions et commandes.
+- Implémentation d’un panier dynamique et d’un système de gestion des stocks en temps réel.
+- Création d’une interface d’administration (Bootstrap) pour la gestion des opérations et des flux de paiement simulés.
+
+---
+
+## Formation
+
+**Master Professionnel National** | ISET Tozeur (2022 – 2024)  
+- Domaine : Sciences Technologiques | Spécialité : Informatique  
+- Spécialisation : DevOps et Cloud Computing
+
+**Licence Nationale** | ISET Mahdia (2019 – 2022)  
+- Domaine : Sciences Exactes et Technologie | Spécialité : Technologies de l’Information  
+- Spécialisation : Développement Web et Multimédia
+
+---
+
+## Langues
+
+| Langue | Niveau |
+|--------|--------|
+| Arabe  | Natif  |
+| Français | B2 |
+| Anglais | B2 |
+| Allemand | B1 |
+
+---
+</file>
+
+<file path="job_description.txt">
+Junior Fullstack Developer (m/f/d)
+for new location Roding (Germany)
+
+YOUR RESPONSIBILITIES:
+
+Conception, implementation, new and further development of various applications in the web and app area
+Creative solution of new and complex tasks
+Implementation of interfaces to third-party systems
+Requirements management and documentation
+Creation of mockups and design concepts
+Advice to the specialist departments
+ 
+
+YOUR PROFILE:
+
+Advanced experience in application development
+Profound knowledge in modern web technologies
+Very good knowledge of object-oriented programming
+Experience in the administration of web servers is an advantage
+Analytical and conceptual skills
+Communication and teamwork skills
+Personality is more than anything!
+</file>
+
+<file path="linguaresume/__init__.py">
+"""LinguaResume package."""
+import logging
+
+def setup_logging(level: int = logging.INFO) -> logging.Logger:
+    """Configure root logger for the package."""
+    logger = logging.getLogger("linguaresume")
+    if not logger.handlers:
+        handler = logging.StreamHandler()
+        formatter = logging.Formatter("%(levelname)s | %(message)s")
+        handler.setFormatter(formatter)
+        logger.addHandler(handler)
+    logger.setLevel(level)
+    return logger
+</file>
+
+<file path="linguaresume/cli.py">
+"""CLI entry point with subcommands for LinguaResume."""
+import argparse
+import logging
+import os
+import sys
+from typing import Optional
+
+from linguaresume import setup_logging
+from linguaresume.config import Config
+from linguaresume.llm.client import OllamaClient, OpenAIClient
+from linguaresume.tailoring.engine import TailoringEngine
+from linguaresume.pdf.renderer import PDFRenderer
+from linguaresume.parsing.extractor import load_text, extract_companies, extract_dates
+from linguaresume.parsing.splitter import split_resume_sections, build_static_bundle, _make_alias_map
+from linguaresume.validation.tech import TechValidator
+
+logger = logging.getLogger("linguaresume")
+
+
+def _build_llm_client(cfg: Config, api_key: Optional[str] = None):
+    if api_key or os.environ.get("OPENAI_API_KEY"):
+        return OpenAIClient(
+            api_key=api_key or os.environ["OPENAI_API_KEY"],
+            model=cfg.ollama.model,
+            temperature=cfg.ollama.temperature,
+            timeout=cfg.ollama.timeout,
+        )
+    return OllamaClient(
+        url=cfg.ollama.url,
+        model=cfg.ollama.model,
+        temperature=cfg.ollama.temperature,
+        timeout=cfg.ollama.timeout,
+    )
+
+
+def cmd_tailor(args):
+    setup_logging(level=logging.INFO)
+    cfg = Config.from_yaml(args.config)
+    llm = _build_llm_client(cfg, args.api_key)
+    engine = TailoringEngine(cfg, llm, force=args.force, domain_override=args.domain)
+    md_path, pdf_path = engine.run(args.job_description)
+    print(f"\n✅ Done!\nMarkdown: {md_path}\nPDF:      {pdf_path}")
+
+
+def cmd_validate(args):
+    setup_logging(level=logging.INFO)
+    cfg = Config.from_yaml(args.config)
+    final_md = load_text(args.markdown)
+
+    master_path = args.master or cfg.fallback_cv
+    if not os.path.exists(master_path):
+        print(f"Master CV not found: {master_path}")
+        sys.exit(1)
+
+    master_md = load_text(master_path)
+    llm = _build_llm_client(cfg)
+    engine = TailoringEngine(cfg, llm)
+    engine.master_md = master_md
+    engine.master_name = "Candidate"
+    engine.master_companies = extract_companies(master_md)
+    engine.master_dates = extract_dates(master_md)
+    engine.alias_map = _make_alias_map(cfg.section_aliases)
+    engine.static_keys = cfg.static_section_keys
+    engine.tech_validator = TechValidator(engine.alias_map)
+    engine.bullet_token_overlap = cfg.validation.bullet_token_overlap_threshold
+    engine.bullet_retention = cfg.validation.bullet_retention_threshold
+    engine.master_lang = args.master_lang
+    engine.target_lang = args.target_lang
+
+    header, sections = split_resume_sections(master_md, engine.alias_map)
+    static_bundle = build_static_bundle(sections, engine.static_keys, engine.alias_map)
+
+    result = engine.validate_final(final_md, static_bundle)
+    print(f"Validation {'PASSED' if result.passed else 'FAILED'}")
+    if result.failures:
+        for f in result.failures:
+            print(f"  - {f}")
+    if result.details:
+        for k, v in result.details.items():
+            print(f"  {k}: {v}")
+    sys.exit(0 if result.passed else 1)
+
+
+def cmd_pdf(args):
+    setup_logging(level=logging.INFO)
+    cfg = Config.from_yaml(args.config)
+    md_text = load_text(args.markdown)
+    pdf_path = args.output or os.path.splitext(args.markdown)[0] + ".pdf"
+    renderer = PDFRenderer(cfg.resume_css)
+    renderer.render(md_text, pdf_path, lang=args.lang)
+    print(f"📄 PDF regenerated: {pdf_path}")
+
+
+def cmd_translate(args):
+    setup_logging(level=logging.INFO)
+    cfg = Config.from_yaml(args.config)
+    llm = _build_llm_client(cfg)
+    engine = TailoringEngine(cfg, llm)
+    engine.target_lang = args.to
+    engine.master_lang = args.from_lang
+
+    md_text = load_text(args.markdown)
+    header, sections = split_resume_sections(md_text, _make_alias_map(cfg.section_aliases))
+    static = build_static_bundle(sections, cfg.static_section_keys, _make_alias_map(cfg.section_aliases))
+
+    if not static.strip():
+        print("No static sections found to translate.")
+        sys.exit(0)
+
+    translated = engine.translate_static_sections(static)
+    print(translated)
+
+
+def main():
+    parser = argparse.ArgumentParser(description="LinguaResume - Language-Agnostic Resume Tailor")
+    parser.add_argument("--config", default="config.yaml", help="Path to config file")
+    sub = parser.add_subparsers(dest="command", required=True)
+
+    p_tailor = sub.add_parser("tailor", help="Run full tailoring pipeline")
+    p_tailor.add_argument("job_description", help="Path to job description text file")
+    p_tailor.add_argument("--force", action="store_true", help="Skip compatibility confirmation")
+    p_tailor.add_argument("--domain", choices=["webdev", "devops", "fullstack", "other"], help="Force domain")
+    p_tailor.add_argument("--api-key", help="OpenAI API key (optional)")
+
+    p_val = sub.add_parser("validate", help="Run validators on a tailored resume")
+    p_val.add_argument("markdown", help="Path to tailored resume markdown")
+    p_val.add_argument("--master", help="Path to master CV for comparison")
+    p_val.add_argument("--master-lang", default="en", choices=["en", "fr", "de"])
+    p_val.add_argument("--target-lang", default="en", choices=["en", "fr", "de"])
+
+    p_pdf = sub.add_parser("pdf", help="Regenerate PDF from markdown")
+    p_pdf.add_argument("markdown", help="Path to markdown file")
+    p_pdf.add_argument("--output", "-o", help="Output PDF path")
+    p_pdf.add_argument("--lang", default="en", choices=["en", "fr", "de"])
+
+    p_trans = sub.add_parser("translate", help="Translate static sections of a resume")
+    p_trans.add_argument("markdown", help="Path to markdown file")
+    p_trans.add_argument("--to", required=True, choices=["en", "fr", "de"], help="Target language")
+    p_trans.add_argument("--from-lang", default="en", choices=["en", "fr", "de"])
+
+    args = parser.parse_args()
+
+    if args.command == "tailor":
+        cmd_tailor(args)
+    elif args.command == "validate":
+        cmd_validate(args)
+    elif args.command == "pdf":
+        cmd_pdf(args)
+    elif args.command == "translate":
+        cmd_translate(args)
+
+
+if __name__ == "__main__":
+    main()
+</file>
+
+<file path="linguaresume/llm/__init__.py">
+"""LLM client and prompts."""
+from linguaresume.llm.client import LLMClient, OllamaClient, OpenAIClient, MockLLMClient
+from linguaresume.llm.cache import LLMCache
+from linguaresume.llm.prompts import (
+    render_middle_prompt,
+    render_translate_prompt,
+    render_requirements_prompt,
+    render_title_translate_prompt,
+)
+
+__all__ = [
+    "LLMClient",
+    "OllamaClient",
+    "OpenAIClient",
+    "MockLLMClient",
+    "LLMCache",
+    "render_middle_prompt",
+    "render_translate_prompt",
+    "render_requirements_prompt",
+    "render_title_translate_prompt",
+]
+</file>
+
+<file path="linguaresume/llm/cache.py">
+"""In-memory and optional disk cache for LLM calls."""
+import hashlib
+import json
+import os
+from typing import Dict, Optional
+
+
+class LLMCache:
+    def __init__(self, disk_dir: Optional[str] = None):
+        self._memory: Dict[str, str] = {}
+        self._disk_dir = disk_dir
+        if disk_dir:
+            os.makedirs(disk_dir, exist_ok=True)
+
+    def _key(self, payload: str) -> str:
+        return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
+    def get(self, payload: str) -> Optional[str]:
+        key = self._key(payload)
+        if key in self._memory:
+            return self._memory[key]
+        if self._disk_dir:
+            path = os.path.join(self._disk_dir, f"{key}.json")
+            if os.path.exists(path):
+                with open(path, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                    self._memory[key] = data
+                    return data
+        return None
+
+    def set(self, payload: str, value: str) -> None:
+        key = self._key(payload)
+        self._memory[key] = value
+        if self._disk_dir:
+            path = os.path.join(self._disk_dir, f"{key}.json")
+            with open(path, "w", encoding="utf-8") as f:
+                json.dump(value, f, ensure_ascii=False)
+</file>
+
+<file path="linguaresume/llm/client.py">
+"""Abstract and concrete LLM clients."""
+import time
+import logging
+from abc import ABC, abstractmethod
+from typing import Optional
+
+import requests
+
+from linguaresume.llm.cache import LLMCache
+
+logger = logging.getLogger("linguaresume")
+
+
+class LLMClient(ABC):
+    @abstractmethod
+    def complete(self, system: str, user: str) -> str:
+        """Return the LLM response string."""
+
+
+class OllamaClient(LLMClient):
+    def __init__(
+        self,
+        url: str,
+        model: str,
+        temperature: float = 0.3,
+        timeout: int = 720,
+        max_retries: int = 2,
+        cache: Optional[LLMCache] = None,
+    ):
+        self.url = url
+        self.model = model
+        self.temperature = temperature
+        self.timeout = timeout
+        self.max_retries = max_retries
+        self.cache = cache or LLMCache()
+        self._session = requests.Session()
+        self._session.headers.update({"Content-Type": "application/json"})
+
+    def complete(self, system: str, user: str) -> str:
+        cache_payload = f"{self.model}:{self.temperature}:{system}:{user}"
+        cached = self.cache.get(cache_payload)
+        if cached is not None:
+            return cached
+
+        payload = {
+            "model": self.model,
+            "messages": [
+                {"role": "system", "content": system},
+                {"role": "user", "content": user},
+            ],
+            "stream": False,
+            "options": {"temperature": self.temperature},
+        }
+
+        last_error: Exception = RuntimeError("No LLM call attempted")
+        for attempt in range(self.max_retries + 1):
+            try:
+                r = self._session.post(self.url, json=payload, timeout=self.timeout)
+                r.raise_for_status()
+                result = r.json()
+                if "choices" in result and len(result["choices"]) > 0:
+                    content = result["choices"][0]["message"]["content"]
+                elif "message" in result:
+                    content = result["message"]["content"]
+                else:
+                    raise RuntimeError(f"Unexpected LLM response format: {list(result.keys())}")
+                self.cache.set(cache_payload, content)
+                return content
+            except Exception as e:
+                last_error = e
+                if attempt < self.max_retries:
+                    wait = 1 * (attempt + 1)
+                    logger.warning("⚠️ LLM call failed (attempt %d), retrying in %ds...", attempt + 1, wait)
+                    time.sleep(wait)
+
+        raise last_error
+
+
+class OpenAIClient(LLMClient):
+    def __init__(
+        self,
+        api_key: str,
+        base_url: str = "https://api.openai.com/v1",
+        model: str = "gpt-4o-mini",
+        temperature: float = 0.3,
+        timeout: int = 120,
+        max_retries: int = 2,
+        cache: Optional[LLMCache] = None,
+    ):
+        self.api_key = api_key
+        self.base_url = base_url.rstrip("/")
+        self.model = model
+        self.temperature = temperature
+        self.timeout = timeout
+        self.max_retries = max_retries
+        self.cache = cache or LLMCache()
+        self._session = requests.Session()
+        self._session.headers.update({
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {api_key}",
+        })
+
+    def complete(self, system: str, user: str) -> str:
+        cache_payload = f"{self.model}:{self.temperature}:{system}:{user}"
+        cached = self.cache.get(cache_payload)
+        if cached is not None:
+            return cached
+
+        payload = {
+            "model": self.model,
+            "messages": [
+                {"role": "system", "content": system},
+                {"role": "user", "content": user},
+            ],
+            "temperature": self.temperature,
+        }
+
+        last_error: Exception = RuntimeError("No LLM call attempted")
+        for attempt in range(self.max_retries + 1):
+            try:
+                r = self._session.post(
+                    f"{self.base_url}/chat/completions",
+                    json=payload,
+                    timeout=self.timeout,
+                )
+                r.raise_for_status()
+                result = r.json()
+                content = result["choices"][0]["message"]["content"]
+                self.cache.set(cache_payload, content)
+                return content
+            except Exception as e:
+                last_error = e
+                if attempt < self.max_retries:
+                    wait = 1 * (attempt + 1)
+                    logger.warning("⚠️ LLM call failed (attempt %d), retrying in %ds...", attempt + 1, wait)
+                    time.sleep(wait)
+
+        raise last_error
+
+
+class MockLLMClient(LLMClient):
+    """Return canned responses for unit testing."""
+    def __init__(self, responses: Optional[dict] = None):
+        self.responses = responses or {}
+
+    def complete(self, system: str, user: str) -> str:
+        return self.responses.get(user, "<resume_middle>\n## Profile\n\nTest\n</resume_middle>")
+</file>
+
+<file path="linguaresume/llm/prompts.py">
+"""Jinja2 prompt templates for LinguaResume LLM calls."""
+from jinja2 import Template
+
+_MIDDLE_TEMPLATE = Template(r"""
+<<system_context>
+You are an expert resume writer. You rewrite resume middle sections to match job descriptions while maintaining strict factual fidelity to the source material.
+</system_context>
+
+<<output_rules>
+1. Return ONLY the resume middle sections inside <resume_middle> XML tags.
+2. Language: ALL content must be in {{ lang_name }} except proper nouns.
+3. Section headings must be exactly: ## Profile, ## Technical Skills, ## Professional Experience.
+4. Preserve the EXACT number of bullet points per employer as the master.
+5. Do not add technologies not present in the master CV.
+6. Do not include Education or Languages sections.
+7. For French output, use past participles without auxiliary.
+8. No meta-commentary, code fences, or extra XML tags.
+</output_rules>
+
+<<job_description>
+{{ job_desc }}
+</job_description>
+
+<<requirements>
+must_haves: {{ must_haves | tojson }}
+nice_to_haves: {{ nice_to_haves | tojson }}
+soft_skills: {{ soft_skills | tojson }}
+job_focus: {{ job_focus }}
+</requirements>
+
+{% if retry_block %}
+<<retry_feedback>
+{{ retry_block }}
+</retry_feedback>
+{% endif %}
+
+<source_material>
+{{ master_mutable }}
+</source_material>
+
+<<example_output_format>
+## Profile
+
+[2-3 sentences]
+
+## Technical Skills
+
+| Category | Technologies |
+|----------|-------------|
+| ... | ... |
+
+## Professional Experience
+
+### Company Name, Job Title (MM/YYYY – MM/YYYY)
+- [Bullet in {{ lang_name }}]
+</example_output_format>
+
+Now generate the tailored resume middle sections.
+""")
+
+_TRANSLATE_TEMPLATE = Template(r"""
+You are a precise translator.
+
+Translate the following resume sections into {{ target_lang_name }}.
+
+RULES:
+- Keep ALL proper nouns exactly as written.
+- Translate degree names and table column headers.
+- Do NOT change structure or add/remove information.
+
+STATIC SECTIONS TO TRANSLATE:
+{{ static_bundle }}
+
+Return ONLY the translated sections, with the same Markdown formatting.
+""")
+
+_REQUIREMENTS_TEMPLATE = Template(r"""
+Analyze this job description and extract the core requirements in JSON format.
+
+JOB DESCRIPTION:
+{{ job_desc }}
+
+Return ONLY valid JSON (no markdown, no explanation) in this exact format:
+{
+  "job_title": "...",
+  "company": "...",
+  "domain": "devops|webdev|fullstack|other",
+  "must_haves": ["..."],
+  "nice_to_haves": ["..."],
+  "soft_skills": ["..."],
+  "job_focus": "one sentence summary",
+  "language_tone": "formal|casual|technical"
+}
+""")
+
+_TITLE_TRANSLATE_TEMPLATE = Template(r"""
+Translate this job title into {{ target_lang }}: {{ job_title }}
+Return only the translation.
+""")
+
+
+def render_middle_prompt(
+    *,
+    lang_name: str,
+    job_desc: str,
+    must_haves: list,
+    nice_to_haves: list,
+    soft_skills: list,
+    job_focus: str,
+    retry_block: str,
+    master_mutable: str,
+) -> str:
+    return _MIDDLE_TEMPLATE.render(
+        lang_name=lang_name,
+        job_desc=job_desc,
+        must_haves=must_haves,
+        nice_to_haves=nice_to_haves,
+        soft_skills=soft_skills,
+        job_focus=job_focus,
+        retry_block=retry_block,
+        master_mutable=master_mutable,
+    )
+
+
+def render_translate_prompt(*, target_lang: str, static_bundle: str) -> str:
+    lang_names = {"en": "English", "fr": "French", "de": "German"}
+    return _TRANSLATE_TEMPLATE.render(
+        target_lang=target_lang.upper(),
+        target_lang_name=lang_names.get(target_lang, target_lang.upper()),
+        static_bundle=static_bundle,
+    )
+
+
+def render_requirements_prompt(*, job_desc: str) -> str:
+    return _REQUIREMENTS_TEMPLATE.render(job_desc=job_desc)
+
+
+def render_title_translate_prompt(*, target_lang: str, job_title: str) -> str:
+    return _TITLE_TRANSLATE_TEMPLATE.render(
+        target_lang=target_lang,
+        job_title=job_title,
+    )
+</file>
+
+<file path="linguaresume/models.py">
+"""Shared dataclasses for LinguaResume."""
+from dataclasses import dataclass, field
+from typing import List, Dict, Any
+
+
+@dataclass
+class ResumeSection:
+    title: str
+    content: str
+    is_static: bool = False
+
+
+@dataclass
+class Requirement:
+    job_title: str = ""
+    company: str = ""
+    domain: str = "other"
+    must_haves: List[str] = field(default_factory=list)
+    nice_to_haves: List[str] = field(default_factory=list)
+    soft_skills: List[str] = field(default_factory=list)
+    job_focus: str = ""
+    language_tone: str = "professional"
+    job_title_translated: str = ""
+    failures: List[str] = field(default_factory=list, repr=False)
+    missing_must: List[str] = field(default_factory=list, repr=False)
+    missing_soft: List[str] = field(default_factory=list, repr=False)
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "job_title": self.job_title,
+            "company": self.company,
+            "domain": self.domain,
+            "must_haves": self.must_haves,
+            "nice_to_haves": self.nice_to_haves,
+            "soft_skills": self.soft_skills,
+            "job_focus": self.job_focus,
+            "language_tone": self.language_tone,
+            "job_title_translated": self.job_title_translated,
+        }
+
+
+@dataclass
+class ValidationResult:
+    passed: bool
+    failures: List[str]
+    details: Dict[str, Any] = field(default_factory=dict)
+
+    @property
+    def should_retry(self) -> bool:
+        return not self.passed and bool(self.failures)
+</file>
+
+<file path="linguaresume/parsing/__init__.py">
+"""Parsing utilities for resumes."""
+from linguaresume.parsing.splitter import (
+    split_resume_sections,
+    build_mutable_bundle,
+    build_static_bundle,
+    replace_subtitle,
+    is_static_section,
+    _make_alias_map,
+    _heading_normalize,
+)
+from linguaresume.parsing.extractor import (
+    extract_companies,
+    extract_dates,
+    extract_keywords,
+    extract_total_months,
+    company_matches,
+    normalize_text,
+    _bullet_sections,
+    _sig_tokens,
+    load_text,
+)
+
+__all__ = [
+    "split_resume_sections",
+    "build_mutable_bundle",
+    "build_static_bundle",
+    "replace_subtitle",
+    "is_static_section",
+    "_make_alias_map",
+    "_heading_normalize",
+    "extract_companies",
+    "extract_dates",
+    "extract_keywords",
+    "extract_total_months",
+    "company_matches",
+    "normalize_text",
+    "_bullet_sections",
+    "_sig_tokens",
+    "load_text",
+]
+</file>
+
+<file path="linguaresume/parsing/extractor.py">
+"""Text extraction helpers for resumes."""
+import re
+import unicodedata
+from datetime import datetime
+from typing import Dict, List, Set
+
+try:
+    from sklearn.feature_extraction.text import ENGLISH_STOP_WORDS
+except ImportError:
+    ENGLISH_STOP_WORDS = set()
+
+
+def load_text(path: str) -> str:
+    with open(path, "r", encoding="utf-8") as f:
+        return f.read()
+
+
+def normalize_text(text: str) -> str:
+    text = unicodedata.normalize("NFKD", text)
+    text = "".join(ch for ch in text if not unicodedata.combining(ch))
+    text = text.lower()
+    text = re.sub(r"[^\w\s]", " ", text)
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def extract_companies(markdown_text: str) -> Set[str]:
+    companies = set()
+    for line in re.findall(r"^### (.+)", markdown_text, re.MULTILINE):
+        en_match = re.search(r"\[EN:\s*([^\]]+?)\]", line)
+        if en_match:
+            companies.add(en_match.group(1).strip())
+        else:
+            companies.add(line.split(",")[0].strip())
+    return companies
+
+
+def extract_dates(markdown_text: str) -> Set[str]:
+    return set(re.findall(r"\(([^)]+\d{4}[^)]*)\)", markdown_text))
+
+
+def company_matches(master: str, output: str) -> bool:
+    output = output.strip()
+    en_match = re.search(r"\[EN:\s*([^\]]+)\]", output)
+    if en_match:
+        output = en_match.group(1).strip()
+    master_norm = normalize_text(master)
+    output_norm = normalize_text(output)
+    if output_norm == master_norm:
+        return True
+    master_tokens = set(master_norm.split())
+    output_tokens = set(output_norm.split())
+    if not master_tokens or not output_tokens:
+        return False
+    common = master_tokens & output_tokens
+    if len(common) / max(len(output_tokens), 1) >= 0.5:
+        return True
+    if len(common) >= 2 and {"tahar", "sfar"} <= common:
+        return True
+    acronym_match = re.search(r"\(([^)]+)\)", output)
+    if acronym_match and acronym_match.group(1).lower() in master_norm:
+        return True
+    return False
+
+
+def extract_total_months(md: str) -> float:
+    patterns = [
+        r'\((\d{2}/\d{4})\s*[-–]\s*(\d{2}/\d{4}|Present|Current|Aujourd\'hui|aujourd\'hui)\)',
+        r'\((\d{2}\.\d{4})\s*[-–]\s*(\d{2}\.\d{4}|Present|Current|Aujourd\'hui|aujourd\'hui)\)',
+    ]
+    matches = []
+    for pat in patterns:
+        matches.extend(re.findall(pat, md, re.IGNORECASE))
+
+    total = 0
+    now = datetime.now()
+
+    for start, end in matches:
+        try:
+            if '/' in start:
+                start_date = datetime.strptime(start, "%m/%Y")
+            elif '.' in start:
+                start_date = datetime.strptime(start, "%m.%Y")
+            else:
+                continue
+
+            if end.lower() in ("present", "current", "aujourd'hui"):
+                end_date = now
+            elif '/' in end:
+                end_date = datetime.strptime(end, "%m/%Y")
+            elif '.' in end:
+                end_date = datetime.strptime(end, "%m.%Y")
+            else:
+                continue
+
+            total += (end_date.year - start_date.year) * 12 + (end_date.month - start_date.month)
+        except ValueError:
+            continue
+    return total
+
+
+def extract_keywords(text: str, stopwords: Set[str]) -> Set[str]:
+    text = unicodedata.normalize("NFKD", text)
+    text = "".join(ch for ch in text if not unicodedata.combining(ch))
+    text = re.sub(r"[^\w\s]", " ", text.lower())
+    words = text.split()
+    if ENGLISH_STOP_WORDS:
+        stopwords = stopwords | set(ENGLISH_STOP_WORDS)
+    return {w for w in words if len(w) > 3 and w not in stopwords}
+
+
+def _bullet_sections(md: str) -> Dict[str, List[str]]:
+    sections: Dict[str, List[str]] = {}
+    current = None
+    for line in md.splitlines():
+        if line.startswith("## "):
+            current = None
+        elif line.startswith("### "):
+            header = re.sub(r",?\s*\(\d{2}/\d{4}.*?\).*?$", "", line)
+            header = re.sub(r"\[EN:.*?\]", "", header)
+            header = re.sub(r",?\s*\w+\s+\d{4}\s*[-–]\s*(?:\w+\s+\d{4}|Present).*?$", "", header)
+            current = header.replace("### ", "").strip()
+            sections[current] = []
+        elif line.startswith(("- ", "* ", "+ ")) and current:
+            sections[current].append(line[2:].strip())
+    return sections
+
+
+def _sig_tokens(text: str) -> Set[str]:
+    norm = unicodedata.normalize("NFKD", text)
+    norm = "".join(c for c in norm if not unicodedata.combining(c))
+    words = re.findall(r"[\w]+", norm)
+    tokens = set()
+    for w in words:
+        if re.match(r"[A-Z]{2,}", w):
+            tokens.add(w.upper())
+        elif len(w) >= 5:
+            tokens.add(w.lower())
+    return tokens
+</file>
+
+<file path="linguaresume/parsing/splitter.py">
+"""Resume section splitting and header manipulation."""
+import re
+import unicodedata
+from typing import Dict, List, Optional, Tuple
+
+
+def _heading_normalize(title: str) -> str:
+    title = title.strip().lstrip("#").strip()
+    title = unicodedata.normalize("NFKD", title)
+    title = "".join(ch for ch in title if not unicodedata.combining(ch))
+    title = title.lower()
+    title = re.sub(r"[\W_]+", " ", title)
+    return re.sub(r"\s+", " ", title).strip()
+
+
+def _make_alias_map(section_aliases: Dict[str, List[str]]) -> Dict[str, List[str]]:
+    return {key: [_heading_normalize(a) for a in aliases] for key, aliases in section_aliases.items()}
+
+
+def split_resume_sections(md_text: str, alias_map: Dict[str, List[str]]) -> Tuple[str, List[Tuple[str, str]]]:
+    lines = md_text.replace("\r\n", "\n").replace("\r", "\n").splitlines()
+    header_lines: List[str] = []
+    sections: List[Tuple[str, str]] = []
+    current_title: Optional[str] = None
+    current_lines: List[str] = []
+
+    for line in lines:
+        if line.startswith("## "):
+            raw_title = line[3:].strip()
+            norm_title = _heading_normalize(raw_title)
+            matched = any(norm_title in alist for alist in alias_map.values())
+            if matched:
+                if current_title is not None:
+                    sections.append((current_title, "\n".join(current_lines).rstrip()))
+                current_title = raw_title
+                current_lines = [line]
+            else:
+                if current_title is None:
+                    header_lines.append(line)
+                else:
+                    current_lines.append(line)
+        else:
+            if current_title is None:
+                header_lines.append(line)
+            else:
+                current_lines.append(line)
+
+    if current_title is not None:
+        sections.append((current_title, "\n".join(current_lines).rstrip()))
+    return "\n".join(header_lines).rstrip(), sections
+
+
+def is_static_section(title: str, static_keys: List[str], alias_map: Dict[str, List[str]]) -> bool:
+    norm = _heading_normalize(title)
+    return any(norm in alias_map.get(key, []) for key in static_keys)
+
+
+def build_mutable_bundle(sections: List[Tuple[str, str]], static_keys: List[str], alias_map: Dict[str, List[str]]) -> str:
+    parts = [content.strip() for title, content in sections if not is_static_section(title, static_keys, alias_map)]
+    return "\n\n".join(parts).strip() + "\n"
+
+
+def build_static_bundle(sections: List[Tuple[str, str]], static_keys: List[str], alias_map: Dict[str, List[str]]) -> str:
+    parts = [content.strip() for title, content in sections if is_static_section(title, static_keys, alias_map)]
+    return "\n\n".join(parts).strip() + "\n"
+
+
+def replace_subtitle(header: str, new_subtitle: str) -> str:
+    lines = header.splitlines()
+    heading_idx = -1
+    for i, line in enumerate(lines):
+        if line.startswith("# "):
+            heading_idx = i
+            break
+    if heading_idx == -1:
+        return f"**{new_subtitle}**\n\n{header}"
+    inserted = False
+    for j in range(heading_idx + 1, len(lines)):
+        stripped = lines[j].strip()
+        if stripped:
+            lines[j] = f"**{new_subtitle}**"
+            inserted = True
+            break
+    if not inserted:
+        lines.insert(heading_idx + 1, f"**{new_subtitle}**")
+    return "\n".join(lines).rstrip()
+</file>
+
+<file path="linguaresume/pdf/__init__.py">
+"""PDF rendering."""
+from linguaresume.pdf.renderer import PDFRenderer
+
+__all__ = ["PDFRenderer"]
+</file>
+
+<file path="linguaresume/pdf/renderer.py">
+"""Shared PDF rendering logic."""
+try:
+    from playwright.sync_api import sync_playwright
+except ImportError as exc:
+    raise ImportError(
+        "Playwright is required for PDF rendering. "
+        "Install it with: pip install playwright && playwright install chromium"
+    ) from exc
+
+import markdown as md_lib
+import re
+from typing import Optional
+
+
+class PDFRenderer:
+    """Render Markdown resume to PDF using Playwright."""
+
+    def __init__(self, css: str):
+        self.css = css
+
+    def render(self, md_text: str, output_path: str, lang: Optional[str] = None) -> str:
+        """Convert markdown to PDF and write to output_path. Returns the path."""
+        md_text = re.sub(r"\s*\[EN:\s*[^\]]*\]", "", md_text)
+        body = md_lib.markdown(md_text, extensions=["tables", "fenced_code", "nl2br"])
+        lang_attr = f' lang="{lang}"' if lang else ""
+        html = (
+            f"<!DOCTYPE html><html{lang_attr}><head>"
+            f'<meta charset="utf-8"/><style>{self.css}</style>'
+            f"</head><body>{body}</body></html>"
+        )
+        with sync_playwright() as p:
+            browser = p.chromium.launch()
+            page = browser.new_page()
+            page.set_content(html, wait_until="networkidle")
+            pdf_bytes = page.pdf(
+                format="A4",
+                margin={"top": "18mm", "bottom": "18mm", "left": "20mm", "right": "20mm"},
+                print_background=True,
+                prefer_css_page_size=False,
+            )
+            browser.close()
+        with open(output_path, "wb") as f:
+            f.write(pdf_bytes)
+        return output_path
+</file>
+
+<file path="linguaresume/tailoring/__init__.py">
+"""Tailoring engine."""
+from linguaresume.tailoring.engine import TailoringEngine
+
+__all__ = ["TailoringEngine"]
+</file>
+
+<file path="linguaresume/validation/__init__.py">
+"""Validation package."""
+from linguaresume.validation.base import ValidationResult
+from linguaresume.validation.companies import validate_companies
+from linguaresume.validation.dates import validate_dates
+from linguaresume.validation.bullets import validate_bullet_retention
+from linguaresume.validation.experience import validate_experience
+from linguaresume.validation.tech import TechValidator
+from linguaresume.validation.static import validate_static_sections
+
+__all__ = [
+    "ValidationResult",
+    "validate_companies",
+    "validate_dates",
+    "validate_bullet_retention",
+    "validate_experience",
+    "TechValidator",
+    "validate_static_sections",
+]
+</file>
+
+<file path="linguaresume/validation/base.py">
+"""Validation result type."""
+from dataclasses import dataclass, field
+from typing import List, Dict, Any
+
+
+@dataclass
+class ValidationResult:
+    passed: bool
+    failures: List[str]
+    details: Dict[str, Any] = field(default_factory=dict)
+
+    @property
+    def should_retry(self) -> bool:
+        return not self.passed and bool(self.failures)
+</file>
+
+<file path="linguaresume/validation/bullets.py">
+"""Bullet point retention validation."""
+import logging
+from typing import Dict, List
+
+from linguaresume.parsing.extractor import _bullet_sections, _sig_tokens
+
+logger = logging.getLogger("linguaresume")
+
+
+def validate_bullet_retention(
+    master_md: str,
+    tailored_md: str,
+    lang_mismatch: bool = False,
+    token_overlap_threshold: float = 0.35,
+    retention_threshold: float = 0.60,
+) -> bool:
+    master_sec = _bullet_sections(master_md)
+    tailored_sec = _bullet_sections(tailored_md)
+
+    if lang_mismatch:
+        if len(master_sec) != len(tailored_sec):
+            logger.warning("⚠️ Bullet retention: employer count mismatch (master %d vs tailored %d)",
+                         len(master_sec), len(tailored_sec))
+            return False
+        for emp, bullets in master_sec.items():
+            matched = None
+            best_overlap = 0
+            for t_emp in tailored_sec:
+                overlap = len(_sig_tokens(emp) & _sig_tokens(t_emp))
+                if overlap > best_overlap:
+                    best_overlap = overlap
+                    matched = t_emp
+            if matched is None or best_overlap < 1:
+                logger.warning("⚠️ Cannot match employer '%s' structurally", emp)
+                return False
+            count_diff = abs(len(bullets) - len(tailored_sec[matched]))
+            if count_diff > 1:
+                logger.warning("⚠️ Bullet count mismatch for '%s': master %d vs tailored %d",
+                             emp, len(bullets), len(tailored_sec[matched]))
+                return False
+        logger.info("✅ Structural bullet retention passed (translation mode).")
+        return True
+
+    if not master_sec:
+        return True
+    ok = True
+    for employer, m_bullets in master_sec.items():
+        m_tok = _sig_tokens(employer)
+        matched_key = None
+        best_overlap = 0
+        for t_emp in tailored_sec:
+            overlap = len(m_tok & _sig_tokens(t_emp))
+            if overlap > best_overlap:
+                best_overlap = overlap
+                matched_key = t_emp
+        if matched_key is None or best_overlap < 1:
+            logger.warning("⚠️ Cannot match employer '%s'", employer)
+            ok = False
+            continue
+        t_bullets = tailored_sec[matched_key]
+        content_scores = []
+        for bullet in m_bullets:
+            key = _sig_tokens(bullet)
+            if not key:
+                continue
+            if any(len(key & _sig_tokens(tb)) / max(len(key), 1) >= token_overlap_threshold for tb in t_bullets):
+                content_scores.append(True)
+        if m_bullets and len(content_scores) / len(m_bullets) < retention_threshold:
+            logger.warning(
+                "⚠️ Low content retention for '%s': %d/%d bullets retained",
+                employer, len(content_scores), len(m_bullets),
+            )
+            ok = False
+    if ok:
+        logger.info("✅ Bullet content retention check passed.")
+    return ok
+</file>
+
+<file path="linguaresume/validation/companies.py">
+"""Company name validation."""
+import logging
+from typing import Set
+
+from linguaresume.parsing.extractor import extract_companies, company_matches
+
+logger = logging.getLogger("linguaresume")
+
+
+def validate_companies(final_md: str, master_companies: Set[str], translating: bool = False) -> bool:
+    out = extract_companies(final_md)
+    extra = {comp for comp in out if not any(company_matches(m, comp) for m in master_companies)}
+    if extra:
+        if translating:
+            logger.warning("⚠️ Translated company names (likely correct): %s", extra)
+            return True
+        else:
+            logger.warning("⚠️ HALLUCINATED COMPANIES: %s", extra)
+            return False
+    logger.info("✅ All companies match master resume.")
+    return True
+</file>
+
+<file path="linguaresume/validation/dates.py">
+"""Date validation."""
+import logging
+from typing import Set
+
+from linguaresume.parsing.extractor import extract_dates
+
+logger = logging.getLogger("linguaresume")
+
+
+def validate_dates(final_md: str, master_dates: Set[str]) -> bool:
+    out_dates = extract_dates(final_md)
+    extra = out_dates - master_dates
+    if extra:
+        logger.warning("⚠️ INVENTED DATES: %s", extra)
+        return False
+    logger.info("✅ All dates match master resume.")
+    return True
+</file>
+
+<file path="linguaresume/validation/experience.py">
+"""Experience duration validation."""
+import logging
+import re
+
+from linguaresume.parsing.extractor import extract_total_months
+
+logger = logging.getLogger("linguaresume")
+
+
+def validate_experience(master_md: str, tailored_md: str) -> bool:
+    master_months = extract_total_months(master_md)
+    tailored_months = extract_total_months(tailored_md)
+
+    profile_match = re.search(r'(?i)(\d+)\s*(?:ans?|years?)\s*d?[\'’e]?\s*exp[eé]rience', tailored_md)
+    if profile_match:
+        claimed_years = int(profile_match.group(1))
+        if claimed_years * 12 > master_months + 6:
+            logger.warning(
+                "⚠️ Experience inflation: claims %d years but master has ~%.1f years",
+                claimed_years, master_months / 12,
+            )
+            return False
+
+    if tailored_months > master_months + 6:
+        logger.warning(
+            "⚠️ Experience inflation: tailored total %.0f months vs master %.0f months",
+            tailored_months, master_months,
+        )
+        return False
+
+    logger.info("✅ Experience duration matches master CV.")
+    return True
+</file>
+
+<file path="linguaresume/validation/static.py">
+"""Static section content validation."""
+import logging
+import re
+from typing import Dict, List
+
+from linguaresume.parsing.splitter import split_resume_sections, is_static_section
+
+logger = logging.getLogger("linguaresume")
+
+
+def validate_static_sections(final_md: str, static_bundle: str, alias_map: Dict, static_keys: List[str]) -> bool:
+    if not static_bundle.strip():
+        return True
+    header, final_sections = split_resume_sections(final_md, alias_map)
+    final_static_parts = []
+    for title, content in final_sections:
+        if is_static_section(title, static_keys, alias_map):
+            final_static_parts.append(content.strip())
+    final_static = "\n\n".join(final_static_parts)
+
+    def normalize(s: str) -> set:
+        s = re.sub(r'(?m)^## .*$', '', s)
+        lines = [re.sub(r'\s+', ' ', line).strip()
+                 for line in s.splitlines()
+                 if line.strip()]
+        return set(lines)
+
+    final_norm = normalize(final_static)
+    static_norm = normalize(static_bundle)
+
+    if final_norm != static_norm:
+        missing = static_norm - final_norm
+        extra = final_norm - static_norm
+        if len(missing) > 2 or len(extra) > 2:
+            churn = (len(missing) + len(extra)) / max(len(static_norm), 1)
+            if churn > 0.10:
+                logger.warning("⚠️ Static sections content was altered or missing (churn %.0f%%).", churn * 100)
+                return False
+    logger.info("✅ Static sections content preserved.")
+    return True
+</file>
+
+<file path="outputs/fach/Mohamed_Tababi_Anschreiben.md">
+# Anschreiben
+
+Mohamed Tababi  
+Tunesien  
+E-Mail: [mohammadtabbaby@gmail.com](mailto:mohammadtabbaby@gmail.com)  
+Telefon: (+216) 99 145 392
+
+[Name des Unternehmens]  
+Recruiting-Team  
+93426 Roding
+
+Tunesien, den 2. Juni 2026
+
+## Bewerbung um einen Ausbildungsplatz als Fachinformatiker für Anwendungsentwicklung im Bereich AI/Cloud Solutions (m/w/d)
+
+Sehr geehrte Damen und Herren,
+
+mit großem Interesse habe ich Ihre Ausschreibung für die Ausbildung als Fachinformatiker für Anwendungsentwicklung im Bereich AI/Cloud Solutions gelesen. Die Kombination aus praktischer Softwareentwicklung, Cloud-Technologien und modernen Zukunftsthemen wie künstlicher Intelligenz spricht mich sehr an – und entspricht genau meinen persönlichen und beruflichen Zielen.
+
+In meinen Praktika habe ich bereits praktische Erfahrungen im Bereich Informatik gesammelt und mit Technologien wie Java, Python, Angular, Docker und Kubernetes gearbeitet. Dabei habe ich auch Grundlagen in Cloud- und DevOps-Themen kennengelernt. Was mich begeistert, ist nicht nur die theoretische Seite – die ich bereits studiert habe – sondern besonders die praktische Anwendung: das Lösen von technischen Problemen, die Zusammenarbeit im Team und das kontinuierliche Lernen neuer Technologien im beruflichen Kontext.
+
+Genau deshalb möchte ich bewusst eine Ausbildung in Deutschland machen. Ich bin überzeugt, dass eine strukturierte Berufsausbildung in einem etablierten Unternehmen mir die beste Grundlage bietet, um professionelle Softwareentwicklung von Anfang an richtig zu lernen, wertvolle praktische Erfahrung zu sammeln und in echten Projektteams zu arbeiten. Ihr Unternehmen bietet mit dem offenen Arbeitsumfeld, der individuellen Förderung und der Chance, an modernen AI/Cloud-Lösungen zu arbeiten, genau das, was ich suche.
+
+Ich bin jemand, der sorgfältig arbeitet, schnell lernt, neugierig ist und viel Eigeninitiative mitbringt. Persönlichkeit und echtes Interesse an der Sache sind mir genauso wichtig wie die fachlichen Fähigkeiten – und ich hoffe, dass das in unseren Gesprächen deutlich wird. Außerdem freue ich mich darauf, meine Deutschkenntnisse im Arbeitsalltag zu vertiefen und mich langfristig in Deutschland beruflich zu entwickeln.
+
+Ich bin bereit, für die Ausbildung nach Roding umzuziehen, und freue mich sehr über die Möglichkeit eines persönlichen oder virtuellen Gesprächs. Gerne stelle ich Ihnen weitere Details zu meinen Fähigkeiten und meiner Motivation zur Verfügung.
+
+Mit freundlichen Grüßen
+
+Mohamed Tababi
+</file>
+
+<file path="outputs/fach/Mohamed_Tababi_CV.md">
+# LEBENSLAUF
+
+## Mohamed Tababi
+
+**Bewerbung für die Ausbildung als Fachinformatiker für Anwendungsentwicklung (AI/Cloud Solutions)**
+
+**E-Mail:** [mohammadtabbaby@gmail.com](mailto:mohammadtabbaby@gmail.com)  
+**Telefon:** (+216) 99 145 392  
+**Standort:** Tunesien (bereit für Umzug nach Deutschland)  
+**LinkedIn:** linkedin.com/in/mohammadtabbaby  
+**GitHub:** github.com/MohammadTabbaby
+
+---
+
+## Persönliches Profil
+
+Motivierter und lernbereiter Kandidat mit Bachelor- und Master-Abschluss in Informatik mit Schwerpunkt DevOps & Cloud Computing. Praktische Erfahrung mit Java, Python, Angular, Docker und modernen Entwicklungspraktiken. Höchst interessiert an AI/Cloud Solutions, sorgfältig in der Arbeitsweise und enthusiastisch beim Lernen neuer Technologien. Suche gezielt eine Ausbildung in Deutschland, um professionelle Softwareentwicklung im Team zu praktizieren und mir eine solide Grundlage im deutschen Arbeitsmarkt aufzubauen.
+
+---
+
+## Fachliche Kompetenzen
+
+### Programmierung
+
+* **Sprachen:** Java, Python, JavaScript, TypeScript
+* **Frameworks & Tools:** Spring Boot, Angular, Django, Express.js, VS Code, Git
+* **Konzepte:** Algorithmen, Datenstrukturen, REST APIs, OOP, MVC-Architektur
+
+### Cloud & DevOps
+
+* **Erfahrung mit:** Docker, Kubernetes, Linux (Ubuntu/Debian), Jenkins, AWS (Grundlagen)
+* **Infrastruktur:** CI/CD Pipelines, Automatisierung, Containerisierung
+
+### Weitere Fähigkeiten
+
+* **Datenbanken:** MongoDB, MySQL, PostgreSQL
+* **Persönliche Stärken:** Hohe Lernbereitschaft, Teamfähigkeit, Zuverlässigkeit, schnelle Auffassungsgabe, Eigeninitiative, Sorgfalt, Neugier
+
+---
+
+## Berufliche Erfahrung
+
+### Software & DevOps Engineer (Praktikum)
+
+**ISET Tozeur** | *02/2024 – 06/2024*
+
+* Entwicklung von Microservices mit Spring Boot und Docker
+* Arbeit mit Kubernetes und CI/CD Pipelines (Jenkins, SonarQube)
+* Implementierung von REST APIs und Angular-Frontends
+* Aufbau von Observability-Stacks (Prometheus, Grafana)
+* Zusammenarbeit im Team an komplexen Softwareprojekten
+* API-Sicherheit und RBAC-Implementierung
+
+### Software Engineer im Gesundheitswesen (Praktikum)
+
+**Tahar Sfar Universitätskrankenhaus** | *02/2022 – 06/2022*
+
+* Entwicklung eines zentralisierten Beschwerdemanagement-Systems
+* Datenbankarbeit und Analyse von Benutzeranforderungen
+* Testing, Fehlerbehebung und Digitalisierung interner Prozesse
+* Arbeit in einem hochregulierten Umfeld
+
+### Full-Stack Developer (Praktikum)
+
+**LeaderPos** | *08/2021 – 09/2021*
+
+* Backend-Entwicklung mit Django und MongoDB
+* Mitarbeit an E-Commerce-Lösungen und Zahlungssystemen
+* Echtzeit-Bestandsverfolgung und dynamische Warenkorb-Engine
+* Zusammenarbeit mit anderen Entwicklern
+
+---
+
+## Bildungsweg
+
+### Master-Abschluss (Diplôme National)
+
+**ISET Tozeur** | 2022 – 2024
+
+* Fachbereich: Technologische Wissenschaften | Hauptfach: Informatik
+* **Spezialisierung:** DevOps & Cloud Computing
+* Kurse: Kubernetes, Docker, Jenkins, Cloud Architecture, Security
+
+### Bachelor-Abschluss (Diplôme National)
+
+**ISET Mahdia** | 2019 – 2022
+
+* Fachbereich: Exakte Wissenschaften und Technologie | Hauptfach: Informatik
+* **Spezialisierung:** Webentwicklung und Multimedia
+
+---
+
+## Sprachkenntnisse
+
+| Sprache     | Niveau           |
+| ----------- | ---------------- |
+| Deutsch     | B1 (Grundlagen)  |
+| Englisch    | B2               |
+| Französisch | B2               |
+| Arabisch    | Muttersprache    |
+
+---
+
+## Besonderheiten & Interessen
+
+* **Bereit für Umzug:** Umzug nach Deutschland und Roding für die Ausbildung fest geplant
+* **Starke Motivation:** Bewusst gewählte Ausbildung für praktische, projektbasierte Erfahrung
+* **Technologische Interessen:** AI, Cloud Computing, DevOps, Open-Source, Linux
+* **Arbeitsstil:** Teamgeist, schnelle Lernfähigkeit, Initiative und Zuverlässigkeit
+* **Langzeitperspektive:** Berufliche Entwicklung in Deutschland angestrebt
+</file>
+
+<file path="outputs/ingenieur_java_spring_backend_fullstack/ingenieur_java_spring_backend_fullstack.md">
+# Mohamed Tababi
+**Ingénieur Java Spring Back-end/Fullstack**
+
+**E-mail :** mohammadtabbaby@gmail.com | **Téléphone :** (+216) 99 145 392  
+**Localisation :** Tunisie  
+**Liens :** [LinkedIn](https://linkedin.com/in/mohammadtabbaby) | [GitHub](https://github.com/MohammadTabbaby)
+
+---
+
+## Profil
+
+Ingénieur logiciel et DevOps axé sur la sécurité, spécialisé dans l'architecture d'applications full-stack et les déploiements automatisés au sein d'environnements exigeants. Expert en création d'API REST backend évolutives avec une solide expérience des microservices et de l'orchestration Kubernetes pour combler le fossé entre développement sécurisé et production stable.
+
+## Compétences techniques
+
+| Catégorie | Outils & Technologies |
+|----------|----------------------|
+| **Développement Backend** | Spring Boot, API RESTful |
+| **Frontend** | Angular, TypeScript, JavaScript (ES6+), HTML5, CSS3, Tailwind |
+| **Bases de données** | MongoDB, MySQL, PostgreSQL |
+| **Cloud & Infrastructure** | AWS, Docker, Kubernetes, Terraform |
+| **CI/CD & Automatisation** | Jenkins, SonarQube, Ansible |
+| **Monitoring & Logging** | Prometheus, Grafana, Winston |
+| **Sécurité (DevSecOps)** | JWT, Helm, bcrypt, Limitation de débit (Limitation de taux), Sécurité des API |
+| **Scripting & OS** | Python, Bash, Linux (Ubuntu, Debian), Windows Server |
+
+## Professional Experience
+
+### ISET Tozeur — Ingénieur Logiciel & DevOps (Full-Stack)
+*Stage | 02/2024 – 06/2024*
+- **Exploitation d'un cluster Kubernetes de 8 microservices** pour des applications Spring Boot, assurant une haute disponibilité et une stabilité d'orchestration.
+- **Conception et déploiement** d'un portail d'administration Angular sécurisé utilisant le contrôle d'accès basé sur les rôles (RBAC) pour rationaliser et optimiser les opérations académiques complexes.
+- **Ingénierie de microservices distribués** et d'API REST, garantissant une évolutivité modulaire et une communication backend haute performance.
+- **Standardisation des pipelines de livraison** avec Jenkins et SonarQube, automatisant les contrôles de qualité du code et accélérant le cycle de publication.
+- **Renforcement de la sécurité des API et de l'infrastructure** par l'implémentation de Spring Security, l'authentification JWT et la limitation de débit pour prévenir les accès non autorisés et assurer l'intégrité des données.
+- **Mise en place d'une pile d'observabilité complète** utilisant Prometheus, Grafana et Winston pour permettre la détection d'incidents en temps réel et le suivi de la santé des services.
+
+### Hôpital universitaire Tahar Sfar — Ingénieur Logiciel (Systèmes de Santé)
+*Stage | 02/2022 – 06/2022*
+- **Développement, lancement et déploiement** d'une plateforme centralisée de gestion des plaintes à haute traçabilité, numérisant les flux de travail critiques et assurant la disponibilité du système dans un environnement hospitalier hautement réglementé.
+- **Automatisation du suivi des ressources médicales** par la conception d'un système d'inventaire en temps réel, réduisant considérablement les erreurs administratives manuelles et augmentant la visibilité des ressources.
+
+### LeaderPos — Développeur Full-Stack
+*Stage | 08/2021 – 09/2021*
+- **Ingénierie d'un backend performant et évolutif** utilisant Django et MongoDB pour gérer des cycles de vie complexes de commandes, de produits et de sessions à haute fréquence.
+- **Optimisation de l'expérience utilisateur et de la fiabilité du système** par l'implémentation d'un moteur de panier dynamique et de flux de travail de suivi des stocks en temps réel.
+- **Création d'une interface d'administration spécialisée** utilisant Bootstrap pour gérer des simulations de paiement sécurisées et des opérations backend.
+
+## Formation
+
+**Master Professionnel National** | ISET Tozeur (2022 – 2024)  
+- Domaine : Sciences Technologiques | Spécialité : Informatique  
+- Option : DevOps (Développement, Opérations) et Cloud Computing
+
+**Licence Appliquée Nationale** | ISET Mahdia (2019 – 2022)  
+- Domaine : Sciences Exactes et Technologie | Spécialité : Informatique  
+- Option : Développement Web et Multimédia
+
+---
+
+## Langues
+
+| Langue | Niveau |
+|----------|-------------|
+| Arabe    | Maternel    |
+| Français | B2          |
+| Anglais  | B2          |
+| Allemand | B1          |
+</file>
+
+<file path="outputs/junior_fullstack_developer_mfd/junior_fullstack_developer_mfd.md">
+# Mohamed Tababi
+**Junior Fullstack Developer**
+
+**Email:** mohammadtabbaby@gmail.com | **Phone:** (+216) 99 145 392  
+**Location:** Tunisia  
+**Links:** [LinkedIn](https://linkedin.com/in/mohammadtabbaby) | [GitHub](https://github.com/MohammadTabbaby)
+
+---
+
+## Profile
+
+Advanced experience in application development with profound knowledge of modern web technologies and very good object-oriented programming skills. Expertise spans conception, implementation, and further development of various applications in the web and app area including interface creation to third-party systems. Combines analytical and conceptual skills with strong communication and teamwork abilities to deliver creative solutions for complex tasks.
+
+## Technical Skills
+
+| Category | Technologies |
+|----------|-------------|
+| **Cloud & Infrastructure** | AWS, Docker, Kubernetes, Terraform |
+| **CI/CD & Automation** | Jenkins, GitHub Actions, Ansible, SonarQube |
+| **Monitoring & Logging** | Prometheus, Grafana, Winston |
+| **Security (DevSecOps)** | JWT, Helm, bcrypt, Rate Limiting, API Security |
+| **Backend Development** | Spring Boot (JPA/Hibernate), Django, Laravel, Node.js, Express.js, RESTful APIs |
+| **Frontend Development** | Angular, JavaScript (ES6+), TypeScript, HTML5, CSS3, Tailwind |
+| **Databases** | MongoDB, MySQL, PostgreSQL |
+| **Scripting & OS** | Python, Bash, Linux (Ubuntu, Debian), Windows Server |
+
+## Professional Experience
+
+### ISET Tozeur — Software & DevOps Engineer (Full-Stack)
+*Internship | 02/2024 – 06/2024*
+- Operated an 8-microservice Kubernetes cluster for Spring Boot applications, ensuring high availability and orchestration stability.
+- Architected and deployed a secure Angular administration portal using Role-Based Access Control (RBAC) to streamline and optimize complex academic operations.
+- Engineered distributed microservices and REST APIs, ensuring modular scalability and high-performance backend communication.
+- Standardized delivery pipelines using Jenkins and SonarQube, automating code quality gates and accelerating the release cycle.
+- Hardened API security and infrastructure by implementing Spring Security, JWT authentication, and rate limiting to prevent unauthorized access and ensure data integrity.
+- Established a comprehensive observability stack using Prometheus, Grafana, and Winston to enable real-time incident detection and service health tracking.
+
+### Tahar Sfar University Hospital — Software Engineer (Healthcare Systems)
+*Internship | 02/2022 – 06/2022*
+- Developed, launched, and deployed a centralized, high-traceability complaints management platform, digitizing critical workflows and ensuring system uptime in a high-compliance hospital environment.
+- Automated medical resource tracking by engineering a real-time inventory system, significantly reducing manual administrative errors and increasing resource visibility.
+
+### LeaderPos — Full-Stack Developer
+*Internship | 08/2021 – 09/2021*
+- Engineered a scalable, high-performance backend using Django and MongoDB to handle complex order, product, and high-frequency session lifecycles.
+- Optimized user experience and system reliability by implementing a dynamic cart engine and real-time stock tracking workflows.
+- Built a specialized admin interface using Bootstrap to manage secure payment simulations and backend operations.
+
+## Education
+
+**National Professional Master’s Degree** | ISET Tozeur (2022 – 2024)  
+- Field: Technological Sciences | Major: Computer Science  
+- Specialization: DevOps (Development, Operations) and Cloud Computing
+
+**National Bachelor's Degree** | ISET Mahdia (2019 – 2022)  
+- Field: Exact Sciences and Technology | Major: Information Technology  
+- Specialization: Web Development and Multimedia
+
+---
+
+## Languages
+
+| Language | Proficiency |
+|----------|-------------|
+| Arabic   | Native      |
+| French   | B2          |
+| English  | B2          |
+| German   | B1          |
+</file>
+
+<file path="outputs/junior_fullstack_developer_mfd/letter.md">
+# Mohamed Tababi
+
+**Email:** mohammadtabbaby@gmail.com  
+**Phone:** (+216) 99 145 392  
+**Location:** Tunisia  
+**LinkedIn:** [linkedin.com/in/mohammadtabbaby](https://linkedin.com/in/mohammadtabbaby)  
+**GitHub:** [github.com/MohammadTabbaby](https://github.com/MohammadTabbaby)
+
+---
+
+## Cover Letter – Junior Fullstack Developer (m/f/d) – Roding, Germany
+
+Dear Hiring Team,
+
+I am writing to express my strong interest in the Junior Fullstack Developer position at your new location in Roding, Germany. With a Master’s degree in DevOps and Cloud Computing, hands‑on experience in full‑stack development, and a passion for building modern web applications, I am confident that I can contribute effectively to your team.
+
+In my recent internship at ISET Tozeur, I engineered distributed microservices and REST APIs using Spring Boot, and developed secure Angular dashboards with Role‑Based Access Control (RBAC). These projects required both conception and implementation, as well as close collaboration with academic stakeholders – skills that align directly with your responsibilities of “Requirements management and documentation” and “Advice to the specialist departments”.
+
+My experience also includes creating mockups and design concepts for administrative portals, and implementing interfaces to third‑party systems such as payment gateways and inventory trackers. During my internship at Tahar Sfar University Hospital, I built a real‑time medical inventory system and a fully traceable complaints platform, handling everything from database design to frontend deployment.
+
+The job description emphasises “advanced experience in application development” and “profound knowledge of modern web technologies”. I have worked extensively with Angular, TypeScript, JavaScript, Spring Boot, Node.js, and MongoDB. My object‑oriented programming skills are solid, and I have also administered web servers (Linux, Nginx) during my DevOps training – a plus you mentioned.
+
+Beyond technical skills, I value communication, teamwork, and creative problem‑solving. I enjoy tackling complex tasks and delivering clean, user‑friendly solutions. I am eager to bring my full‑stack expertise and continuous learning mindset to your team in Roding, and I am ready to relocate for the right opportunity.
+
+Thank you for considering my application. I would welcome the chance to discuss how my background matches your needs.
+
+Sincerely,
+
+Mohamed Tababi
+</file>
+
+<file path="pytest.ini">
+[pytest]
+minversion = 6.0
+addopts = -q
+</file>
+
+<file path="regenerate_pdf.py">
+#!/usr/bin/env python3
+"""
+Regenerate a PDF from an already tailored Markdown file.
+Uses the shared PDFRenderer and auto-detects language.
+Usage: python regenerate_pdf.py path\to\resume.md
+"""
+
+import sys
+import os
+
+from linguaresume.config import Config
+from linguaresume.pdf.renderer import PDFRenderer
+
+
+def detect_md_lang(md_text: str) -> str:
+    fr_words = {"profil", "compétences", "expérience", "formation", "langues"}
+    de_words = {"profil", "fähigkeiten", "erfahrung", "ausbildung", "sprachen"}
+    text_lower = md_text.lower()
+    if any(w in text_lower for w in fr_words):
+        return "fr"
+    if any(w in text_lower for w in de_words):
+        return "de"
+    return "en"
+
+
+def regenerate(md_path: str, config_path: str = "config.yaml") -> str:
+    cfg = Config.from_yaml(config_path)
+
+    with open(md_path, "r", encoding="utf-8") as f:
+        content = f.read()
+
+    lang = detect_md_lang(content)
+    pdf_path = os.path.splitext(md_path)[0] + ".pdf"
+    renderer = PDFRenderer(cfg.resume_css)
+    renderer.render(content, pdf_path, lang=lang)
+    print(f"✅ PDF regenerated: {pdf_path}")
+    return pdf_path
+
+
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print("Usage: python regenerate_pdf.py resume.md")
+        sys.exit(1)
+    regenerate(sys.argv[1])
+</file>
+
+<file path="requirements.txt">
+pyyaml
+jinja2
+requests
+markdown
+playwright
+pytest
+</file>
+
+<file path="run.py">
+#!/usr/bin/env python3
+"""Backward-compatible wrapper around the new CLI."""
+import sys
+from linguaresume.cli import main
+
+if __name__ == "__main__":
+    # Convert legacy `python run.py job.txt` → `python -m linguaresume tailor job.txt`
+    if len(sys.argv) > 1 and sys.argv[1] not in ("tailor", "validate", "pdf", "translate", "--help", "-h"):
+        sys.argv.insert(1, "tailor")
+    main()
+</file>
+
+<file path="tests/test_cv_selection.py">
+from linguaresume.llm.client import MockLLMClient
+from linguaresume.config import Config, OllamaConfig, OutputConfig, ValidationConfig
+from linguaresume.tailoring.engine import TailoringEngine
+
+
+def make_cfg(tmp_path, cv_map):
+    ollama_cfg = OllamaConfig(url="http://127.0.0.1:1234/v1/chat/completions", model="mock", timeout=60, temperature=0.3)
+    cfg = Config(
+        ollama=ollama_cfg,
+        cv_map=cv_map,
+        fallback_cv="./cvs/master_en.md",
+        output=OutputConfig(subdir=str(tmp_path / "outputs"), max_retries=1),
+        section_aliases={},
+        static_section_keys=["education", "languages"],
+        junior_keywords=[],
+        enable_junior_special_case=False,
+        corrections_fr=[],
+        corrections_de=[],
+        stopwords=[],
+        resume_css="",
+        validation=ValidationConfig(),
+    )
+    return cfg
+
+
+def test_select_master_cv_prefers_de(tmp_path):
+    cv_map = {
+        "de_webdev": "./cvs/web_de.md",
+        "webdev": "./cvs/web_en.md",
+        "other": "./cvs/nontech_master_en.md",
+    }
+    cfg = make_cfg(tmp_path, cv_map)
+    mock = MockLLMClient(responses={})
+    engine = TailoringEngine(cfg, mock, force=True)
+    engine.target_lang = "de"
+    engine.domain = "webdev"
+    engine.select_master_cv()
+    assert engine.master_lang == "de"
+    assert engine.master_md.strip()
+
+
+def test_select_master_cv_fallback_to_en(tmp_path):
+    cv_map = {
+        "webdev": "./cvs/web_en.md",
+    }
+    cfg = make_cfg(tmp_path, cv_map)
+    mock = MockLLMClient(responses={})
+    engine = TailoringEngine(cfg, mock, force=True)
+    engine.target_lang = "de"
+    engine.domain = "webdev"
+    engine.select_master_cv()
+    assert engine.master_lang == "en"
+    assert engine.master_md.strip()
+</file>
+
+<file path="tests/test_engine_mockllm.py">
+from linguaresume.llm.client import MockLLMClient
+from linguaresume.config import Config, OllamaConfig, OutputConfig, ValidationConfig
+from linguaresume.tailoring.engine import TailoringEngine
+import os
+
+
+def test_tailoring_with_mock(tmp_path, monkeypatch):
+    # Construct a minimal Config to avoid YAML dependency in tests
+    ollama_cfg = OllamaConfig(url="http://127.0.0.1:1234/v1/chat/completions", model="mock", timeout=60, temperature=0.3)
+    cfg = Config(
+        ollama=ollama_cfg,
+        cv_map={"other": "./cvs/nontech_master_en.md"},
+        fallback_cv="./cvs/master_en.md",
+        output=OutputConfig(subdir=str(tmp_path / "outputs"), max_retries=1),
+        section_aliases={},
+        static_section_keys=["education", "languages"],
+        junior_keywords=[],
+        enable_junior_special_case=False,
+        corrections_fr=[],
+        corrections_de=[],
+        stopwords=[],
+        resume_css="",
+        validation=ValidationConfig(),
+    )
+
+    # Use a Mock LLM that returns a minimal resume middle
+    mock = MockLLMClient(responses={})
+    engine = TailoringEngine(cfg, mock, force=True)
+
+    # Avoid importing Playwright by faking PDF conversion
+    def fake_convert_to_pdf(self, md_path):
+        pdf_path = os.path.splitext(md_path)[0] + ".pdf"
+        with open(pdf_path, "wb") as f:
+            f.write(b"%PDF-1.4\n%EOF")
+        return pdf_path
+
+    monkeypatch.setattr(TailoringEngine, "convert_to_pdf", fake_convert_to_pdf)
+
+    job_file = tmp_path / "job.txt"
+    job_file.write_text("Looking for a Test Engineer")
+
+    md_path, pdf_path = engine.run(str(job_file))
+    assert os.path.exists(md_path)
+    assert md_path.endswith(".md")
+</file>
+
+<file path="config.yaml">
+# ============================================================
+# LinguaResume Configuration
+# ============================================================
+
+ollama:
+  url: "http://127.0.0.1:1234/v1/chat/completions"
+  model: "qwen/qwen3.5-9b"
+  timeout: 720
+  temperature: 0.3
+
+validation:
+  bullet_token_overlap_threshold: 0.35
+  bullet_retention_threshold: 0.60
+
+  
+# Master CVs by domain (language‑agnostic – keep them in English)
+cv_map:
+  # Language‑specific (used when target language matches)
+  fr_webdev: "./cvs/web_fr.md"
+  fr_devops: "./cvs/devops_fr.md"
+  fr_fullstack: "./cvs/master_fr.md"
+  fr_other: "./cvs/nontech_master_fr.md"      # fixed filename
+
+  # English masters (fallback)
+  webdev: "./cvs/web_en.md"
+  devops: "./cvs/devops_en.md"
+  fullstack: "./cvs/master_en.md"
+  other: "./cvs/nontech_master_en.md"         # fixed filename
+  # German masters (explicit)
+  de_webdev: "./cvs/web_de.md"
+  de_devops: "./cvs/devops_de.md"
+  de_fullstack: "./cvs/master_de.md"
+  de_other: "./cvs/nontech_master_de.md"
+
+fallback_cv: "./cvs/master_en.md"
+
+output:
+  subdir: "outputs"
+  max_retries: 3
+
+# Section aliases – used to split the resume (can be multi‑lingual)
+section_aliases:
+  profile:
+    - "Profil"
+    - "Profile"
+    - "Professional Profile"
+    - "Profil Professionnel"
+    - "Résumé"
+    - "Resume"
+    - "Summary"
+    - "Berufliches Profil"
+  tech_skills:
+    - "Compétences techniques"
+    - "Competences techniques"
+    - "Technical Skills"
+    - "Skills"
+    - "Compétences clés"
+    - "Key Skills"
+    - "Skills Summary"
+    - "Technical Skills Stack"   # added to match master_en.md
+    - "Technische Fähigkeiten"
+    - "Fähigkeiten"
+    - "Kenntnisse"
+  experience:
+    - "Expérience Professionnelle"
+    - "Experience Professionnelle"
+    - "Professional Experience"
+    - "Experience"
+    - "Expérience"
+    - "Berufserfahrung"
+    - "Berufliche Erfahrung"
+  education:
+    - "Éducation"
+    - "Education"
+    - "Formation"
+    - "Study"
+    - "Studies"
+    - "Ausbildung"
+  languages:
+    - "Langues"
+    - "Languages"
+    - "Sprachen"
+    - "Fremdsprachen"
+
+static_section_keys:
+  - "education"
+  - "languages"
+
+# Junior detection keywords (configurable)
+junior_keywords:
+  - "junior"
+  - "débutant"
+  - "entry level"
+  - "junior level"
+
+# If a specific junior CV is not found, fall back to the regular domain CV.
+# Set to true to enable junior special case (requires cv_map entries like "fr_fullstack_junior" etc.)
+enable_junior_special_case: false   # set to true only if you add those CVs
+
+# Corrections applied ONLY to French output
+corrections_fr:
+  - pattern: "Universit[eé]\\s+Tahar\\s+Sfar(?!\\s+Universit)"
+    replacement: "Hôpital universitaire Tahar Sfar"
+    flags: "IGNORECASE"
+  - pattern: "H[oô]pital\\s+(?:Universitaire\\s+)?Tahar\\s+Sfar(?:\\s+University\\s+Hospital)?"
+    replacement: "Hôpital universitaire Tahar Sfar"
+    flags: "IGNORECASE"
+  - pattern: "Tahar\\s+Sfar\\s+University\\s+Hospital"
+    replacement: "Hôpital universitaire Tahar Sfar"
+    flags: "IGNORECASE"
+  - pattern: "Master(?:\\s+Professionnel)?\\s+National(?:\\s+Professio[n]nel)?"
+    replacement: "Diplôme national de Master professionnel"
+    flags: "IGNORECASE"
+  - pattern: "National\\s+Professional\\s+Master['']?s?\\s+Degree"
+    replacement: "Diplôme national de Master professionnel"
+    flags: "IGNORECASE"
+  - pattern: "Baccalaur[eé]at\\s+National"
+    replacement: "Licence nationale"
+    flags: "IGNORECASE"
+  - pattern: "National\\s+Bachelor['']?s?\\s+Degree"
+    replacement: "Licence nationale"
+    flags: "IGNORECASE"
+  - pattern: "Dipl[oô]me\\s+Universitaire"
+    replacement: "Licence nationale"
+    flags: "IGNORECASE"
+  - pattern: "Champ\\s*:"
+    replacement: "Domaine :"
+  - pattern: "Field\\s*:"
+    replacement: "Domaine :"
+    flags: "IGNORECASE"
+  - pattern: "Major\\s*:"
+    replacement: "Filière :"
+    flags: "IGNORECASE"
+  - pattern: "Speciali[sz]ation\\s*:"
+    replacement: "Spécialisation :"
+    flags: "IGNORECASE"
+  - pattern: "Spécialité\\s*:"
+    replacement: "Spécialisation :"
+  - pattern: "\\bEmplacement\\s*:"
+    replacement: "Localisation :"
+  - pattern: "(?<![\\w])Location\\s*:"
+    replacement: "Localisation :"
+    flags: "IGNORECASE"
+  - pattern: "Calcul\\s+en\\s+nuage"
+    replacement: "Cloud Computing"
+    flags: "IGNORECASE"
+  - pattern: "Informatique\\s+en\\s+nuage"
+    replacement: "Cloud Computing"
+    flags: "IGNORECASE"
+  - pattern: "Nuage\\s+Computing"
+    replacement: "Cloud Computing"
+    flags: "IGNORECASE"
+  - pattern: "Nuage\\s+(?:et|&)\\s+Infrastructure"
+    replacement: "Cloud & Infrastructure"
+    flags: "IGNORECASE"
+  - pattern: "\\bTunisia\\b"
+    replacement: "Tunisie"
+    flags: "IGNORECASE"
+  - pattern: "CI/CD\\s*&\\s*Automation"
+    replacement: "CI/CD & Automatisation"
+  - pattern: "\\bAutomation\\b"
+    replacement: "Automatisation"
+    flags: "IGNORECASE"
+  - pattern: "Security\\s*\\(DevSecOps\\)"
+    replacement: "Sécurité (DevSecOps)"
+    flags: "IGNORECASE"
+  - pattern: "\\bScripting\\s*&\\s*OS\\b"
+    replacement: "Scripting & OS"
+  - pattern: "Rate\\s+Limiting"
+    replacement: "Limitation de taux"
+    flags: "IGNORECASE"
+  - pattern: "API\\s+Security"
+    replacement: "Sécurité API"
+    flags: "IGNORECASE"
+  - pattern: "\\bDéveloppas?\\b"
+    replacement: "Développé"
+    flags: "VERB"
+  - pattern: "\\bLivras?\\b"
+    replacement: "Livré"
+    flags: "VERB"
+  - pattern: "\\bDelivras?\\b"
+    replacement: "Livré"
+    flags: "VERB"
+  - pattern: "\\bConçut\\b"
+    replacement: "Conçu"
+    flags: "VERB"
+  - pattern: "\\bDéployas?\\b"
+    replacement: "Déployé"
+    flags: "VERB"
+  - pattern: "\\bImplémentas?\\b"
+    replacement: "Implémenté"
+    flags: "VERB"
+  - pattern: "\\bArchitecturas?\\b"
+    replacement: "Architecturé"
+    flags: "VERB"
+  - pattern: "\\bSécouru\\b"
+    replacement: "Sécurisé"
+    flags: "VERB"
+  - pattern: "\\bSécourut\\b"
+    replacement: "Sécurisé"
+    flags: "VERB"
+  - pattern: "\\bSécurisa\\b"
+    replacement: "Sécurisé"
+    flags: "VERB"
+  - pattern: "\\bOrchestra\\b"
+    replacement: "Orchestré"
+    flags: "VERB"
+  - pattern: "\\bOrchestre\\b"
+    replacement: "Orchestré"
+    flags: "VERB"
+  - pattern: "\\bLivrait\\b"
+    replacement: "Livré"
+    flags: "VERB"
+  - pattern: "\\bConçus?\\b"
+    replacement: "Conçu"
+    flags: "VERB"
+  - pattern: "\\bDéploya\\b"
+    replacement: "Déployé"
+    flags: "VERB"
+  - pattern: "\\bMit\\s+en\\s+place\\b"
+    replacement: "Mis en place"
+    flags: "VERB"
+
+corrections_de:
+  - pattern: "CI/CD\\s*&\\s*Automation"
+    replacement: "CI/CD & Automatisierung"
+    flags: "IGNORECASE"
+  - pattern: "\\bAutomation\\b"
+    replacement: "Automatisierung"
+    flags: "IGNORECASE"
+  - pattern: "\\bTunisia\\b"
+    replacement: "Tunesien"
+    flags: "IGNORECASE"
+  - pattern: "Scripting\\s*&\\s*OS"
+    replacement: "Scripting & OS"
+    flags: "IGNORECASE"
+
+stopwords:
+  - "ein"
+  - "eine"
+  - "der"
+  - "die"
+  - "das"
+  - "und"
+  - "für"
+  - "mit"
+  - "von"
+  - "zu"
+  - "bei"
+  - "ist"
+  - "nicht"
+  - "auf"
+  - "im"
+  - "in"
+  - "dem"
+  - "den"
+  - "des"
+  - "the"
+  - "and"
+  - "for"
+  - "with"
+  - "this"
+  - "that"
+  - "from"
+  - "your"
+  - "have"
+  - "been"
+  - "role"
+  - "work"
+  - "team"
+  - "resume"
+  - "will"
+  - "must"
+  - "area"
+  - "some"
+  - "also"
+  - "into"
+  - "they"
+  - "their"
+  - "able"
+  - "both"
+  - "each"
+  - "avec"
+  - "dans"
+  - "pour"
+  - "les"
+  - "des"
+  - "une"
+  - "vous"
+  - "nous"
+  - "leur"
+  - "mais"
+  - "bien"
+  - "plus"
+  - "tout"
+  - "aussi"
+  - "comme"
+  - "sont"
+  - "cette"
+  - "base"
+  - "bonne"
+  - "notre"
+  - "vos"
+  - "nos"
+  - "son"
+  - "ses"
+  - "aux"
+  - "connaissances"
+  - "familiarite"
+  - "comprehension"
+  - "motivation"
+  - "apprendre"
+  - "progresser"
+  - "acceptes"
+  - "projets"
+
+resume_css: |
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+  @page { margin: 18mm 20mm 18mm 20mm; size: A4; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', 'Segoe UI', Arial, sans-serif; font-size: 10.5pt; line-height: 1.55; color: #1a1a1a; background: #ffffff; }
+  h1 { font-size: 24pt; font-weight: 700; letter-spacing: -0.3px; color: #0f172a; margin-bottom: 3px; }
+  h1 + p strong { font-size: 12.5pt; font-weight: 600; color: #334155; }
+  h1 ~ p { font-size: 9pt; color: #475569; margin-top: 2px; margin-bottom: 1px; }
+  hr { border: none; border-top: 2.5px solid #0f172a; margin: 10px 0 12px 0; }
+  h2 { font-size: 9.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 1.4px; color: #0f172a; border-bottom: 1.5px solid #cbd5e1; padding-bottom: 4px; margin-top: 18px; margin-bottom: 10px; page-break-after: avoid; break-after: avoid; }
+  h3 { font-size: 10pt; font-weight: 600; color: #1e293b; margin-top: 12px; margin-bottom: 5px; page-break-after: avoid; break-after: avoid; }
+  ul { padding-left: 16px; margin-bottom: 4px; page-break-inside: avoid; break-inside: avoid; }
+  li { list-style-type: disc; margin-bottom: 3px; line-height: 1.5; color: #1e293b; }
+  li strong { color: #0f172a; }
+  table { width: 100%; border-collapse: collapse; font-size: 9.5pt; margin-top: 4px; margin-bottom: 6px; page-break-inside: avoid; break-inside: avoid; }
+  thead th { background-color: #0f172a; color: #f8fafc; font-weight: 600; padding: 6px 12px; text-align: left; }
+  tbody td { padding: 5px 12px; border-bottom: 1px solid #e2e8f0; vertical-align: top; }
+  tbody td:first-child { font-weight: 600; color: #0f172a; white-space: nowrap; width: 30%; }
+  tbody tr:nth-child(even) td { background-color: #f8fafc; }
+  a { color: #2563eb; text-decoration: none; }
+  p { margin-bottom: 4px; }
+  strong { font-weight: 700; }
+</file>
+
+<file path="linguaresume/config.py">
+"""Configuration dataclasses for LinguaResume."""
+from dataclasses import dataclass, field
+from typing import Dict, List
+import os
+import yaml
+
+
+@dataclass
+class OllamaConfig:
+    url: str
+    model: str
+    timeout: int
+    temperature: float
+
+
+@dataclass
+class OutputConfig:
+    subdir: str
+    max_retries: int
+
+
+@dataclass
+class ValidationConfig:
+    bullet_token_overlap_threshold: float = 0.35
+    bullet_retention_threshold: float = 0.60
+
+
+@dataclass
+class Config:
+    ollama: OllamaConfig
+    cv_map: Dict[str, str]
+    fallback_cv: str
+    output: OutputConfig
+    section_aliases: Dict[str, List[str]]
+    static_section_keys: List[str]
+    junior_keywords: List[str]
+    enable_junior_special_case: bool
+    corrections_fr: List[dict]
+    corrections_de: List[dict]
+    stopwords: List[str]
+    resume_css: str
+    validation: ValidationConfig = field(default_factory=ValidationConfig)
+
+    @classmethod
+    def from_yaml(cls, path: str = "config.yaml") -> "Config":
+        with open(path, "r", encoding="utf-8") as f:
+            raw = yaml.safe_load(f)
+
+        ollama_raw = raw.get("ollama", {})
+        output_raw = raw.get("output", {})
+        validation_raw = raw.get("validation", {})
+
+        cfg = cls(
+            ollama=OllamaConfig(
+                url=ollama_raw.get("url", "http://127.0.0.1:1234/v1/chat/completions"),
+                model=ollama_raw.get("model", "qwen/qwen3.5-9b"),
+                timeout=ollama_raw.get("timeout", 720),
+                temperature=ollama_raw.get("temperature", 0.3),
+            ),
+            cv_map=raw.get("cv_map", {}),
+            fallback_cv=raw.get("fallback_cv", "./cvs/master_en.md"),
+            output=OutputConfig(
+                subdir=output_raw.get("subdir", "outputs"),
+                max_retries=output_raw.get("max_retries", 3),
+            ),
+            section_aliases=raw.get("section_aliases", {}),
+            static_section_keys=raw.get("static_section_keys", ["education", "languages"]),
+            junior_keywords=raw.get("junior_keywords", ["junior", "débutant"]),
+            enable_junior_special_case=raw.get("enable_junior_special_case", False),
+            corrections_fr=raw.get("corrections_fr", []),
+            corrections_de=raw.get("corrections_de", []),
+            stopwords=raw.get("stopwords", []),
+            resume_css=raw.get("resume_css", ""),
+            validation=ValidationConfig(
+                bullet_token_overlap_threshold=validation_raw.get(
+                    "bullet_token_overlap_threshold", 0.35
+                ),
+                bullet_retention_threshold=validation_raw.get(
+                    "bullet_retention_threshold", 0.60
+                ),
+            ),
+        )
+        cfg._validate_cv_paths()
+        return cfg
+
+    def _validate_cv_paths(self) -> None:
+        all_paths = list(self.cv_map.values()) + [self.fallback_cv]
+        for path in all_paths:
+            if not os.path.exists(path):
+                raise FileNotFoundError(f"CV file not found: {path}")
+</file>
+
+<file path="linguaresume/validation/tech.py">
+"""Technology hallucination validation."""
+import logging
+import re
+import unicodedata
+from typing import Set, Dict, List
+
+from linguaresume.parsing.splitter import split_resume_sections, _heading_normalize
+
+logger = logging.getLogger("linguaresume")
+
+
+class TechValidator:
+    def __init__(self, alias_map: Dict[str, List[str]]):
+        self.alias_map = alias_map
+
+    def _normalize_tech_token(self, token: str) -> str:
+        token = unicodedata.normalize("NFKD", token)
+        token = token.strip().lower()
+        token = re.sub(r"\s*\([^)]*\)$", "", token)
+        token = re.sub(r"\s*[+\-]\s*\d+.*$", "", token)
+        token = re.sub(r"\d+\.?\d*", "", token)
+        token = re.sub(r"[^\w#+.\-\s]", "", token)
+        token = re.sub(r"\s+", " ", token)
+        return token.strip()
+
+    def _extract_tech_items(self, md: str) -> Set[str]:
+        items: Set[str] = set()
+        header, sections = split_resume_sections(md, self.alias_map)
+
+        tech_aliases = self.alias_map.get("tech_skills", [])
+        for title, content in sections:
+            if _heading_normalize(title) in tech_aliases:
+                for line in content.splitlines():
+                    # Skip Markdown headings
+                    if line.startswith("#"):
+                        continue
+                    if re.match(r"^\s*\|?[-:\s|]+\|?\s*$", line):
+                        continue
+                    if "|" in line:
+                        parts = [p.strip() for p in line.split("|") if p.strip()]
+                        for cell in parts[1:]:
+                            for token in re.split(r",|;|/|\|\band\b|-", cell):
+                                tok = self._normalize_tech_token(token)
+                                if tok:
+                                    items.add(tok)
+                    else:
+                        for token in re.split(r",|;|/|\|\band\b|-", line):
+                            tok = token.strip().lstrip("-* ")
+                            if tok:
+                                items.add(self._normalize_tech_token(tok))
+
+        exp_aliases = self.alias_map.get("experience", [])
+        for title, content in sections:
+            if _heading_normalize(title) in exp_aliases:
+                for line in content.splitlines():
+                    if line.startswith("#"):
+                        continue
+                    multiword = re.findall(r'\b[A-Z][a-zA-Z0-9]*(?:\s+[A-Z][a-zA-Z0-9]*)+\b', line)
+                    for mw in multiword:
+                        items.add(self._normalize_tech_token(mw))
+                    standalone = re.findall(r'\b[A-Z][a-zA-Z0-9]*\b', line)
+                    for sw in standalone:
+                        items.add(self._normalize_tech_token(sw))
+
+        exclude = {
+            "agile", "scrum", "safe", "methodology", "process", "team",
+            "collaboration", "project", "management", "analysis", "design",
+            "documentation", "client", "company", "university", "master",
+            "bachelor", "engineer", "developer", "senior", "junior", "lead",
+            "january", "february", "march", "april", "may", "june", "july",
+            "august", "september", "october", "november", "december",
+            "present", "current", "france", "tunisia", "english", "french",
+            "german", "profile", "skills", "experience", "education", "languages",
+            "technologies", "category", "tools"                     # <-- ADD THESE
+        }
+        return {t for t in items if t not in exclude and len(t) > 1}
+
+    def get_extra_techs(self, master_md: str, final_md: str) -> Set[str]:
+        extra = self._extract_tech_items(final_md) - self._extract_tech_items(master_md)
+        if extra:
+            logger.info("Extra techs detected: %s", sorted(extra))
+        return extra
+
+    def validate(self, master_md: str, final_md: str) -> bool:
+        extra = self.get_extra_techs(master_md, final_md)
+        if extra:
+            logger.warning("⚠️ ADDED NEW TECHNOLOGIES: %s", sorted(extra))
+            return False
+        logger.info("✅ No new technologies added.")
+        return True
+</file>
+
+<file path="linguaresume/tailoring/engine.py">
+"""High-level tailoring and assembly engine."""
+import os
+import re
+import sys
+import json
+import logging
+import unicodedata
+from datetime import datetime
+from typing import Dict, List, Optional, Set, Tuple
+
+from linguaresume.config import Config
+from linguaresume.models import Requirement, ValidationResult
+from linguaresume.llm.client import LLMClient
+from linguaresume.llm.prompts import (
+    render_middle_prompt,
+    render_translate_prompt,
+    render_requirements_prompt,
+    render_title_translate_prompt,
+)
+from linguaresume.parsing.splitter import (
+    split_resume_sections,
+    build_mutable_bundle,
+    build_static_bundle,
+    replace_subtitle,
+    _make_alias_map,
+)
+from linguaresume.parsing.extractor import (
+    extract_companies,
+    extract_dates,
+    extract_keywords,
+    extract_total_months,
+    company_matches,
+    normalize_text,
+    _sig_tokens,
+    load_text,
+)
+from linguaresume.validation import (
+    validate_companies,
+    validate_dates,
+    validate_bullet_retention,
+    validate_experience,
+    TechValidator,
+    validate_static_sections,
+)
+
+logger = logging.getLogger("linguaresume")
+
+
+def detect_language(text: str) -> str:
+    text_lower = text.lower()
+    fr_words = {"le", "la", "les", "de", "et", "à", "dans", "pour", "avec", "un", "une", "des", "du", "sur"}
+    de_words = {"der", "die", "das", "und", "für", "mit", "von", "zu", "auf", "bei", "ist", "sich", "werden"}
+    en_words = {"the", "and", "for", "with", "this", "that", "from", "have", "been", "are", "was", "were"}
+    words = set(re.findall(r"\b[a-z]{2,}\b", text_lower))
+    fr_count = len(words & fr_words)
+    de_count = len(words & de_words)
+    en_count = len(words & en_words)
+    if fr_count >= 2 and fr_count > de_count and fr_count > en_count:
+        return "fr"
+    elif de_count >= 2 and de_count > en_count:
+        return "de"
+    else:
+        return "en"
+
+
+def clean_markdown(text: str) -> str:
+    text = text.strip()
+    text = re.sub(r"^```(?:markdown)?\s*", "", text, flags=re.IGNORECASE)
+    text = re.sub(r"\s*```\s*$", "", text)
+    text = re.sub(r"^\d+\s*\n", "", text, count=1)
+    text = text.replace("&amp;", "&").replace("&lt;", "<").replace("&gt;", ">")
+    text = text.replace("\\)", ")").replace("\\(", "(")
+    text = re.sub(r"\(([^a-zA-Z$#%_{}&])", r"\1", text)
+    if not text.endswith("\n"):
+        text += "\n"
+    return text
+
+
+def apply_corrections(text: str, corrections: list, master_name: Optional[str] = None) -> str:
+    text = text.replace("\r\n", "\n").replace("\r", "\n")
+    if master_name:
+        text = re.sub(r'^#\s+.*$', f"# {master_name}", text, count=1, flags=re.MULTILINE)
+
+    for entry in corrections:
+        pattern = entry["pattern"]
+        replacement = entry["replacement"]
+        flags = entry.get("flags", "")
+        if flags == "VERB":
+            def replacer(m, repl=replacement):
+                w = m.group(0)
+                return repl if w[0].isupper() else repl[0].lower() + repl[1:]
+            text = re.sub(pattern, replacer, text, flags=re.IGNORECASE)
+        elif flags == "IGNORECASE":
+            text = re.sub(pattern, replacement, text, flags=re.IGNORECASE)
+        else:
+            text = re.sub(pattern, replacement, text)
+
+    forbidden = [
+        r"^##\s+Comp[eé]tences?\s*.*?(?=^##|\Z)",
+        r"^##\s+Key\s+Skills?\s*.*?(?=^##|\Z)",
+        r"^##\s+Skills?\s+Summary\s*.*?(?=^##|\Z)",
+    ]
+    for pat in forbidden:
+        text = re.sub(pat, "", text, flags=re.MULTILINE | re.DOTALL)
+
+    strip_lines = [
+        r"^Note\s*:.*$", r"^Remarque\s*:.*$", r"^Notez\s+que\b.*$",
+        r"^Please\s+note\b.*$", r"^\*Note\s*:.*\*\s*$", r"^I have (followed|respected|adhered).*$",
+        r"^J'ai (respecté|suivi|appliqué).*$", r"^J'ai (identifié|traduit|ajouté|conservé).*$",
+        r"^En (suivant|respectant|appliquant).*$",
+    ]
+    for pat in strip_lines:
+        text = re.sub(pat, "", text, flags=re.MULTILINE)
+
+    strip_blocks = [
+        r"(?m)^Notez\s+que\b[\s\S]*?(?=\n\n|\Z)",
+        r"(?m)^Note\s*:[\s\S]*?(?=\n\n|\Z)",
+        r"(?m)^J'ai respecté[\s\S]*?(?=\n\n|\Z)",
+        r"(?m)^Please\s+note[\s\S]*?(?=\n\n|\Z)",
+    ]
+    for pat in strip_blocks:
+        text = re.sub(pat, "", text, flags=re.IGNORECASE)
+
+    text = re.sub(r"\n{3,}", "\n\n", text)
+    return text.rstrip() + "\n"
+
+
+def enforce_headings(text: str, target_lang: str) -> str:
+    heading_map = {
+        "en": {"profile": "Profile", "tech": "Technical Skills", "edu": "Education", "lang": "Languages"},
+        "fr": {"profile": "Profil", "tech": "Compétences techniques", "edu": "Formation", "lang": "Langues"},
+        "de": {"profile": "Profil", "tech": "Technische Fähigkeiten", "edu": "Ausbildung", "lang": "Sprachen"},
+    }
+    h = heading_map.get(target_lang, heading_map["en"])
+    text = re.sub(r"(?m)^##\s*(?:Profile|Professional Profile|Profil|Berufliches Profil).*$",
+                  f"## {h['profile']}", text)
+    text = re.sub(r"(?m)^##\s*(?:Technical\s+Skills|Compétences techniques|Technische Fähigkeiten|Skills|Compétences|Fähigkeiten|Technical Skills Stack).*$",
+                  f"## {h['tech']}", text)
+    text = re.sub(r"(?m)^##\s*(?:Education|Formation|Ausbildung|Éducation).*$",
+                  f"## {h['edu']}", text)
+    text = re.sub(r"(?m)^##\s*(?:Languages|Langues|Sprachen).*$",
+                  f"## {h['lang']}", text)
+    return text
+
+
+def extract_json_object(text: str) -> Optional[dict]:
+    text = text.strip()
+    if text.startswith("{") and text.endswith("}"):
+        try:
+            return json.loads(text)
+        except Exception:
+            pass
+    try:
+        from json_repair import repair_json
+    except ImportError:
+        repair_json = None
+    if repair_json:
+        try:
+            repaired = repair_json(text)
+            return json.loads(repaired)
+        except Exception:
+            pass
+    start = text.find("{")
+    if start == -1:
+        return None
+    depth = 0
+    in_string = False
+    escape = False
+    end = None
+    for i in range(start, len(text)):
+        ch = text[i]
+        if escape:
+            escape = False
+            continue
+        if ch == "\\" and in_string:
+            escape = True
+            continue
+        if ch == '"':
+            in_string = not in_string
+            continue
+        if not in_string:
+            if ch == "{":
+                depth += 1
+            elif ch == "}":
+                depth -= 1
+                if depth == 0:
+                    end = i + 1
+                    break
+    if end is None:
+        return None
+    candidate = text[start:end]
+    try:
+        return json.loads(candidate)
+    except Exception:
+        if repair_json:
+            try:
+                return json.loads(repair_json(candidate))
+            except Exception:
+                pass
+    return None
+
+
+def slugify(text: str, max_len: int = 40) -> str:
+    text = unicodedata.normalize("NFKD", text)
+    text = "".join(ch for ch in text if not unicodedata.combining(ch))
+    text = text.lower().strip()
+    text = re.sub(r"[^\w\s-]", "", text)
+    text = re.sub(r"[\s_-]+", "_", text).strip("_")
+    return text[:max_len]
+
+
+class TailoringEngine:
+    def __init__(
+        self,
+        config: Config,
+        llm_client: LLMClient,
+        force: bool = False,
+        domain_override: Optional[str] = None,
+    ):
+        self.cfg = config
+        self.llm = llm_client
+        self.force = force
+        self.domain_override = domain_override
+        self.alias_map = _make_alias_map(self.cfg.section_aliases)
+        self.static_keys = self.cfg.static_section_keys
+        self.stopwords = set(self.cfg.stopwords)
+        self.master_lang = "en"
+        self.job_desc = ""
+        self.target_lang = "en"
+        self.domain = "other"
+        self.master_md = ""
+        self.master_name = ""
+        self.master_companies: Set[str] = set()
+        self.master_dates: Set[str] = set()
+        self.requirements = Requirement()
+        self.output_dir = ""
+        self.tech_validator = TechValidator(self.alias_map)
+        self.bullet_token_overlap = self.cfg.validation.bullet_token_overlap_threshold
+        self.bullet_retention = self.cfg.validation.bullet_retention_threshold
+
+    def detect_language(self, text: str) -> str:
+        return detect_language(text)
+
+    def extract_requirements(self) -> Requirement:
+        prompt = render_requirements_prompt(job_desc=self.job_desc)
+        response = self.llm.complete(
+            "You are a JSON expert. Return only valid JSON.",
+            prompt,
+        )
+        req_dict = extract_json_object(response)
+        if req_dict is None:
+            logger.warning("⚠️ LLM JSON parsing failed; using fallback domain detection.")
+            req_dict = {
+                "job_title": self._fallback_job_title(),
+                "company": "",
+                "domain": self._fallback_domain(self.job_desc),
+                "must_haves": [],
+                "nice_to_haves": [],
+                "soft_skills": [],
+                "job_focus": "",
+                "language_tone": "professional",
+            }
+        valid_domains = {"devops", "webdev", "fullstack", "other"}
+        if req_dict.get("domain") not in valid_domains:
+            req_dict["domain"] = self._fallback_domain(self.job_desc)
+        self.domain = req_dict["domain"]
+        if self.domain_override:
+            self.domain = self.domain_override
+            req_dict["domain"] = self.domain_override
+            logger.info("📌 Domain overridden to: %s", self.domain)
+
+        self.requirements = Requirement(
+            job_title=req_dict.get("job_title", ""),
+            company=req_dict.get("company", ""),
+            domain=req_dict.get("domain", "other"),
+            must_haves=req_dict.get("must_haves", []),
+            nice_to_haves=req_dict.get("nice_to_haves", []),
+            soft_skills=req_dict.get("soft_skills", []),
+            job_focus=req_dict.get("job_focus", ""),
+            language_tone=req_dict.get("language_tone", "professional"),
+        )
+
+        if self.target_lang != "en" and self.requirements.job_title:
+            trans_prompt = render_title_translate_prompt(
+                target_lang=self.target_lang,
+                job_title=self.requirements.job_title,
+            )
+            trans_resp = self.llm.complete("You are a translator.", trans_prompt)
+            self.requirements.job_title_translated = trans_resp.strip()
+        return self.requirements
+
+    def _fallback_domain(self, text: str) -> str:
+        lower = text.lower()
+        frontend_kw = {"react", "next.js", "nextjs", "vue", "svelte", "angular"}
+        devops_kw = {"kubernetes", "k8s", "docker", "nginx", "load balancer", "digitalocean", "ci/cd", "jenkins", "terraform", "ansible"}
+        has_frontend = any(kw in lower for kw in frontend_kw)
+        score_d = sum(1 for kw in devops_kw if kw in lower)
+        score_w = sum(1 for kw in frontend_kw if kw in lower)
+
+        if score_d == 0 and score_w == 0:
+            return "other"
+        if has_frontend and score_d > 0:
+            if score_d >= 2:
+                return "fullstack"
+            else:
+                return "webdev"
+        if score_d > 0:
+            return "devops"
+        if has_frontend:
+            return "webdev"
+        return "other"
+
+    def _fallback_job_title(self) -> str:
+        patterns = [
+            r"\b(?:recherchons|recrutons|embauchons)\s+(?:un(?:e)?\s+)?([\w\-\s]{4,60}?)(?:[.,;]|\s+(?:pour|afin|à|dans|en)\b)",
+            r"(?:est|sommes)\s+à\s+la\s+recherche\s+d['\s]?un(?:e)?\s+([\w\-\s]{4,60}?)(?:[.,;]|\s+(?:pour|afin|à|dans|en)\b)",
+            r"recherche\s+(?:un|une|des)\s+([\w\-\s]{4,60}?)(?:[.,;]|\s+(?:pour|afin|à|dans|en)\b)",
+            r"recrute\s+(?:un|une|des)\s+([\w\-\s]{4,60}?)(?:[.,;]|\s+(?:pour|afin|à|dans|en)\b)",
+        ]
+        for pat in patterns:
+            m = re.search(pat, self.job_desc, re.IGNORECASE)
+            if m:
+                title = m.group(1).strip()
+                title = re.sub(r"\bDéveloppeurs\b", "Développeur", title, flags=re.IGNORECASE)
+                title = re.sub(r"\bIngénieurs\b", "Ingénieur", title, flags=re.IGNORECASE)
+                title = re.sub(r"\bFullstack\b", "Full-Stack", title, flags=re.IGNORECASE)
+                return title
+        return ""
+
+    def select_master_cv(self) -> None:
+        domain = self.domain
+        if self.cfg.enable_junior_special_case:
+            job_title = self.requirements.job_title.lower()
+            if any(kw in job_title for kw in self.cfg.junior_keywords):
+                domain = f"{domain}_junior"
+                logger.info("🔰 Junior position detected – trying junior master CV")
+        lang_domain_key = f"{self.target_lang}_{domain}"
+        cv_file = self.cfg.cv_map.get(lang_domain_key)
+        if cv_file:
+            logger.info("📄 Using language‑specific CV: %s", cv_file)
+            self.master_lang = self.target_lang
+        else:
+            cv_file = self.cfg.cv_map.get(domain, self.cfg.fallback_cv)
+            logger.info("📄 No %s CV, using English master: %s", lang_domain_key, cv_file)
+            self.master_lang = "en"
+
+        if not os.path.exists(cv_file):
+            raise FileNotFoundError(f"Master CV file not found: {cv_file}")
+        self.master_md = load_text(cv_file)
+        name_match = re.search(r"^#\s+(.+)", self.master_md, re.MULTILINE)
+        self.master_name = name_match.group(1).strip() if name_match else "Candidate"
+        self.master_companies = extract_companies(self.master_md)
+        self.master_dates = extract_dates(self.master_md)
+
+    def compatibility_check(self) -> None:
+        master_norm = unicodedata.normalize("NFKD", self.master_md)
+        master_norm = "".join(ch for ch in master_norm if not unicodedata.combining(ch))
+        master_kw = extract_keywords(master_norm, self.stopwords)
+        job_text = " ".join(
+            self.requirements.must_haves +
+            self.requirements.nice_to_haves +
+            self.requirements.soft_skills
+        )
+        job_kw = extract_keywords(job_text, self.stopwords)
+        common = master_kw & job_kw
+        pct = len(common) / max(len(job_kw), 1) * 100
+        logger.info("📋 Compatibility: %.1f%% (%d of %d job keywords present in master)", pct, len(common), len(job_kw))
+        if pct < 30 and not self.force:
+            logger.warning("⚠️ Low match – the LLM will focus on transferable skills.")
+            if os.environ.get("LINGUARESUME_YES", "").lower() in ("1", "true", "yes"):
+                logger.info("Auto-continuing via LINGUARESUME_YES.")
+            else:
+                try:
+                    response = input("Continue anyway? (y/n): ").strip().lower()
+                    if response != "y":
+                        sys.exit(0)
+                except EOFError:
+                    logger.error("Non-interactive mode detected. Use --force or set LINGUARESUME_YES=1")
+                    sys.exit(1)
+        elif pct < 30 and self.force:
+            logger.warning("⚠️ Low match but --force flag set, continuing.")
+
+    def split_master(self) -> Tuple[str, str, str]:
+        header, sections = split_resume_sections(self.master_md, self.alias_map)
+        mutable = build_mutable_bundle(sections, self.static_keys, self.alias_map)
+        static = build_static_bundle(sections, self.static_keys, self.alias_map)
+        return header, mutable, static
+
+    def tailor_middle(self, master_mutable: str) -> str:
+        system = """You are a resume optimization engine. Your task is to rewrite resume content to align with a job description while following strict constraints:
+
+1. OUTPUT FORMAT: Wrap the entire response in <resume_middle> XML tags.
+2. FACTUAL FIDELITY: Every claim must be verifiable in the source material. Do not invent companies, dates, technologies, or experience duration.
+3. TRANSLATION: Translate all content into the target language except proper nouns.
+4. BULLET PRESERVATION: Keep the exact same number of bullets per employer as the source.
+5. TECHNOLOGY BOUNDARY: Only mention tools/frameworks explicitly listed in the source CV. If the job requires something missing, omit it entirely.
+6. NO META-COMMENTARY: Do not include notes, explanations, or "I have followed" statements.
+7. HEADING ENFORCEMENT: Use exactly ## Profile, ## Technical Skills, ## Professional Experience."""
+        prompt = self._build_middle_prompt(master_mutable)
+        raw = self.llm.complete(system, prompt)
+        cleaned = clean_markdown(raw)
+
+        match = re.search(r'<resume_middle>(.*?)</resume_middle>', cleaned, re.DOTALL | re.IGNORECASE)
+        if match:
+            cleaned = match.group(1).strip()
+        else:
+            cleaned = re.sub(r'</?[a-z_]+>', '', cleaned).strip()
+
+        if self.target_lang == "fr":
+            cleaned = apply_corrections(cleaned, self.cfg.corrections_fr, self.master_name)
+        elif self.target_lang == "de":
+            cleaned = apply_corrections(cleaned, self.cfg.corrections_de, self.master_name)
+        cleaned = enforce_headings(cleaned, self.target_lang)
+        return cleaned
+
+    def _build_middle_prompt(self, master_mutable: str) -> str:
+        req = self.requirements
+        failures = req.failures
+        missing = req.missing_must
+        missing_soft = req.missing_soft
+
+        retry_notes = []
+        if missing:
+            retry_notes.append(f"MISSING_MUST_HAVES: {json.dumps(missing, ensure_ascii=False)}")
+        if missing_soft:
+            retry_notes.append(f"MISSING_SOFT_SKILLS: {json.dumps(missing_soft, ensure_ascii=False)}")
+        if "hallucinated_companies" in failures:
+            retry_notes.append("RULE: Use EXACT company names from master. No translations, no inventions.")
+        if "invented_dates" in failures:
+            retry_notes.append("RULE: Use EXACT date ranges from master. No modifications.")
+        if "bullets_dropped" in failures:
+            retry_notes.append("RULE: Preserve every bullet point. Do not merge, split, or delete.")
+        if "static_sections_altered" in failures:
+            retry_notes.append("RULE: Do not write Education or Languages sections. They are appended automatically.")
+        if "experience_inflated" in failures:
+            retry_notes.append("RULE: Total experience must not exceed master CV.")
+        if "added_new_technologies" in failures:
+            retry_notes.append("RULE: Only use technologies explicitly listed in master CV.")
+
+        retry_block = "\n".join(retry_notes)
+
+        lang_name = {"en": "English", "fr": "French", "de": "German"}.get(self.target_lang, "English")
+
+        return render_middle_prompt(
+            lang_name=lang_name,
+            job_desc=self.job_desc,
+            must_haves=req.must_haves,
+            nice_to_haves=req.nice_to_haves,
+            soft_skills=req.soft_skills,
+            job_focus=req.job_focus,
+            retry_block=retry_block,
+            master_mutable=master_mutable,
+        )
+
+    def translate_static_sections(self, static_bundle: str) -> str:
+        if self.master_lang == self.target_lang or not static_bundle.strip():
+            return static_bundle
+
+        prompt = render_translate_prompt(
+            target_lang=self.target_lang,
+            static_bundle=static_bundle,
+        )
+        system = "You are a translation engine. Output only the translated text."
+        translated = self.llm.complete(system, prompt)
+        translated = clean_markdown(translated)
+        translated = enforce_headings(translated, self.target_lang)
+        return translated
+
+    def _compute_missing(self, tailored_middle: str) -> None:
+        tailored_tokens = _sig_tokens(tailored_middle)
+        self.requirements.missing_must = [
+            r for r in self.requirements.must_haves
+            if len(_sig_tokens(r) & tailored_tokens) / max(len(_sig_tokens(r)), 1) < 0.5
+        ]
+        self.requirements.missing_soft = [
+            s for s in self.requirements.soft_skills
+            if s.lower() not in tailored_middle.lower()
+        ]
+
+    def validate_final(self, final_md: str, static_bundle: str) -> ValidationResult:
+        failures = []
+        details: Dict[str, any] = {}
+        translating = (self.master_lang != self.target_lang)
+
+        if not validate_companies(final_md, self.master_companies, translating=translating):
+            failures.append("hallucinated_companies")
+        if not validate_dates(final_md, self.master_dates):
+            failures.append("invented_dates")
+        if not validate_static_sections(final_md, static_bundle, self.alias_map, self.static_keys):
+            failures.append("static_sections_altered")
+        if not validate_bullet_retention(
+            self.master_md, final_md, lang_mismatch=translating,
+            token_overlap_threshold=self.bullet_token_overlap,
+            retention_threshold=self.bullet_retention,
+        ):
+            failures.append("bullets_dropped")
+        if not validate_experience(self.master_md, final_md):
+            failures.append("experience_inflated")
+        extra_techs = self.tech_validator.get_extra_techs(self.master_md, final_md)
+        if extra_techs:
+            failures.append("added_new_technologies")
+            details["added_new_technologies"] = sorted(extra_techs)
+
+        passed = not failures
+        if passed:
+            logger.info("✅ Validation passed.")
+        return ValidationResult(passed=passed, failures=failures, details=details)
+
+    def assemble(self, header: str, tailored_middle: str, static_bundle: str) -> str:
+        static_bundle = self.translate_static_sections(static_bundle)
+        job_title = self.requirements.job_title_translated or self.requirements.job_title
+        final_header = replace_subtitle(header, job_title) if job_title else header.rstrip()
+        parts = [final_header.rstrip(), "", tailored_middle.strip(), "", static_bundle.strip()]
+        return "\n".join(parts).strip() + "\n"
+
+    def setup_output_dir(self) -> None:
+        parts = [self.requirements.company, self.requirements.job_title]
+        slug_parts = [slugify(p) for p in parts if p]
+        if not slug_parts:
+            slug_parts.append(f"resume_{datetime.now().strftime('%Y%m%d_%H%M%S')}")
+        dir_name = "_".join(slug_parts)
+        out_dir = os.path.join(self.cfg.output.subdir, dir_name)
+        os.makedirs(out_dir, exist_ok=True)
+        self.output_dir = out_dir
+        logger.info("📁 Output directory: %s", out_dir)
+
+    def save_markdown(self, final_md: str) -> str:
+        stem = os.path.basename(self.output_dir)
+        md_path = os.path.join(self.output_dir, f"{stem}.md")
+        with open(md_path, "w", encoding="utf-8") as f:
+            f.write(final_md)
+        logger.info("📄 Markdown saved to %s", md_path)
+        return md_path
+
+    def convert_to_pdf(self, md_path: str) -> str:
+        from linguaresume.pdf.renderer import PDFRenderer
+        with open(md_path, "r", encoding="utf-8") as f:
+            content = f.read()
+        pdf_path = os.path.splitext(md_path)[0] + ".pdf"
+        renderer = PDFRenderer(self.cfg.resume_css)
+        renderer.render(content, pdf_path, lang=self.target_lang)
+        logger.info("📄 PDF ready: %s", pdf_path)
+        return pdf_path
+
+    def run(self, job_desc_path: str) -> Tuple[str, str]:
+        self.job_desc = load_text(job_desc_path)
+        self.target_lang = self.detect_language(self.job_desc)
+        logger.info("🌐 Detected job description language: %s", self.target_lang.upper())
+
+        self.extract_requirements()
+        logger.info("📂 Domain: %s", self.domain)
+
+        self.select_master_cv()
+        self.compatibility_check()
+
+        header, master_mutable, static_bundle = self.split_master()
+
+        retries = 0
+        max_retries = self.cfg.output.max_retries
+        final_md = ""
+
+        while True:
+            logger.info("✏️ Generating tailored resume (attempt %d)...", retries + 1)
+            tailored_middle = self.tailor_middle(master_mutable)
+            final_md = self.assemble(header, tailored_middle, static_bundle)
+
+            result = self.validate_final(final_md, static_bundle)
+            if result.passed:
+                break
+
+            retries += 1
+            if retries > max_retries:
+                logger.warning("⚠️ After %d retries, proceeding with current version.", max_retries)
+                break
+
+            self._compute_missing(tailored_middle)
+            self.requirements.failures = result.failures
+            logger.info("🔁 Retrying with targeted feedback (failures: %s)", result.failures)
+
+        self.setup_output_dir()
+        md_path = self.save_markdown(final_md)
+        logger.info("📄 Converting to PDF...")
+        pdf_path = self.convert_to_pdf(md_path)
+        logger.info("✅ All done!")
+        return md_path, pdf_path
+</file>
+
+</files>
