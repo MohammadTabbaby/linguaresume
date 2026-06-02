@@ -69,7 +69,7 @@ def clean_markdown(text: str) -> str:
     text = re.sub(r"\s*```\s*$", "", text)
     text = re.sub(r"^\d+\s*\n", "", text, count=1)
     text = text.replace("&amp;", "&").replace("&lt;", "<").replace("&gt;", ">")
-    text = text.replace("\)", ")").replace("\(", "(")
+    text = text.replace("\\)", ")").replace("\\(", "(")
     text = re.sub(r"\(([^a-zA-Z$#%_{}&])", r"\1", text)
     if not text.endswith("\n"):
         text += "\n"
