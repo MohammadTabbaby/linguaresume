@@ -31,6 +31,9 @@ class TechValidator:
         for title, content in sections:
             if _heading_normalize(title) in tech_aliases:
                 for line in content.splitlines():
+                    # Skip Markdown headings
+                    if line.startswith("#"):
+                        continue
                     if re.match(r"^\s*\|?[-:\s|]+\|?\s*$", line):
                         continue
                     if "|" in line:
@@ -49,12 +52,15 @@ class TechValidator:
         exp_aliases = self.alias_map.get("experience", [])
         for title, content in sections:
             if _heading_normalize(title) in exp_aliases:
-                multiword = re.findall(r'\b[A-Z][a-zA-Z0-9]*(?:\s+[A-Z][a-zA-Z0-9]*)+\b', content)
-                for mw in multiword:
-                    items.add(self._normalize_tech_token(mw))
-                standalone = re.findall(r'\b[A-Z][a-zA-Z0-9]*\b', content)
-                for sw in standalone:
-                    items.add(self._normalize_tech_token(sw))
+                for line in content.splitlines():
+                    if line.startswith("#"):
+                        continue
+                    multiword = re.findall(r'\b[A-Z][a-zA-Z0-9]*(?:\s+[A-Z][a-zA-Z0-9]*)+\b', line)
+                    for mw in multiword:
+                        items.add(self._normalize_tech_token(mw))
+                    standalone = re.findall(r'\b[A-Z][a-zA-Z0-9]*\b', line)
+                    for sw in standalone:
+                        items.add(self._normalize_tech_token(sw))
 
         exclude = {
             "agile", "scrum", "safe", "methodology", "process", "team",
@@ -64,12 +70,16 @@ class TechValidator:
             "january", "february", "march", "april", "may", "june", "july",
             "august", "september", "october", "november", "december",
             "present", "current", "france", "tunisia", "english", "french",
-            "german", "profile", "skills", "experience", "education", "languages"
+            "german", "profile", "skills", "experience", "education", "languages",
+            "technologies", "category", "tools"                     # <-- ADD THESE
         }
         return {t for t in items if t not in exclude and len(t) > 1}
 
     def get_extra_techs(self, master_md: str, final_md: str) -> Set[str]:
-        return self._extract_tech_items(final_md) - self._extract_tech_items(master_md)
+        extra = self._extract_tech_items(final_md) - self._extract_tech_items(master_md)
+        if extra:
+            logger.info("Extra techs detected: %s", sorted(extra))
+        return extra
 
     def validate(self, master_md: str, final_md: str) -> bool:
         extra = self.get_extra_techs(master_md, final_md)
@@ -78,3 +88,5 @@ class TechValidator:
             return False
         logger.info("✅ No new technologies added.")
         return True
+    
+    

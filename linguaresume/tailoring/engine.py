@@ -70,13 +70,13 @@ def clean_markdown(text: str) -> str:
     text = re.sub(r"^\d+\s*\n", "", text, count=1)
     text = text.replace("&amp;", "&").replace("&lt;", "<").replace("&gt;", ">")
     text = text.replace("\)", ")").replace("\(", "(")
-    text = re.sub(r"\([^a-zA-Z$#%_{}&])", r"\1", text)
+    text = re.sub(r"\(([^a-zA-Z$#%_{}&])", r"\1", text)
     if not text.endswith("\n"):
         text += "\n"
     return text
 
 
-def apply_fr_corrections(text: str, corrections: list, master_name: Optional[str] = None) -> str:
+def apply_corrections(text: str, corrections: list, master_name: Optional[str] = None) -> str:
     text = text.replace("\r\n", "\n").replace("\r", "\n")
     if master_name:
         text = re.sub(r'^#\s+.*$', f"# {master_name}", text, count=1, flags=re.MULTILINE)
@@ -407,7 +407,9 @@ class TailoringEngine:
             cleaned = re.sub(r'</?[a-z_]+>', '', cleaned).strip()
 
         if self.target_lang == "fr":
-            cleaned = apply_fr_corrections(cleaned, self.cfg.corrections_fr, self.master_name)
+            cleaned = apply_corrections(cleaned, self.cfg.corrections_fr, self.master_name)
+        elif self.target_lang == "de":
+            cleaned = apply_corrections(cleaned, self.cfg.corrections_de, self.master_name)
         cleaned = enforce_headings(cleaned, self.target_lang)
         return cleaned
 

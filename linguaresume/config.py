@@ -36,6 +36,7 @@ class Config:
     junior_keywords: List[str]
     enable_junior_special_case: bool
     corrections_fr: List[dict]
+    corrections_de: List[dict]
     stopwords: List[str]
     resume_css: str
     validation: ValidationConfig = field(default_factory=ValidationConfig)
@@ -67,6 +68,7 @@ class Config:
             junior_keywords=raw.get("junior_keywords", ["junior", "débutant"]),
             enable_junior_special_case=raw.get("enable_junior_special_case", False),
             corrections_fr=raw.get("corrections_fr", []),
+            corrections_de=raw.get("corrections_de", []),
             stopwords=raw.get("stopwords", []),
             resume_css=raw.get("resume_css", ""),
             validation=ValidationConfig(

@@ -1,0 +1,339 @@
+# ============================================================
+# LinguaResume Configuration
+# ============================================================
+
+ollama:
+  url: "http://127.0.0.1:1234/v1/chat/completions"
+  model: "qwen/qwen3.5-9b"
+  timeout: 720
+  temperature: 0.3
+
+validation:
+  bullet_token_overlap_threshold: 0.35
+  bullet_retention_threshold: 0.60
+
+  
+# Master CVs by domain (language‑agnostic – keep them in English)
+cv_map:
+  # Language‑specific (used when target language matches)
+  fr_webdev: "./cvs/web_fr.md"
+  fr_devops: "./cvs/devops_fr.md"
+  fr_fullstack: "./cvs/master_fr.md"
+  fr_other: "./cvs/nontech_master_fr.md"      # fixed filename
+
+  # English masters (fallback)
+  webdev: "./cvs/web_en.md"
+  devops: "./cvs/devops_en.md"
+  fullstack: "./cvs/master_en.md"
+  other: "./cvs/nontech_master_en.md"         # fixed filename
+  # German masters (explicit)
+  de_webdev: "./cvs/web_de.md"
+  de_devops: "./cvs/devops_de.md"
+  de_fullstack: "./cvs/master_de.md"
+  de_other: "./cvs/nontech_master_de.md"
+
+fallback_cv: "./cvs/master_en.md"
+
+output:
+  subdir: "outputs"
+  max_retries: 3
+
+# Section aliases – used to split the resume (can be multi‑lingual)
+section_aliases:
+  profile:
+    - "Profil"
+    - "Profile"
+    - "Professional Profile"
+    - "Profil Professionnel"
+    - "Résumé"
+    - "Resume"
+    - "Summary"
+    - "Berufliches Profil"
+    - "Berufliches Profil"
+  tech_skills:
+    - "Compétences techniques"
+    - "Competences techniques"
+    - "Technical Skills"
+    - "Skills"
+    - "Compétences clés"
+    - "Key Skills"
+    - "Skills Summary"
+    - "Technical Skills Stack"   # added to match master_en.md
+    - "Technische Fähigkeiten"
+    - "Fähigkeiten"
+    - "Kenntnisse"
+  experience:
+    - "Expérience Professionnelle"
+    - "Experience Professionnelle"
+    - "Professional Experience"
+    - "Experience"
+    - "Expérience"
+    - "Berufserfahrung"
+    - "Berufliche Erfahrung"
+  education:
+    - "Éducation"
+    - "Education"
+    - "Formation"
+    - "Study"
+    - "Studies"
+    - "Ausbildung"
+  languages:
+    - "Langues"
+    - "Languages"
+    - "Sprachen"
+    - "Fremdsprachen"
+
+static_section_keys:
+  - "education"
+  - "languages"
+
+# Junior detection keywords (configurable)
+junior_keywords:
+  - "junior"
+  - "débutant"
+  - "entry level"
+  - "junior level"
+
+# If a specific junior CV is not found, fall back to the regular domain CV.
+# Set to true to enable junior special case (requires cv_map entries like "fr_fullstack_junior" etc.)
+enable_junior_special_case: false   # set to true only if you add those CVs
+
+# Corrections applied ONLY to French output
+corrections_fr:
+  - pattern: "Universit[eé]\\s+Tahar\\s+Sfar(?!\\s+Universit)"
+    replacement: "Hôpital universitaire Tahar Sfar"
+    flags: "IGNORECASE"
+  - pattern: "H[oô]pital\\s+(?:Universitaire\\s+)?Tahar\\s+Sfar(?:\\s+University\\s+Hospital)?"
+    replacement: "Hôpital universitaire Tahar Sfar"
+    flags: "IGNORECASE"
+  - pattern: "Tahar\\s+Sfar\\s+University\\s+Hospital"
+    replacement: "Hôpital universitaire Tahar Sfar"
+    flags: "IGNORECASE"
+  - pattern: "Master(?:\\s+Professionnel)?\\s+National(?:\\s+Professio[n]nel)?"
+    replacement: "Diplôme national de Master professionnel"
+    flags: "IGNORECASE"
+  - pattern: "National\\s+Professional\\s+Master['']?s?\\s+Degree"
+    replacement: "Diplôme national de Master professionnel"
+    flags: "IGNORECASE"
+  - pattern: "Baccalaur[eé]at\\s+National"
+    replacement: "Licence nationale"
+    flags: "IGNORECASE"
+  - pattern: "National\\s+Bachelor['']?s?\\s+Degree"
+    replacement: "Licence nationale"
+    flags: "IGNORECASE"
+  - pattern: "Dipl[oô]me\\s+Universitaire"
+    replacement: "Licence nationale"
+    flags: "IGNORECASE"
+  - pattern: "Champ\\s*:"
+    replacement: "Domaine :"
+  - pattern: "Field\\s*:"
+    replacement: "Domaine :"
+    flags: "IGNORECASE"
+  - pattern: "Major\\s*:"
+    replacement: "Filière :"
+    flags: "IGNORECASE"
+  - pattern: "Speciali[sz]ation\\s*:"
+    replacement: "Spécialisation :"
+    flags: "IGNORECASE"
+  - pattern: "Spécialité\\s*:"
+    replacement: "Spécialisation :"
+  - pattern: "\\bEmplacement\\s*:"
+    replacement: "Localisation :"
+  - pattern: "(?<![\\w])Location\\s*:"
+    replacement: "Localisation :"
+    flags: "IGNORECASE"
+  - pattern: "Calcul\\s+en\\s+nuage"
+    replacement: "Cloud Computing"
+    flags: "IGNORECASE"
+  - pattern: "Informatique\\s+en\\s+nuage"
+    replacement: "Cloud Computing"
+    flags: "IGNORECASE"
+  - pattern: "Nuage\\s+Computing"
+    replacement: "Cloud Computing"
+    flags: "IGNORECASE"
+  - pattern: "Nuage\\s+(?:et|&)\\s+Infrastructure"
+    replacement: "Cloud & Infrastructure"
+    flags: "IGNORECASE"
+  - pattern: "\\bTunisia\\b"
+    replacement: "Tunisie"
+    flags: "IGNORECASE"
+  - pattern: "CI/CD\\s*&\\s*Automation"
+    replacement: "CI/CD & Automatisation"
+  - pattern: "\\bAutomation\\b"
+    replacement: "Automatisation"
+    flags: "IGNORECASE"
+  - pattern: "Security\\s*\\(DevSecOps\\)"
+    replacement: "Sécurité (DevSecOps)"
+    flags: "IGNORECASE"
+  - pattern: "\\bScripting\\s*&\\s*OS\\b"
+    replacement: "Scripting & OS"
+  - pattern: "Rate\\s+Limiting"
+    replacement: "Limitation de taux"
+    flags: "IGNORECASE"
+  - pattern: "API\\s+Security"
+    replacement: "Sécurité API"
+    flags: "IGNORECASE"
+  - pattern: "\\bDéveloppas?\\b"
+    replacement: "Développé"
+    flags: "VERB"
+  - pattern: "\\bLivras?\\b"
+    replacement: "Livré"
+    flags: "VERB"
+  - pattern: "\\bDelivras?\\b"
+    replacement: "Livré"
+    flags: "VERB"
+  - pattern: "\\bConçut\\b"
+    replacement: "Conçu"
+    flags: "VERB"
+  - pattern: "\\bDéployas?\\b"
+    replacement: "Déployé"
+    flags: "VERB"
+  - pattern: "\\bImplémentas?\\b"
+    replacement: "Implémenté"
+    flags: "VERB"
+  - pattern: "\\bArchitecturas?\\b"
+    replacement: "Architecturé"
+    flags: "VERB"
+  - pattern: "\\bSécouru\\b"
+    replacement: "Sécurisé"
+    flags: "VERB"
+  - pattern: "\\bSécourut\\b"
+    replacement: "Sécurisé"
+    flags: "VERB"
+  - pattern: "\\bSécurisa\\b"
+    replacement: "Sécurisé"
+    flags: "VERB"
+  - pattern: "\\bOrchestra\\b"
+    replacement: "Orchestré"
+    flags: "VERB"
+  - pattern: "\\bOrchestre\\b"
+    replacement: "Orchestré"
+    flags: "VERB"
+  - pattern: "\\bLivrait\\b"
+    replacement: "Livré"
+    flags: "VERB"
+  - pattern: "\\bConçus?\\b"
+    replacement: "Conçu"
+    flags: "VERB"
+  - pattern: "\\bDéploya\\b"
+    replacement: "Déployé"
+    flags: "VERB"
+  - pattern: "\\bMit\\s+en\\s+place\\b"
+    replacement: "Mis en place"
+    flags: "VERB"
+
+corrections_de:
+  - pattern: "CI/CD\\s*&\\s*Automation"
+    replacement: "CI/CD & Automatisierung"
+    flags: "IGNORECASE"
+  - pattern: "\\bAutomation\\b"
+    replacement: "Automatisierung"
+    flags: "IGNORECASE"
+  - pattern: "\\bTunisia\\b"
+    replacement: "Tunesien"
+    flags: "IGNORECASE"
+  - pattern: "Scripting\\s*&\\s*OS"
+    replacement: "Scripting & OS"
+    flags: "IGNORECASE"
+
+stopwords:
+  - "ein"
+  - "eine"
+  - "der"
+  - "die"
+  - "das"
+  - "und"
+  - "für"
+  - "mit"
+  - "von"
+  - "zu"
+  - "bei"
+  - "ist"
+  - "nicht"
+  - "auf"
+  - "im"
+  - "in"
+  - "dem"
+  - "den"
+  - "des"
+  - "the"
+  - "and"
+  - "for"
+  - "with"
+  - "this"
+  - "that"
+  - "from"
+  - "your"
+  - "have"
+  - "been"
+  - "role"
+  - "work"
+  - "team"
+  - "resume"
+  - "will"
+  - "must"
+  - "area"
+  - "some"
+  - "also"
+  - "into"
+  - "they"
+  - "their"
+  - "able"
+  - "both"
+  - "each"
+  - "avec"
+  - "dans"
+  - "pour"
+  - "les"
+  - "des"
+  - "une"
+  - "vous"
+  - "nous"
+  - "leur"
+  - "mais"
+  - "bien"
+  - "plus"
+  - "tout"
+  - "aussi"
+  - "comme"
+  - "sont"
+  - "cette"
+  - "base"
+  - "bonne"
+  - "notre"
+  - "vos"
+  - "nos"
+  - "son"
+  - "ses"
+  - "aux"
+  - "connaissances"
+  - "familiarite"
+  - "comprehension"
+  - "motivation"
+  - "apprendre"
+  - "progresser"
+  - "acceptes"
+  - "projets"
+
+resume_css: |
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+  @page { margin: 18mm 20mm 18mm 20mm; size: A4; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', 'Segoe UI', Arial, sans-serif; font-size: 10.5pt; line-height: 1.55; color: #1a1a1a; background: #ffffff; }
+  h1 { font-size: 24pt; font-weight: 700; letter-spacing: -0.3px; color: #0f172a; margin-bottom: 3px; }
+  h1 + p strong { font-size: 12.5pt; font-weight: 600; color: #334155; }
+  h1 ~ p { font-size: 9pt; color: #475569; margin-top: 2px; margin-bottom: 1px; }
+  hr { border: none; border-top: 2.5px solid #0f172a; margin: 10px 0 12px 0; }
+  h2 { font-size: 9.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 1.4px; color: #0f172a; border-bottom: 1.5px solid #cbd5e1; padding-bottom: 4px; margin-top: 18px; margin-bottom: 10px; page-break-after: avoid; break-after: avoid; }
+  h3 { font-size: 10pt; font-weight: 600; color: #1e293b; margin-top: 12px; margin-bottom: 5px; page-break-after: avoid; break-after: avoid; }
+  ul { padding-left: 16px; margin-bottom: 4px; page-break-inside: avoid; break-inside: avoid; }
+  li { list-style-type: disc; margin-bottom: 3px; line-height: 1.5; color: #1e293b; }
+  li strong { color: #0f172a; }
+  table { width: 100%; border-collapse: collapse; font-size: 9.5pt; margin-top: 4px; margin-bottom: 6px; page-break-inside: avoid; break-inside: avoid; }
+  thead th { background-color: #0f172a; color: #f8fafc; font-weight: 600; padding: 6px 12px; text-align: left; }
+  tbody td { padding: 5px 12px; border-bottom: 1px solid #e2e8f0; vertical-align: top; }
+  tbody td:first-child { font-weight: 600; color: #0f172a; white-space: nowrap; width: 30%; }
+  tbody tr:nth-child(even) td { background-color: #f8fafc; }
+  a { color: #2563eb; text-decoration: none; }
+  p { margin-bottom: 4px; }
+  strong { font-weight: 700; }
