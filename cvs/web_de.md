@@ -8,7 +8,7 @@
 ---
 
 ## Profil
-Full-Stack Webentwickler mit Erfahrung in der Entwicklung von Webanwendungen in akademischen und medizinischen Umgebungen. Starker Fokus auf Backend-Architektur, REST-APIs und Frontend-Schnittstellen mit Angular. Fähig, komplette Weblösungen mit Augenmerk auf Leistung, Benutzerfreundlichkeit und Wartbarkeit zu entwerfen, zu entwickeln und bereitzustellen.
+Full-Stack Webentwickler mit Erfahrung in der Entwicklung von Webanwendungen in akademischen und medizinischen Umgebungen. Starker Fokus auf Backend-Architektur, REST-APIs und Frontend-Schnittstellen mit Angular. Fähig, komplette Weblösungen mit Schwerpunkt auf Leistung, Benutzerfreundlichkeit und Wartbarkeit zu entwerfen, zu entwickeln und bereitzustellen.
 
 ---
 
@@ -26,21 +26,22 @@ Full-Stack Webentwickler mit Erfahrung in der Entwicklung von Webanwendungen in 
 
 ## Berufserfahrung
 
-### ISET Tozeur — Praktikant als Full-Stack Entwickler (02/2024 – 06/2024)
-- Entwicklung von Angular-Dashboards mit rollenbasierter Zugriffskontrolle (RBAC) für den akademischen Betrieb.
-- Entwurf und Entwicklung von Backend-Microservices und REST-APIs in einer verteilten Architektur.
-- Implementierung von API-Sicherheitsmechanismen mit Spring Security, JWT und Ratenbegrenzung zur Zugriffskontrolle und Sicherung von Endpunkten.
+### ISET Tozeur
+**Praktikant als Full-Stack Entwickler** (02/2024 – 06/2024)
+- Entwicklung von Angular-Dashboards mit rollenbasierter Zugriffskontrolle (RBAC) für akademische Betriebsprozesse
+- Entwurf und Entwicklung von Backend-Microservices und REST-APIs in verteilter Architektur
+- Implementierung von API-Sicherheitsmechanismen mit Spring Security, JWT und Ratenbegrenzung zur Zugriffskontrolle und Endpunkt-Sicherung
 
-### Tahar Sfar Universitätskrankenhaus
+### Universitätskrankenhaus Tahar Sfar
 **Praktikant als Full-Stack Webentwickler** (02/2022 – 06/2022)
-- Entwicklung und Bereitstellung einer internen Beschwerdemanagement-Plattform mit Rückverfolgbarkeit in einer Krankenhausumgebung.
-- Aufbau eines Echtzeit-Systems zur Verfolgung medizinischer Bestände, um die Ressourcensichtbarkeit zu verbessern und den manuellen Verwaltungsaufwand zu reduzieren.
+- Entwicklung und Bereitstellung einer internen Beschwerdemanagement-Plattform mit hoher Nachverfolgbarkeit in einer Krankenhausumgebung
+- Aufbau eines Echtzeit-Systems zur Verfolgung medizinischer Bestände, Verbesserung der Ressourcensichtbarkeit und Reduktion manueller administrativer Aufgaben
 
 ### LeaderPos
 **Praktikant als Full-Stack Webentwickler** (08/2021 – 09/2021)
-- Entwicklung eines Backend-Systems (Django, MongoDB) für eine E-Commerce-Plattform zur Verwaltung von Produkten, Sitzungen und Bestellungen.
-- Implementierung einer dynamischen Warenkorbfunktion und von Mechanismen zur Bestandsverfolgung für Echtzeit-Updates.
-- Erstellung einer Admin-Oberfläche (Bootstrap) zur Verwaltung von Abläufen und simulierten Zahlungs-Workflows.
+- Entwicklung eines Backend-Systems (Django, MongoDB) für eine E-Commerce-Plattform zur Verwaltung von Produkten, Sitzungen und Bestellungen
+- Implementierung einer dynamischen Warenkorbfunktion und Bestandsverfolgungsmechanismen für Echtzeit-Updates
+- Erstellung einer Admin-Oberfläche (Bootstrap) zur Verwaltung von Abläufen und simulierten Zahlungs-Workflows
 
 ---
 

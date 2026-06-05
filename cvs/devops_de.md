@@ -8,7 +8,7 @@
 ---
 
 ## Profil
-DevOps & Cloud Engineer mit Schwerpunkt auf Automatisierung, Deployment-Industrialisierung und Zuverlässigkeit. Praktische Erfahrung mit CI/CD-Pipelines, Kubernetes-Orchestrierung, Observability und API-Sicherheit in akademischen und Krankenhausumgebungen. Fähig, über den gesamten Bereitstellungszyklus (vom Build über das Deployment bis zum Monitoring) hinweg zu arbeiten, mit einem starken Verständnis für Anwendungscode dank eines Full-Stack-Hintergrunds.
+DevOps & Cloud Engineer mit Schwerpunkt auf Automatisierung, Deployment-Industrialisierung und Zuverlässigkeit. Praktische Erfahrung mit CI/CD-Pipelines, Kubernetes-Orchestrierung, Observability und API-Sicherheit in akademischen und Krankenhausumgebungen. Fähig, über den gesamten Bereitstellungszyklus hinweg zu arbeiten, mit einem starken Verständnis für Anwendungscode dank Full-Stack-Hintergrund.
 
 ---
 
@@ -32,23 +32,23 @@ DevOps & Cloud Engineer mit Schwerpunkt auf Automatisierung, Deployment-Industri
 
 ### Höheres Institut für technologische Studien (ISET) Tozeur
 **Praktikant als DevOps & Full-Stack Engineer** (02/2024 – 06/2024)
-- Bereitstellung und Betrieb eines Kubernetes-Clusters mit 8 Microservices für Spring Boot-Dienste in einer realen akademischen Umgebung.
-- Entwurf und Implementierung von CI/CD-Pipelines mit Jenkins und SonarQube, einschließlich automatisierter Builds, Tests und Code-Qualitätsprüfungen.
-- Einrichtung eines Überwachungs- und Alarmierungs-Stacks mit Prometheus, Grafana und Winston, um den Service-Zustand zu verfolgen und Vorfälle zu erkennen.
-- Implementierung von API-Sicherheitsmechanismen mit Spring Security, JWT und Ratenbegrenzung zur Zugriffskontrolle und Sicherung von Endpunkten.
-- Entwicklung von Angular-Dashboards mit rollenbasierter Zugriffskontrolle (RBAC) für den akademischen Betrieb.
-- Entwurf und Entwicklung von Backend-Microservices und REST-APIs in einer verteilten Architektur.
+- Bereitstellung und Verwaltung eines Kubernetes-Clusters mit 8 Microservices für Spring Boot-Dienste in akademischer Produktionsumgebung
+- Entwurf und Implementierung von CI/CD-Pipelines mit Jenkins und SonarQube, einschließlich automatisierter Builds, Tests und Code-Qualitätsprüfungen
+- Einrichtung eines Monitoring- und Alerting-Stacks mit Prometheus, Grafana und Winston für Service-Health-Tracking und Echtzeitfehler-Erkennung
+- Implementierung von API-Sicherheitsmechanismen mit Spring Security, JWT und Ratenbegrenzung zur Zugriffskontrolle und Endpunkt-Sicherung
+- Entwicklung von Angular-Dashboards mit rollenbasierter Zugriffskontrolle (RBAC) für akademische Betriebsprozesse
+- Entwurf und Entwicklung von Backend-Microservices und REST-APIs in verteilter Architektur
 
-### Tahar Sfar Universitätskrankenhaus
+### Universitätskrankenhaus Tahar Sfar
 **Praktikant als Full-Stack Webentwickler** (02/2022 – 06/2022)
-- Entwicklung und Bereitstellung einer internen Beschwerdemanagement-Plattform mit Rückverfolgbarkeit in einer Krankenhausumgebung.
-- Aufbau eines Echtzeit-Systems zur Verfolgung medizinischer Bestände, um die Ressourcensichtbarkeit zu verbessern und den manuellen Verwaltungsaufwand zu reduzieren.
+- Entwicklung und Bereitstellung einer internen Beschwerdemanagement-Plattform mit hoher Nachverfolgbarkeit in einer Krankenhausumgebung
+- Aufbau eines Echtzeit-Systems zur Verfolgung medizinischer Bestände, Verbesserung der Ressourcensichtbarkeit und Reduktion manueller administrativer Aufgaben
 
 ### LeaderPos
 **Praktikant als Full-Stack Webentwickler** (08/2021 – 09/2021)
-- Entwicklung eines Backend-Systems (Django, MongoDB) für eine E-Commerce-Plattform zur Verwaltung von Produkten, Sitzungen und Bestellungen.
-- Implementierung einer dynamischen Warenkorbfunktion und von Mechanismen zur Bestandsverfolgung für Echtzeit-Updates.
-- Erstellung einer Admin-Oberfläche (Bootstrap) zur Verwaltung von Abläufen und simulierten Zahlungs-Workflows.
+- Entwicklung eines Backend-Systems (Django, MongoDB) für eine E-Commerce-Plattform zur Verwaltung von Produkten, Sitzungen und Bestellungen
+- Implementierung einer dynamischen Warenkorbfunktion und Bestandsverfolgungsmechanismen für Echtzeit-Updates
+- Erstellung einer Admin-Oberfläche (Bootstrap) zur Verwaltung von Abläufen und simulierten Zahlungs-Workflows
 
 ---
 

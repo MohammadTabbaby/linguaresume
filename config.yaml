@@ -220,6 +220,8 @@ corrections_fr:
   - pattern: "\\bMit\\s+en\\s+place\\b"
     replacement: "Mis en place"
     flags: "VERB"
+  - pattern: "Limitation de débit \\(Rate Limiting\\)"
+    replacement: "Limitation de débit"
 
 corrections_de:
   - pattern: "CI/CD\\s*&\\s*Automation"

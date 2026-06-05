@@ -8,7 +8,7 @@
 ---
 
 ## Berufliches Profil
-Sicherheitsorientierter und auf Zuverlässigkeit ausgerichteter Software & DevOps Engineer mit Master-Spezialisierung in DevOps und Cloud Computing. Erfahren im Architekturentwurf von Full-Stack-Anwendungen und der Industrialisierung automatisierter Deployments in akademischen und medizinischen Umgebungen mit hohen Compliance-Anforderungen. Experte für den Aufbau skalierbarer Backend-REST-APIs, leistungsstarker Angular-Schnittstellen, die Verwaltung der Kubernetes-Orchestrierung und die Einrichtung umfassender Observability-Stacks. Kombiniert einen soliden Full-Stack-Engineering-Hintergrund mit einer sicherheitsorientierten Infrastruktur-Denkweise, um die Lücke zwischen sicherer Code-Entwicklung und stabilen Produktionsumgebungen zu schließen.
+Sicherheitsorientierter und zuverlässiger Software- und DevOps-Engineer mit Master-Spezialisierung in DevOps und Cloud Computing. Erfahren im Architekturentwurf von Full-Stack-Anwendungen und der Automatisierung von Deployments in akademischen und medizinischen Umgebungen mit hohen Compliance-Anforderungen. Experte für den Aufbau skalierbarer REST-APIs, leistungsstarker Angular-Schnittstellen, Kubernetes-Orchestrierung und umfassender Observability-Stacks. Kombiniert soliden Full-Stack-Engineering-Hintergrund mit sicherheitsorientiertem Infrastruktur-Denken, um die Lücke zwischen sicherer Entwicklung und stabilen Produktionsumgebungen zu schließen.
 
 ---
 
@@ -20,11 +20,11 @@ Sicherheitsorientierter und auf Zuverlässigkeit ausgerichteter Software & DevOp
 | **CI/CD & Automatisierung** | Jenkins, GitHub Actions, Ansible, SonarQube |
 | **Monitoring & Logging** | Prometheus, Grafana, Winston |
 | **Sicherheit (DevSecOps)** | JWT, Helm, bcrypt, Ratenbegrenzung, API-Sicherheit |
-| **Backend-Entwicklung** | Spring Boot (JPA/Hibernate), Django, Laravel, Node.js, Express.js, RESTful APIs |
+| **Backend-Entwicklung** | Spring Boot (JPA/Hibernate), Django, Laravel, Node.js, Express.js, REST-APIs |
 | **Frontend-Entwicklung** | Angular, JavaScript (ES6+), TypeScript, HTML5, CSS3, Tailwind |
 | **Datenbanken** | MongoDB, MySQL, PostgreSQL |
 | **Scripting & OS** | Python, Bash, Linux (Ubuntu, Debian), Windows Server |
-| **Konzepte** | Agile Methoden (Scrum), REST-APIs, RBAC, MVC-Architektur |
+| **Konzepte** | Agile Methoden (Scrum), RBAC, MVC-Architektur |
 
 ---
 
@@ -32,31 +32,31 @@ Sicherheitsorientierter und auf Zuverlässigkeit ausgerichteter Software & DevOp
 
 ### ISET Tozeur — Software & DevOps Engineer (Full-Stack)
 *Praktikum | 02/2024 – 06/2024*
-- **Betrieb eines Kubernetes-Clusters mit 8 Microservices** für Spring Boot-Anwendungen, um hohe Verfügbarkeit und Stabilität der Orchestrierung zu gewährleisten.
-- **Architekturentwurf und Bereitstellung** eines sicheren Angular-Administrationsportals unter Verwendung einer rollenbasierten Zugriffskontrolle (RBAC), um komplexe akademische Abläufe zu rationalisieren und zu optimieren.
-- **Entwicklung verteilter Microservices** und REST-APIs, was modulare Skalierbarkeit und eine leistungsstarke Backend-Kommunikation sicherstellte.
-- **Standardisierung von Bereitstellungspipelines** mit Jenkins und SonarQube, Automatisierung von Code-Qualitätskontrollen und Beschleunigung des Release-Zyklus.
-- **Härtung der API-Sicherheit und Infrastruktur** durch Implementierung von Spring Security, JWT-Authentifizierung und Ratenbegrenzung, um unbefugten Zugriff zu verhindern und die Datenintegrität sicherzustellen.
-- **Aufbau eines umfassenden Observability-Stacks** mit Prometheus, Grafana und Winston, um eine Echtzeit-Vorfalls-Erkennung und die Überwachung des Service-Zustands zu ermöglichen.
+- **Verwaltung eines Kubernetes-Clusters mit 8 Microservices** für Spring Boot-Anwendungen und Gewährleistung hoher Verfügbarkeit sowie Orchestrierungs-Stabilität
+- **Architekturentwurf und Bereitstellung** eines sicheren Angular-Administrationsportals mit rollenbasierter Zugriffskontrolle (RBAC) zur Optimierung akademischer Workflows
+- **Entwicklung verteilter Microservices und REST-APIs** mit modularer Skalierbarkeit und zuverlässiger Backend-Kommunikation
+- **Standardisierung von Bereitstellungspipelines** mit Jenkins und SonarQube, automatisierte Code-Qualitätschecks und beschleunigte Release-Zyklen
+- **Härtung der API-Sicherheit** durch Spring Security, JWT-Authentifizierung und Ratenbegrenzung zur Vermeidung von unbefugtem Zugriff
+- **Aufbau eines Observability-Stacks** mit Prometheus, Grafana und Winston für Echtzeitfehler-Erkennung und Service-Health-Monitoring
 
-### Tahar Sfar University Hospital — Software Engineer (Healthcare Systems)
+### Universitätskrankenhaus Tahar Sfar — Software Engineer (Gesundheitssysteme)
 *Praktikum | 02/2022 – 06/2022*
-- **Entwicklung, Einführung und Bereitstellung** einer zentralisierten Beschwerdemanagement-Plattform mit hoher Rückverfolgbarkeit, Digitalisierung kritischer Workflows und Gewährleistung der Systembetriebszeit in einer Krankenhausumgebung mit hohen Compliance-Anforderungen.
-- **Automatisierung der Verfolgung medizinischer Ressourcen** durch Entwicklung eines Echtzeit-Inventarsystems, was manuelle administrative Fehler signifikant reduzierte und die Ressourcensichtbarkeit erhöhte.
+- **Entwicklung und Bereitstellung** einer zentralisierten Beschwerdemanagement-Plattform mit hoher Nachverfolgbarkeit in einer Krankenhausumgebung mit hohen Compliance-Anforderungen
+- **Automatisierung der Ressourcenverfolgung** durch Echtzeit-Inventarsystem, Reduktion manueller administrativer Fehler und verbesserte Ressourcensichtbarkeit
 
 ### LeaderPos — Full-Stack Developer
 *Praktikum | 08/2021 – 09/2021*
-- **Entwicklung eines skalierbaren, leistungsstarken Backends** mit Django und MongoDB zur Handhabung komplexer Bestell-, Produkt- und hochfrequenter Sitzungslebenszyklen.
-- **Optimierung der Benutzererfahrung und Systemzuverlässigkeit** durch Implementierung einer dynamischen Warenkorb-Engine und von Workflows zur Echtzeit-Bestandsverfolgung.
-- **Aufbau einer spezialisierten Admin-Oberfläche** mit Bootstrap zur Verwaltung sicherer Zahlungssimulationen und Backend-Abläufe.
+- **Entwicklung eines skalierbaren Backends** mit Django und MongoDB für Bestell-, Produkt- und Sitzungsmanagement
+- **Optimierung der Benutzererfahrung** durch dynamische Warenkorb-Engine und Echtzeit-Bestandsverfolgung
+- **Erstellung einer Admin-Oberfläche** mit Bootstrap zur Verwaltung von Zahlungssimulationen und Backend-Prozessen
 
----
+--- 
 
 ## Ausbildung
 
 **Nationaler Professioneller Master-Abschluss** | ISET Tozeur (2022 – 2024)
 - Fachbereich: Technologische Wissenschaften | Hauptfach: Informatik
-- Spezialisierung: DevOps (Entwicklung, Betrieb) und Cloud Computing
+- Spezialisierung: DevOps und Cloud Computing
 
 **Nationaler Bachelor-Abschluss** | ISET Mahdia (2019 – 2022)
 - Fachbereich: Exakte Wissenschaften und Technologie | Hauptfach: Informationstechnologie

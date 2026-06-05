@@ -1,22 +1,24 @@
-Junior Fullstack Developer (m/f/d)
-for new location Roding (Germany)
+Recrutement – Développeur Fullstack Freelance (Web & Mobile)
+Passionné(e) et autonome pour collaborer sur différents projets digitaux web et mobile.
 
-YOUR RESPONSIBILITIES:
+Missions principales
+Développement et maintenance d’applications web et mobiles
+Intégration UI/UX responsive
+Développement front-end et back-end
+Participation aux choix techniques et à l’architecture des projets
+Optimisation des performances et de la sécurité
+Collaboration avec l’équipe créative et marketing
 
-Conception, implementation, new and further development of various applications in the web and app area
-Creative solution of new and complex tasks
-Implementation of interfaces to third-party systems
-Requirements management and documentation
-Creation of mockups and design concepts
-Advice to the specialist departments
- 
+Compétences recherchées
+Bonne maîtrise des technologies front-end : React, Vue.js ou Angular
+Bonne maîtrise du back-end : Node.js, Laravel, PHP ou équivalent
+Expérience en développement mobile : Flutter ou React Native
+Connaissance des bases de données SQL / NoSQL
+Maîtrise de Git et des workflows collaboratifs
+Sens de l’autonomie, créativité et respect des délais
 
-YOUR PROFILE:
-
-Advanced experience in application development
-Profound knowledge in modern web technologies
-Very good knowledge of object-oriented programming
-Experience in the administration of web servers is an advantage
-Analytical and conceptual skills
-Communication and teamwork skills
-Personality is more than anything!
+Profil recherché
+Freelance avec expérience confirmée
+Portfolio ou projets réalisés appréciés
+Bonne communication et esprit d’équipe
+Disponible pour missions régulières ou à long terme

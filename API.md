@@ -308,6 +308,193 @@ Detect text language.
 
 **Returns**: `"en"`, `"fr"`, `"de"`, or default `"en"`
 
+#### Requirement Model
+
+The `Requirement` dataclass returned from requirement extraction:
+
+```python
+from linguaresume.models import Requirement
+
+requirement = Requirement(
+    job_title="Senior DevOps Engineer",
+    job_title_translated="Ingénieur DevOps Senior",  # If translated
+    company="Acme Corp",
+    domain="devops",
+    must_haves=["Kubernetes", "Docker", "AWS"],
+    nice_to_haves=["Terraform"],
+    soft_skills=["Leadership"],
+    job_focus="Infrastructure",
+    language_tone="professional",
+    failures=[],  # Populated on retry
+    missing_must=[],  # Requirements not met in tailored resume
+    missing_soft=[]  # Soft skills missing
+)
+```
+
+### Engine Helper Functions
+
+Utility functions used by TailoringEngine.
+
+```python
+from linguaresume.tailoring.engine import (
+    clean_markdown,
+    apply_corrections,
+    enforce_headings,
+    extract_json_object,
+    slugify,
+    detect_language
+)
+
+# Clean markdown output from LLM
+raw_output = "```markdown\n# Resume\n...\n```"
+cleaned = clean_markdown(raw_output)
+
+# Apply language-specific corrections
+corrected = apply_corrections(
+    cleaned,
+    corrections=[
+        {"pattern": "avoir fait", "replacement": "avoir réalisé", "flags": "IGNORECASE"}
+    ]
+)
+
+# Enforce consistent heading format
+text = """
+## Profile
+## TECHNICAL SKILLS
+## Professional Experience
+"""
+normalized = enforce_headings(text, "en")
+# Result: "## Profile", "## Technical Skills", "## Professional Experience"
+
+# Extract JSON from LLM response
+json_str = '{"domain": "devops", "must_haves": ["K8s"]}'
+data = extract_json_object(json_str)
+# Returns: {"domain": "devops", "must_haves": ["K8s"]}
+
+# Create filesystem-safe filenames
+safe_name = slugify("Senior DevOps Engineer @ Acme")
+# Returns: "senior_devops_engineer_acme"
+
+# Detect job description language
+lang = detect_language("Nous recherchons un ingénieur...")
+# Returns: "fr"
+```
+
+#### `clean_markdown(text: str) -> str`
+
+Clean markdown output from LLM responses.
+
+**Removes**:
+- Markdown code block markers (` ``` `)
+- HTML entities (&amp;, &lt;, &gt;)
+- Escaped parentheses/brackets
+- Leading numbers and prefixes
+- Excessive newlines (3+ → 2)
+
+**Adds**:
+- Trailing newline if missing
+
+#### `apply_corrections(text: str, corrections: list, master_name: Optional[str] = None) -> str`
+
+Apply language-specific regex replacements.
+
+**Parameters**:
+- `corrections` (list): List of replacement rules
+  ```python
+  [
+      {"pattern": "original", "replacement": "fixed", "flags": "IGNORECASE"},
+      {"pattern": "verb_pattern", "replacement": "verb_fixed", "flags": "VERB"}
+  ]
+  ```
+- `master_name` (str): Optional name to update resume title
+
+**Special Flags**:
+- `"IGNORECASE"`: Case-insensitive matching
+- `"VERB"`: Preserve capitalization of first letter
+
+**Removes**:
+- Forbidden sections (e.g., "Compétences", "Skills" headers)
+- Meta-commentary lines ("Note:", "I have followed", etc.)
+- Excessive newlines
+
+#### `enforce_headings(text: str, target_lang: str) -> str`
+
+Standardize section headings for a target language.
+
+**Parameters**:
+- `target_lang` (str): `"en"`, `"fr"`, or `"de"`
+
+**Example**:
+```python
+text = """
+## Professional Profile
+## Technical Competencies
+## Work Experience
+"""
+
+normalized = enforce_headings(text, "en")
+# Result:
+# ## Profile
+# ## Technical Skills
+# ## Professional Experience
+```
+
+#### `extract_json_object(text: str) -> Optional[dict]`
+
+Robustly extract JSON from LLM responses.
+
+**Handles**:
+- Direct JSON objects
+- Markdown code block wrapping
+- Malformed JSON (if `json_repair` is available)
+- Manual parsing with depth tracking
+
+**Returns**: Parsed dict or None
+
+**Usage**:
+```python
+llm_response = """
+Here's the extracted requirements:
+
+{
+  "domain": "devops",
+  "must_haves": ["Kubernetes", "Docker"]
+}
+"""
+
+requirements = extract_json_object(llm_response)
+# Returns: {"domain": "devops", "must_haves": ["Kubernetes", "Docker"]}
+```
+
+#### `slugify(text: str, max_len: int = 40) -> str`
+
+Convert text to URL-safe filename format.
+
+**Process**:
+1. Unicode normalization (NFKD decomposition)
+2. Remove accents and combining characters
+3. Lowercase conversion
+4. Replace spaces/punctuation with underscores
+5. Truncate to max_len
+
+**Example**:
+```python
+slugify("Jean-Pierre Müller (DevOps)")
+# Returns: "jean_pierre_muller_devops"
+
+slugify("Senior Full-Stack Engineer", max_len=20)
+# Returns: "senior_full_stack_"
+```
+
+**Usage**:
+```python
+# Build professional output filenames
+name_slug = slugify(master_name)  # "Jean_Pierre_Muller"
+role_slug = slugify(job_title)    # "Senior_DevOps_Engineer"
+filename = f"CV_{name_slug}_{role_slug}.md"
+# Result: "CV_Jean_Pierre_Muller_Senior_DevOps_Engineer.md"
+```
+
 ### Parsing Functions
 
 Parse resume content.

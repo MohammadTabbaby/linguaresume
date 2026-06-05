@@ -1,0 +1,24 @@
+# .repomixignore
+
+# Directories
+tests/
+outputs/
+.venv/
+.pytest_cache/
+.github/
+
+# Root-level markdown files
+/API.md
+/ARCHITECTURE.md
+/CHANGELOG.md
+/CONFIG.md
+/CONTRIBUTING.md
+/README.md
+/SETUP.md
+
+# CV files
+/**/*.md
+
+# Root-level text files
+/job_description.txt
+/myproject.txt

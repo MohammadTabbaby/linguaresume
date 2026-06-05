@@ -753,10 +753,52 @@ junior_keywords:
 enable_junior_special_case: true
 ```
 
-**When enabled**: 
-- Detects junior-level positions
-- May adjust tailoring strategy
-- Could emphasize learning and growth
+**Purpose**: Allow organization to maintain separate junior-focused CVs with different experience levels and focus areas.
+
+**How it Works**:
+1. Extracts job title from job description
+2. Checks if title contains any `junior_keywords`
+3. If match found and `enable_junior_special_case: true`:
+   - Appends "_junior" suffix to detected domain
+   - Example: "fullstack" → "fullstack_junior"
+   - Looks for `cv_map["fullstack_junior"]` first
+   - Falls back to regular `cv_map["fullstack"]` if not found
+
+**Configuration Example**:
+```yaml
+cv_map:
+  # Junior-specific CVs
+  fullstack_junior: "./cvs/junior_fullstack_en.md"
+  devops_junior: "./cvs/junior_devops_en.md"
+  
+  # Regular CVs (used as fallback)
+  fullstack: "./cvs/master_en.md"
+  devops: "./cvs/devops_en.md"
+  
+  fallback_cv: "./cvs/master_en.md"
+
+junior_keywords:
+  - "junior"
+  - "entry-level"
+  - "graduate"
+  - "débutant"
+  - "anfänger"
+  - "junior developer"
+  - "entry level"
+
+enable_junior_special_case: true
+```
+
+**Logging**:
+When a junior position is detected, the engine logs:
+```
+🔰 Junior position detected – trying junior master CV
+```
+
+**Disabling Junior Handling**:
+```yaml
+enable_junior_special_case: false  # Always use regular CVs
+```
 
 ### Stopwords
 

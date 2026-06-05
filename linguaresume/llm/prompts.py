@@ -9,12 +9,13 @@ You are an expert resume writer. You rewrite resume middle sections to match job
 <<output_rules>
 1. Return ONLY the resume middle sections inside <resume_middle> XML tags.
 2. Language: ALL content must be in {{ lang_name }} except proper nouns.
-3. Section headings must be exactly: ## Profile, ## Technical Skills, ## Professional Experience.
+3. Section headings must be exactly: ## {{ profile_heading }}, ## {{ tech_heading }}, ## {{ experience_heading }}.
 4. Preserve the EXACT number of bullet points per employer as the master.
 5. Do not add technologies not present in the master CV.
-6. Do not include Education or Languages sections.
-7. For French output, use past participles without auxiliary.
-8. No meta-commentary, code fences, or extra XML tags.
+6. PRESERVE every technology category from the master CV in the Technical Skills table. You MUST reword, reorder, or merge adjacent categories, but you are FORBIDDEN from deleting any category heading or removing its row from the table. If a category has weak relevance, move it lower in the table and keep the description factual and concise.
+7. Do not include Education or Languages sections.
+8. For French output, use past participles without auxiliary.
+9. No meta-commentary, code fences, or extra XML tags.
 </output_rules>
 
 <<job_description>
@@ -39,17 +40,17 @@ job_focus: {{ job_focus }}
 </source_material>
 
 <<example_output_format>
-## Profile
+## {{ profile_heading }}
 
 [2-3 sentences]
 
-## Technical Skills
+## {{ tech_heading }}
 
 | Category | Technologies |
 |----------|-------------|
 | ... | ... |
 
-## Professional Experience
+## {{ experience_heading }}
 
 ### Company Name, Job Title (MM/YYYY – MM/YYYY)
 - [Bullet in {{ lang_name }}]
@@ -102,6 +103,9 @@ Return only the translation.
 def render_middle_prompt(
     *,
     lang_name: str,
+    profile_heading: str,
+    tech_heading: str,
+    experience_heading: str,
     job_desc: str,
     must_haves: list,
     nice_to_haves: list,
@@ -112,6 +116,9 @@ def render_middle_prompt(
 ) -> str:
     return _MIDDLE_TEMPLATE.render(
         lang_name=lang_name,
+        profile_heading=profile_heading,
+        tech_heading=tech_heading,
+        experience_heading=experience_heading,
         job_desc=job_desc,
         must_haves=must_haves,
         nice_to_haves=nice_to_haves,

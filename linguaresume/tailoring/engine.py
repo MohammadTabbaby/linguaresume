@@ -6,7 +6,7 @@ import json
 import logging
 import unicodedata
 from datetime import datetime
-from typing import Dict, List, Optional, Set, Tuple
+from typing import Any, Dict, List, Optional, Set, Tuple
 
 from linguaresume.config import Config
 from linguaresume.models import Requirement, ValidationResult
@@ -23,6 +23,7 @@ from linguaresume.parsing.splitter import (
     build_static_bundle,
     replace_subtitle,
     _make_alias_map,
+    _heading_normalize,
 )
 from linguaresume.parsing.extractor import (
     extract_companies,
@@ -96,7 +97,7 @@ def apply_corrections(text: str, corrections: list, master_name: Optional[str] =
             text = re.sub(pattern, replacement, text)
 
     forbidden = [
-        r"^##\s+Comp[eé]tences?\s*.*?(?=^##|\Z)",
+        r"^##\s+Comp[eé]tences?\s*$",
         r"^##\s+Key\s+Skills?\s*.*?(?=^##|\Z)",
         r"^##\s+Skills?\s+Summary\s*.*?(?=^##|\Z)",
     ]
@@ -127,19 +128,50 @@ def apply_corrections(text: str, corrections: list, master_name: Optional[str] =
 
 def enforce_headings(text: str, target_lang: str) -> str:
     heading_map = {
-        "en": {"profile": "Profile", "tech": "Technical Skills", "edu": "Education", "lang": "Languages"},
-        "fr": {"profile": "Profil", "tech": "Compétences techniques", "edu": "Formation", "lang": "Langues"},
-        "de": {"profile": "Profil", "tech": "Technische Fähigkeiten", "edu": "Ausbildung", "lang": "Sprachen"},
+        "en": {
+            "profile": "Profile",
+            "tech": "Technical Skills",
+            "experience": "Professional Experience",
+            "edu": "Education",
+            "lang": "Languages",
+        },
+        "fr": {
+            "profile": "Profil",
+            "tech": "Compétences techniques",
+            "experience": "Expérience Professionnelle",
+            "edu": "Formation",
+            "lang": "Langues",
+        },
+        "de": {
+            "profile": "Profil",
+            "tech": "Technische Fähigkeiten",
+            "experience": "Berufserfahrung",
+            "edu": "Ausbildung",
+            "lang": "Sprachen",
+        },
     }
     h = heading_map.get(target_lang, heading_map["en"])
-    text = re.sub(r"(?m)^##\s*(?:Profile|Professional Profile|Profil|Berufliches Profil).*$",
-                  f"## {h['profile']}", text)
-    text = re.sub(r"(?m)^##\s*(?:Technical\s+Skills|Compétences techniques|Technische Fähigkeiten|Skills|Compétences|Fähigkeiten|Technical Skills Stack).*$",
-                  f"## {h['tech']}", text)
-    text = re.sub(r"(?m)^##\s*(?:Education|Formation|Ausbildung|Éducation).*$",
-                  f"## {h['edu']}", text)
-    text = re.sub(r"(?m)^##\s*(?:Languages|Langues|Sprachen).*$",
-                  f"## {h['lang']}", text)
+    
+    text = re.sub(
+        r"(?m)^##\s*(?:Profile|Professional Profile|Profil|Berufliches Profil).*$",
+        f"## {h['profile']}", text
+    )
+    text = re.sub(
+        r"(?m)^##\s*(?:Technical\s+Skills|Compétences techniques|Technische Fähigkeiten|Skills|Compétences|Fähigkeiten|Technical Skills Stack).*$",
+        f"## {h['tech']}", text
+    )
+    text = re.sub(
+        r"(?m)^##\s*(?:Professional\s+Experience|Expérience\s+Professionnelle|Expérience|Experience|Berufserfahrung|Berufliche\s+Erfahrung).*$",
+        f"## {h['experience']}", text
+    )
+    text = re.sub(
+        r"(?m)^##\s*(?:Education|Formation|Ausbildung|Éducation).*$",
+        f"## {h['edu']}", text
+    )
+    text = re.sub(
+        r"(?m)^##\s*(?:Languages|Langues|Sprachen).*$",
+        f"## {h['lang']}", text
+    )
     return text
 
 
@@ -151,7 +183,9 @@ def extract_json_object(text: str) -> Optional[dict]:
         except Exception:
             pass
     try:
-        from json_repair import repair_json
+        import importlib
+        repair_module = importlib.import_module("json_repair")
+        repair_json = getattr(repair_module, "repair_json", None)
     except ImportError:
         repair_json = None
     if repair_json:
@@ -395,7 +429,7 @@ class TailoringEngine:
 4. BULLET PRESERVATION: Keep the exact same number of bullets per employer as the source.
 5. TECHNOLOGY BOUNDARY: Only mention tools/frameworks explicitly listed in the source CV. If the job requires something missing, omit it entirely.
 6. NO META-COMMENTARY: Do not include notes, explanations, or "I have followed" statements.
-7. HEADING ENFORCEMENT: Use exactly ## Profile, ## Technical Skills, ## Professional Experience."""
+7. HEADING ENFORCEMENT: Use exactly the section headings specified in the user prompt."""
         prompt = self._build_middle_prompt(master_mutable)
         raw = self.llm.complete(system, prompt)
         cleaned = clean_markdown(raw)
@@ -441,8 +475,18 @@ class TailoringEngine:
 
         lang_name = {"en": "English", "fr": "French", "de": "German"}.get(self.target_lang, "English")
 
+        heading_map = {
+            "en": {"profile": "Profile", "tech": "Technical Skills", "experience": "Professional Experience"},
+            "fr": {"profile": "Profil", "tech": "Compétences techniques", "experience": "Expérience Professionnelle"},
+            "de": {"profile": "Profil", "tech": "Technische Fähigkeiten", "experience": "Berufserfahrung"},
+        }
+        h = heading_map.get(self.target_lang, heading_map["en"])
+
         return render_middle_prompt(
             lang_name=lang_name,
+            profile_heading=h["profile"],
+            tech_heading=h["tech"],
+            experience_heading=h["experience"],
             job_desc=self.job_desc,
             must_haves=req.must_haves,
             nice_to_haves=req.nice_to_haves,
@@ -479,7 +523,7 @@ class TailoringEngine:
 
     def validate_final(self, final_md: str, static_bundle: str) -> ValidationResult:
         failures = []
-        details: Dict[str, any] = {}
+        details: Dict[str, Any] = {}
         translating = (self.master_lang != self.target_lang)
 
         if not validate_companies(final_md, self.master_companies, translating=translating):
@@ -500,6 +544,14 @@ class TailoringEngine:
         if extra_techs:
             failures.append("added_new_technologies")
             details["added_new_technologies"] = sorted(extra_techs)
+
+        header, final_sections = split_resume_sections(final_md, self.alias_map)
+        final_titles = [_heading_normalize(t) for t, _ in final_sections]
+        tech_aliases = self.alias_map.get("tech_skills", [])
+        has_tech = any(t in tech_aliases for t in final_titles)
+        if not has_tech:
+            failures.append("missing_technical_skills")
+            logger.warning("⚠️ Technical Skills section is missing from output")
 
         passed = not failures
         if passed:
@@ -524,8 +576,16 @@ class TailoringEngine:
         self.output_dir = out_dir
         logger.info("📁 Output directory: %s", out_dir)
 
+    # ─── NEW: professional filename builder ───
+    def _build_filename_stem(self) -> str:
+        """Return CV_Name_Role stem for final files."""
+        name_slug = slugify(self.master_name)
+        role = self.requirements.job_title_translated or self.requirements.job_title
+        role_slug = slugify(role) if role else "resume"
+        return f"CV_{name_slug}_{role_slug}"
+
     def save_markdown(self, final_md: str) -> str:
-        stem = os.path.basename(self.output_dir)
+        stem = self._build_filename_stem()
         md_path = os.path.join(self.output_dir, f"{stem}.md")
         with open(md_path, "w", encoding="utf-8") as f:
             f.write(final_md)
@@ -540,6 +600,19 @@ class TailoringEngine:
         renderer = PDFRenderer(self.cfg.resume_css)
         renderer.render(content, pdf_path, lang=self.target_lang)
         logger.info("📄 PDF ready: %s", pdf_path)
+        # Auto-open PDF
+        try:
+            import platform
+            if platform.system() == "Windows":
+                os.startfile(pdf_path)
+            elif platform.system() == "Darwin":
+                import subprocess
+                subprocess.call(["open", pdf_path])
+            else:
+                import subprocess
+                subprocess.call(["xdg-open", pdf_path])
+        except Exception:
+            pass  # Silently fail if auto-open isn't possible
         return pdf_path
 
     def run(self, job_desc_path: str) -> Tuple[str, str]:

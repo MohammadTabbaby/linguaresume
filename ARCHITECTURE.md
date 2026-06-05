@@ -330,25 +330,128 @@ Workflow:
      - English: the, and, for, with, this, that, from, have, been
    - Counts matches and returns highest scoring language
 
-3. **`_extract_requirements(job_desc: str, lang: str) -> Requirement`**
+3. **`extract_requirements() -> Requirement`**
    - Calls LLM with requirements extraction prompt
-   - Parses JSON response into Requirement dataclass
+   - Parses JSON response with robust fallback handling
+   - Supports `json_repair` library for malformed JSON
    - Extracts: must-haves, nice-to-haves, soft skills, job focus
+   - Domain validation with fallback classification
+   - Translates job title to target language if needed
 
-4. **`_call_llm_tailor(mutable_bundle, requirements, lang) -> str`**
-   - Generates middle prompt with requirements
-   - Calls LLM with templated prompt
-   - Extracts sections between XML tags
+4. **`tailor_middle(master_mutable: str) -> str`**
+   - Generates middle prompt with requirements and mutable content
+   - Calls LLM with detailed system instructions
+   - Extracts content wrapped in `<resume_middle>` XML tags
+   - Applies language-specific text corrections (French/German)
+   - Enforces consistent heading formatting
+   - Returns cleaned markdown content
 
-5. **`_validate_and_retry(...) -> str`**
-   - Runs validation suite (see Validation Strategy)
-   - If failed, generates detailed error feedback
-   - Retries up to max_retries times
-   - Logs each retry attempt
+5. **`validate_final(final_md: str, static_bundle: str) -> ValidationResult`**
+   - Comprehensive 6-tier validation:
+     1. Company name preservation
+     2. Date range validation
+     3. Static section integrity
+     4. Bullet point retention
+     5. Experience duration consistency
+     6. Technology stack validation
+   - Detects missing Technical Skills section
+   - Returns `ValidationResult` with failure details
+   - Used in retry loop for feedback generation
 
-6. **`_translate_title_if_needed(title: str, target_lang: str) -> str`**
-   - Calls LLM for single-line job title translation
-   - Returns original if translation fails
+6. **`assemble(header: str, tailored_middle: str, static_bundle: str) -> str`**
+   - Combines static and tailored sections
+   - Translates static sections if needed
+   - Updates job title in header (translated if applicable)
+   - Ensures proper markdown formatting
+
+7. **`_build_filename_stem() -> str`**
+   - Creates professional filename stem: `CV_{Name}_{Role}`
+   - Slugifies names and roles for filesystem compatibility
+   - Used for all output files (markdown and PDF)
+
+#### Helper Functions
+
+**Text Processing & Cleanup**
+
+1. **`clean_markdown(text: str) -> str`**
+   - Strips markdown code blocks (` ``` `)
+   - Decodes HTML entities (&amp;, &lt;, &gt;)
+   - Fixes escaped parentheses and brackets
+   - Removes leading numbers/prefixes
+   - Normalizes line endings
+   - Ensures trailing newline
+
+2. **`apply_corrections(text: str, corrections: list, master_name: Optional[str]) -> str`**
+   - Applies language-specific regex patterns
+   - Handles verb conjugation (flags="VERB" for case-insensitive replacement)
+   - Removes forbidden sections (e.g., "Compétences" in French)
+   - Strips meta-commentary lines
+   - Example corrections:
+     ```yaml
+     corrections_fr:
+       - pattern: "avoir fait"
+         replacement: "avoir réalisé"
+         flags: "IGNORECASE"
+     ```
+   - Removes header title and strips leading numbers
+   - Normalizes excessive newlines (3+ → 2)
+
+3. **`enforce_headings(text: str, target_lang: str) -> str`**
+   - Standardizes section headings by language
+   - Maps variants to canonical headers:
+     - EN: "Profile", "Technical Skills", "Professional Experience", "Education", "Languages"
+     - FR: "Profil", "Compétences techniques", "Expérience Professionnelle", "Formation", "Langues"
+     - DE: "Profil", "Technische Fähigkeiten", "Berufserfahrung", "Ausbildung", "Sprachen"
+   - Handles common typos and alternate spellings
+   - Ensures consistency for parsing and validation
+
+4. **`extract_json_object(text: str) -> Optional[dict]`**
+   - Robust JSON extraction from LLM responses
+   - Handles markdown code block wrapping
+   - Attempts direct JSON parsing
+   - Falls back to `json_repair` library if available
+   - Manual parsing with depth tracking if needed
+   - Returns `None` on complete failure
+   - Used for requirement extraction from LLM
+
+5. **`slugify(text: str, max_len: int = 40) -> str`**
+   - Converts text to URL-safe filename format
+   - Unicode normalization (NFKD decomposition)
+   - Lowercase with underscore separators
+   - Removes special characters
+   - Truncates to max length (default 40 chars)
+   - Example: "Senior DevOps Engineer" → "senior_devops_engineer"
+
+**Requirement Enhancements**
+
+The `Requirement` dataclass now includes:
+- `job_title_translated` - Translated job title in target language
+- `failures` - List of validation failures from previous attempts
+- `missing_must` - Must-have skills not found in tailored output
+- `missing_soft` - Soft skills not found in tailored output
+
+These fields enable the validation feedback loop to communicate specific failures back to the LLM for targeted refinement.
+
+**Junior Position Handling**
+
+When `enable_junior_special_case: true` in config:
+- Detects job titles matching `junior_keywords` (e.g., "junior", "débutant", "anfänger")
+- Automatically appends "_junior" to domain (e.g., "fullstack_junior")
+- Allows organization to maintain separate junior-focused CVs
+- Logs detection for transparency
+
+**Configuration Enhancements**
+
+```yaml
+# New config options for engine
+enable_junior_special_case: true
+junior_keywords:
+  - "junior"
+  - "débutant"     # French
+  - "anfänger"     # German
+  - "entry-level"
+  - "graduate"
+```
 
 ---
 

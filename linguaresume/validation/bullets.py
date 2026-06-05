@@ -71,6 +71,9 @@ def validate_bullet_retention(
                 employer, len(content_scores), len(m_bullets),
             )
             ok = False
+        if len(m_bullets) != len(t_bullets):
+            logger.warning("Bullet count mismatch...")
+            return False
     if ok:
         logger.info("✅ Bullet content retention check passed.")
     return ok

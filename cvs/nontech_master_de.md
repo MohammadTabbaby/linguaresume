@@ -1,5 +1,5 @@
 # Mohamed Tababi
-**Vielseitiger Fachmann – IT-Support & Helpdesk-Techniker**
+**Vielseitiger Fachmann – IT-Support & Service Management**
 
 **E-Mail:** mohammadtabbaby@gmail.com | **Telefon:** (+216) 99 145 392  
 **Standort:** Tunesien  
@@ -8,7 +8,7 @@
 ---
 
 ## Profil
-Rigoroser und autonomer Fachmann mit starken analytischen Fähigkeiten und ausgezeichneten zwischenmenschlichen Fähigkeiten. Besitzt umfangreiche Erfahrung im Verständnis von Geschäftsanforderungen, in der Implementierung strukturierter Lösungen und in der Leitung funktionsübergreifender Projekte. Anerkannt für den Aufbau von Vertrauensbeziehungen zu Stakeholdern (Kunden, Teams und Partnern) und die Umsetzung komplexer Anfragen in konkrete Maßnahmen. Legt großen Wert auf Teamarbeit und proaktiven Wissensaustausch.
+Rigoroser und autonomer Fachmann mit starken analytischen Fähigkeiten und ausgezeichneten zwischenmenschlichen Kompetenzen. Umfangreiche Erfahrung im Verständnis von Geschäftsanforderungen, Implementierung strukturierter Lösungen und Leitung funktionsübergreifender Projekte. Anerkannt für den Aufbau von Vertrauensbeziehungen mit Stakeholdern und die Umsetzung komplexer Anfragen in konkrete Maßnahmen. Legt großen Wert auf Teamarbeit und proaktiven Wissensaustausch.
 
 ---
 
@@ -16,53 +16,49 @@ Rigoroser und autonomer Fachmann mit starken analytischen Fähigkeiten und ausge
 
 | Kategorie | Fähigkeiten & Fertigkeiten |
 | :--- | :--- |
-| **Kundenbeziehungen** | Aktives Zuhören, Bedarfsermittlung, Personalisierte Nachverfolgung |
-| **Analyse & Problemlösung** | Diagnose, Lösungsvorschläge, Kontinuierliche Verbesserung |
-| **Organisation & Disziplin** | Prioritätenmanagement, Einhaltung von Verfahren, Rückverfolgbarkeit |
-| **Kommunikation & Zusammenarbeit** | Teamarbeit, Workshop-Moderation, Klares Reporting |
+| **Kundenbeziehungen** | Aktives Zuhören, Bedarfsermittlung, personalisierte Nachverfolgung |
+| **Analyse & Problemlösung** | Diagnose, Lösungsvorschläge, kontinuierliche Verbesserung |
+| **Organisation & Disziplin** | Prioritätenmanagement, Einhaltung von Verfahren, Nachverfolgbarkeit |
+| **Kommunikation & Zusammenarbeit** | Teamarbeit, Workshop-Moderation, klares Reporting |
 | **Betriebssysteme** | Windows 10/11, macOS, Grundkenntnisse in Linux |
-| **Digitale Werkzeuge** | Office-Suite, TeamViewer, AnyDesk, Grundlegende Versionskontrolle |
+| **Digitale Werkzeuge** | Office-Suite, TeamViewer, AnyDesk, grundlegende Versionskontrolle |
 
 ---
 
 ## Berufserfahrung
 
 ### Ehrenamtlicher IT-Support
-**Lokales Gemeindezentrum** | *2023 – Heute*
-
-* Unterstützung von über 50 Benutzern bei Hardware- und Softwareproblemen, sowohl telefonisch als auch persönlich.
-* Installation und Wartung von 20 Arbeitsplätzen, wodurch die Ausfallzeiten erfolgreich um 40 % reduziert wurden.
-* Erstellung einer umfassenden Wissensdatenbank für häufige technische Probleme, wodurch wiederholte Anfragen um 25 % gesenkt wurden.
+**Lokales Gemeindezentrum** | 2023 – Heute
+- Unterstützung von über 50 Nutzern bei Hardware- und Softwareproblemen, telefonisch und vor Ort
+- Installation und Wartung von 20 Arbeitsplätzen mit Reduktion der Ausfallzeiten um 40 %
+- Erstellung einer umfassenden Wissensdatenbank für häufige technische Probleme, Senkung wiederholter Anfragen um 25 %
 
 ### Assistent für digitale Projekte
-**Höheres Institut für technologische Studien (ISET) Tozeur** | *02/2024 – 06/2024*
-
-* Erfassung und Analyse der Bedürfnisse akademischer Teams zur Entwicklung maßgeschneiderter Tracking-Schnittstellen, wodurch die betriebliche Transparenz verbessert wurde.
-* Teilnahme am Aufbau einer internen Tool-Architektur, um die Datenzuverlässigkeit und Servicekontinuität sicherzustellen.
-* Beitrag zur Sicherung von Zugängen und zum Schutz sensibler Informationen in Zusammenarbeit mit Geschäftsführern.
+**Höheres Institut für technologische Studien (ISET) Tozeur** | 02/2024 – 06/2024
+- Erfassung und Analyse der Anforderungen akademischer Teams zur Entwicklung maßgeschneiderter Tracking-Schnittstellen
+- Teilnahme am Aufbau einer internen Tool-Architektur zur Gewährleistung von Datenzuverlässigkeit und Servicekontinuität
+- Mitwirkung bei der Sicherung von Zugängen und dem Schutz sensibler Informationen
 
 ### Assistent der Projektleitung
-**Tahar Sfar Universitätskrankenhaus** | *02/2022 – 06/2022*
+**Universitätskrankenhaus Tahar Sfar** | 02/2022 – 06/2022
+- Entwurf und Bereitstellung einer internen Beschwerdeverfolgungsplattform zur Zentralisierung von Anfragen und vollständiger Datenrückverfolgbarkeit
+- Implementierung eines Dashboards zur Verfolgung medizinischer Ressourcen, Rationalisierung der Entscheidungsfindung und Reduktion repetitiver administrativer Aufgaben
 
-* Entwurf und Bereitstellung einer internen Plattform zur Beschwerdeverfolgung, um Anfragen zu zentralisieren und eine vollständige Datenrückverfolgbarkeit zu gewährleisten.
-* Implementierung eines Dashboards zur Verfolgung medizinischer Ressourcen, was die Entscheidungsfindung rationalisierte und sich wiederholende administrative Aufgaben reduzierte.
-
-### Assistent für Support- & Service-Management
-**LeaderPos** | *08/2021 – 09/2021*
-
-* Beitrag zur Verbesserung eines Online-Bestellservices durch Ermittlung der Benutzerbedürfnisse und Vorschlag funktionaler Anpassungen.
-* Zusammenarbeit mit dem Business-Team bei der Erstellung eines einfachen administrativen Verwaltungstools, das Fehler reduzierte und den täglichen Betrieb flüssiger machte.
-* Überwachung simulierter Transaktionsströme, um die betriebliche Konsistenz und Kundenzufriedenheit sicherzustellen.
+### Assistent für Support & Service Management
+**LeaderPos** | 08/2021 – 09/2021
+- Unterstützung bei der Verbesserung eines Online-Bestellservices durch Bedarfsermittlung und funktionale Vorschläge
+- Zusammenarbeit mit dem Business-Team bei der Erstellung eines administrativen Verwaltungstools zur Fehlerreduktion
+- Überwachung simulierter Transaktionsströme zur Gewährleistung betrieblicher Konsistenz und Kundenzufriedenheit
 
 ---
 
 ## Ausbildung
 
-**Professioneller Master-Abschluss in Informatik** *ISET Tozeur* | 2022 – 2024
-* Fortgeschrittene Kurse in Projektmanagement-Methoden und Bedarfsanalyse.
+**Professioneller Master-Abschluss in Informatik** | ISET Tozeur (2022 – 2024)
+- Fortgeschrittene Kurse in Projektmanagement-Methoden und Bedarfsanalyse
 
-**Bachelor-Abschluss in Informationstechnologie** *ISET Mahdia* | 2019 – 2022
-* Spezialisierung auf digitale Lösungen und kollaboratives Arbeiten.
+**Bachelor-Abschluss in Informationstechnologie** | ISET Mahdia (2019 – 2022)
+- Spezialisierung auf digitale Lösungen und kollaboratives Arbeiten
 
 ---
 

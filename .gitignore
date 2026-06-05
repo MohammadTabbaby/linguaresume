@@ -1,0 +1,16 @@
+# .gitignore
+
+# Python files
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+.pytest_cache/
+
+# Environment files (containing secrets)
+.env
+.env.local
+
+# working files
+
+/myproject.txt

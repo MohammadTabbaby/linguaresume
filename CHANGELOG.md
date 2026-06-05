@@ -8,37 +8,129 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- Support for custom CSS styling in PDF rendering
+
+#### Tailoring Engine Enhancements
+- **XML Tag Wrapping**: LLM output now wrapped in `<resume_middle>` tags for reliable parsing
+- **Robust JSON Extraction**: New `extract_json_object()` function with fallback to `json_repair` library
+- **Text Processing Utilities**:
+  - `clean_markdown()`: Strips code blocks, decodes HTML entities, normalizes formatting
+  - `apply_corrections()`: Language-specific regex replacements with verb conjugation support
+  - `enforce_headings()`: Standardizes section headings across languages (EN/FR/DE)
+  - `slugify()`: Creates filesystem-safe filenames from arbitrary text
+- **Professional Filename Generation**: New `_build_filename_stem()` method creates `CV_{Name}_{Role}` format
+- **Enhanced Requirement Model**:
+  - `job_title_translated`: Translated job titles in target language
+  - `failures`: Tracks validation failures for feedback loops
+  - `missing_must`: Missing must-have skills from tailored output
+  - `missing_soft`: Missing soft skills from tailored output
+
+#### Validation Enhancements
+- **Missing Technical Skills Detection**: Validates presence of Technical Skills section in output
+- **Detailed Failure Tracking**: Each validation failure tracked with specific details
+- **Feedback Loop Refinement**: Failed validations now generate targeted feedback for LLM retry
+  - Missing companies → "MISSING_COMPANIES" feedback
+  - Dropped bullets → "RULE: Preserve every bullet point"
+  - Added technologies → "RULE: Only use technologies explicitly listed in master CV"
+  - Inflated experience → "RULE: Total experience must not exceed master CV"
+
+#### Domain & Language Features
+- **Junior Position Detection**: 
+  - Configurable `junior_keywords` list (junior, débutant, anfänger, entry-level, graduate)
+  - Appends "_junior" suffix to domain for CV selection
+  - Example: "fullstack" + junior job → tries `cv_map["fullstack_junior"]` first
+- **Fallback Job Title Extraction**: Regex patterns to detect job titles from French job descriptions
+- **Domain Fallback Classification**: When LLM JSON parsing fails, uses keyword-based classification
+  - Frontend keywords: react, next.js, vue, svelte, angular
+  - DevOps keywords: kubernetes, docker, nginx, load balancer, ci/cd, terraform, ansible
+  - Scoring algorithm determines best domain match
+
+#### Configuration Updates
+- Support for `enable_junior_special_case` configuration flag
+- Configurable `junior_keywords` list for position-level detection
+- New `corrections_de` and `corrections_fr` support for language-specific fixes
+- Enhanced `section_aliases` for multi-language support
+
+#### Error Handling & Logging
+- Custom CSS styling support in PDF rendering
 - Language-specific text corrections (French, German)
 - Multi-language section alias support
-- Validation feedback loop with retry mechanism
+- Validation feedback loop with retry mechanism (max_retries configurable, default 3)
 - Caching system for LLM responses
-- Junior position special handling
 - Comprehensive error messages with actionable feedback
 
 ### Changed
 - Improved resume section parsing with multi-language support
 - Enhanced validation with token-level overlap checking
 - Refactored LLM client architecture for extensibility
-- Improved domain classification algorithm
+- Improved domain classification algorithm with fallback strategy
 - Better error handling and logging throughout
+- LLM system prompt now includes specific constraints:
+  - OUTPUT FORMAT: XML tag wrapping for reliable extraction
+  - FACTUAL FIDELITY: Strict requirement preservation
+  - BULLET PRESERVATION: Exact bullet count enforcement
+  - TECHNOLOGY BOUNDARY: Only master CV technologies
+  - NO META-COMMENTARY: Remove explanatory text
+  - HEADING ENFORCEMENT: Standardized section headers
 
 ### Fixed
 - Date extraction and validation edge cases
-- Company name normalization for matching
-- Bullet point retention calculation
-- PDF rendering with special characters
+- Company name normalization for matching (Unicode NFKD decomposition)
+- Bullet point retention calculation with token-level overlap
+- PDF rendering with special characters and Unicode
+- HTML entity handling in LLM responses
+- Escaped bracket handling in markdown
+- Excessive newline normalization (3+ → 2)
 
 ### Deprecated
 - Support for Python 3.7 (upgrading to 3.8+ requirement)
+- Direct string concatenation for resume assembly (replaced with proper `assemble()` method)
 
 ### Removed
 - Legacy resume format support
+- Unstructured text-based section parsing (now uses alias maps)
 
 ### Security
-- Added input validation for file paths
-- Environment variable handling for secrets
-- Timeout protection for LLM calls
+- Added input validation for file paths (prevents directory traversal)
+- Environment variable handling for secrets (API keys never in config)
+- Timeout protection for LLM calls (configurable, default 720 seconds)
+- Sanitized file path handling in output directory creation
+
+### Technical Details
+
+#### New Methods in `TailoringEngine`
+```python
+def _build_filename_stem() -> str:
+    """Return CV_Name_Role stem for final files."""
+    
+def extract_requirements() -> Requirement:
+    """Extract and parse job requirements with robust JSON handling."""
+    
+def tailor_middle(master_mutable: str) -> str:
+    """Generate tailored middle section with XML tag extraction."""
+    
+def _build_middle_prompt(master_mutable: str) -> str:
+    """Build detailed prompt with validation feedback."""
+    
+def validate_final(final_md: str, static_bundle: str) -> ValidationResult:
+    """Comprehensive 6-tier validation with detailed failure tracking."""
+    
+def _compute_missing(tailored_middle: str) -> None:
+    """Calculate missing must-have and soft skills from output."""
+```
+
+#### New Helper Functions in `tailoring.engine` Module
+- `detect_language(text: str) -> str` - Language detection with word frequency matching
+- `clean_markdown(text: str) -> str` - LLM output cleanup
+- `apply_corrections(text, corrections, master_name) -> str` - Language-specific fixes
+- `enforce_headings(text, target_lang) -> str` - Header normalization
+- `extract_json_object(text) -> Optional[dict]` - Robust JSON parsing
+- `slugify(text, max_len) -> str` - Filesystem-safe naming
+
+### API Stability Notes
+- All new functions in `tailoring.engine` are public and stable
+- `Requirement` dataclass extended with backward-compatible fields
+- `ValidationResult` enhanced with failure details tracking
+- LLM client interface remains unchanged (fully backward compatible)
 
 ## [1.0.0] - 2024-06-02
 
